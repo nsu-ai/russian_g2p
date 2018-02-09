@@ -23,9 +23,9 @@ def get_all_prompts(init_dir_name: str) -> list:
             line_ind = 1
             with codecs.open(full_name, mode='r', encoding='utf-8', errors='ignore') as fp:
                 cur_line = fp.readline()
-                while len(cur_line) > 0:
+                while len(cur_line):
                     prepared_line = cur_line.strip()
-                    if len(prepared_line) > 0:
+                    if len(prepared_line):
                         err_msg = 'File `{0}`, line {1}: this line is wrong!'.format(full_name, line_ind)
                         words = prepared_line.split()
                         assert len(words) > 1, err_msg
@@ -52,13 +52,13 @@ def select_subsentences(source_prompt: str) -> list:
     new_subsentence = list()
     for cur_token in nltk.tokenize.word_tokenize(source_prompt):
         if not cur_token.isalnum():
-            if len(new_subsentence) > 0:
+            if len(new_subsentence):
                 all_subsentences.append(new_subsentence)
             else:
                 new_subsentence.clear()
         else:
             new_subsentence.append(cur_token)
-    if len(new_subsentence) > 0:
+    if len(new_subsentence):
         all_subsentences.append(new_subsentence)
     return all_subsentences
 
@@ -87,7 +87,7 @@ def main():
                         for cur_char in cur_word.lower():
                             if cur_char in VOWEL_LETTERS:
                                 vowels_counter += 1
-                        if ('+' not in cur_word) and (vowels_counter > 1):
+                        if '+' not in cur_word and vowels_counter > 1:
                             unknown_words += [cur_word]
             if trouble:
                 print('`{0}`: this phrase cannot be unambiguously accented!'.format(cur_prompt))

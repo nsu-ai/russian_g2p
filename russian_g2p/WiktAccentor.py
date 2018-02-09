@@ -86,41 +86,32 @@ def get_correct_acc_morf(cur_word, morphotag, accented_wordforms):
                     gramm_info = acc_word.getnext()
                     if treetagged_sentence[i][1][3] == 'n':
                         results.add(result)
+
+                    def variant_fits(form_to_find: str, ind, chars: list) -> bool:
+                        return (variant.text_content().find(form_to_find) != -1) and (
+                                treetagged_sentence[i][1][ind] in chars)
+
                     for variant in gramm_info.find_class('form-of-definition'):
                         t = 0
-                        if (variant.text_content().find('indicative') != -1) and (
-                                treetagged_sentence[i][1][2] in ['i', '-']):
-                            if (variant.text_content().find('future') != -1) and (
-                                    treetagged_sentence[i][1][3] in ['f', '-']):
-                                t += 1
-                            elif (variant.text_content().find('present') != -1) and (
-                                    treetagged_sentence[i][1][3] in ['p', '-']):
-                                t += 1
-                            elif (variant.text_content().find('past') != -1) and (
-                                    treetagged_sentence[i][1][3] in ['s', '-']):
-                                t += 1
-                        elif (variant.text_content().find('imperative') != -1) and (
-                                treetagged_sentence[i][1][2] in ['m', '-']):
-                            t += 1
-                        if (variant.text_content().find('imperfective') != -1) and (
-                                treetagged_sentence[i][1][9] in ['e', 'b', '-']):
-                            t += 1
-                        elif (variant.text_content().find('perfective') != -1) and (
-                                treetagged_sentence[i][1][9] in ['p', '-']):
-                            t += 1
+                        if variant_fits('indicative', 2, ['i', '-']):
+                            t += variant_fits('future', 3, ['f', '-']) or \
+                                 variant_fits('present', 3, ['p', '-']) or \
+                                 variant_fits('past', 3, ['s', '-'])
+                        else:
+                            t += variant_fits('imperative', 2, ['m', '-'])
+                        t += variant_fits('imperfective', 9, ['e', 'b', '-']) or \
+                             variant_fits('perfective', 9, ['p', '-'])
                         if t == 2:
                             results.add(result)
                 else:
                     results.add(result)
-            elif (header.text_content() == 'Numeral') and (treetagged_sentence[i][1][0] == 'M'):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
-            elif (header.text_content() == 'Adverb') and (treetagged_sentence[i][1][0] == 'R'):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
             else:
+                pairs_of_pos_tags = [('Numeral', 'M'), ('Adverb', 'R')]
+                for tag_1, tag_2 in pairs_of_pos_tags:
+                    if (header.text_content() == tag_1) and (treetagged_sentence[i][1][0] == tag_2):
+                        acc_word = header.getparent().getnext()
+                        result = acc_word.find_class('Cyrl headword')[0].text_content()
+                        results.add(result)
                 pairs_of_tags = [('D', 'P'), ('P', 'S'), ('A', 'P')]
                 for tag_1, tag_2 in pairs_of_tags:
                     if (header.text_content()[0] == tag_1) and (treetagged_sentence[i][1][0] == tag_2):

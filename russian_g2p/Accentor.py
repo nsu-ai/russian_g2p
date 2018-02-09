@@ -252,8 +252,7 @@ class Accentor:
             return True
         for cur_part in checked.split('-'):
             if len(cur_part) == 0:
-                res = False
-                break
+                return False
         return res
 
     def check_accented_wordform(self, checked: str) -> bool:
@@ -271,13 +270,12 @@ class Accentor:
             parts = [checked.lower().strip()]
         for cur_part in parts:
             filtered_part = ''.join(list(filter(lambda c: c != '+', cur_part)))
-            if len(filtered_part) == 0:
-                res = False
-                break
+            if not len(filtered_part):
+                return False
         return res
 
     def check_morphotag(self, morphotag: str) -> bool:
-        if len(morphotag.strip()) == 0:
+        if not len(morphotag.strip()):
             return False
         if morphotag.isdigit():
             return True
@@ -287,32 +285,28 @@ class Accentor:
             ok = len(morphotag.strip()) > 0
         else:
             if (ind1 >= 0) and (ind1 >= ind2):
-                ok = False
-            elif len(morphotag[:ind1].strip()) == 0:
-                ok = False
-            elif len(morphotag[(ind1 + 1):ind2].strip()) == 0:
-                ok = False
+                return False
+            elif not len(morphotag[:ind1].strip()):
+                return False
+            elif not len(morphotag[(ind1 + 1):ind2].strip()):
+                return False
             elif not morphotag[(ind1 + 1):ind2].strip().isdigit():
-                ok = False
+                return False
             else:
-                ok = (len(morphotag[(ind2 + 1):].strip()) == 0)
+                ok = len(morphotag[(ind2 + 1):].strip()) == 0
         if ok:
             if ind1 < 0:
                 ind1 = len(morphotag)
             for cur_part in self.__re_for_morphosplit.split(morphotag[:ind1].strip()):
-                if len(cur_part.strip()) == 0:
-                    ok = False
-                    break
+                if not len(cur_part.strip()):
+                    return False
                 if cur_part.strip().isdigit():
-                    ok = False
-                    break
+                    return False
                 search_res = self.__re_for_morphotag.search(cur_part.strip())
                 if search_res is None:
-                    ok = False
-                    break
+                    return False
                 if (search_res.start() < 0) or (search_res.end() < 0):
-                    ok = False
-                    break
+                    return False
         return ok
 
     def calculate_morpho_similarity(self, morphotags_1: str, morphotags_2: str) -> float:

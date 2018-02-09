@@ -26,12 +26,12 @@ def load_accents_dictionary(file_name: str) -> dict:
     with codecs.open(file_name, mode='r', encoding='utf-8', errors='ignore') as dictionary_file:
         cur_line = dictionary_file.readline()
         cur_line_index = 1
-        while len(cur_line) > 0:
+        while len(cur_line):
             prepared_line = cur_line.strip()
             error_message = "File `{0}`, line {1}: description of this word is incorrect!".format(
                 file_name, cur_line_index
             )
-            if len(prepared_line) > 0:
+            if len(prepared_line):
                 line_parts = prepared_line.split('#')
                 assert len(line_parts) == 2, error_message
                 source_lemma = line_parts[0].strip().lower()

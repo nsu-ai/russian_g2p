@@ -626,5 +626,6 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|g h|i|j'), 0.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|b h|d|j'), 0.25, places=7)
 
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
