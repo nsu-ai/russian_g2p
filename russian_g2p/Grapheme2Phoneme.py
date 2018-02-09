@@ -103,11 +103,11 @@ class Grapheme2Phoneme:
         with codecs.open(file_name, mode='r', encoding='utf-8', errors='ignore') as dictionary_file:
             cur_line = dictionary_file.readline()
             cur_line_index = 1
-            while len(cur_line) > 0:
+            while len(cur_line):
                 error_message = "File `{0}`, line {1}: description of this word and its transcription is " \
                                 "incorrect!".format(file_name, cur_line_index)
                 prepared_line = cur_line.strip()
-                if len(prepared_line) > 0:
+                if len(prepared_line):
                     words_of_line = prepared_line.split()
                     nwords = len(words_of_line)
                     assert nwords >= 2, error_message
@@ -149,9 +149,9 @@ class Grapheme2Phoneme:
         if prepared_word in self.__exclusions_dictionary:
             return self.__exclusions_dictionary[prepared_word]
         if '+' not in prepared_word:
-            cyrillic_Yo_ind = prepared_word.find('ё')
-            if cyrillic_Yo_ind >= 0:
-                prepared_word = prepared_word[0:(cyrillic_Yo_ind + 1)] + '+' + prepared_word[(cyrillic_Yo_ind + 1):]
+            cyrillic_yo_ind = prepared_word.find('ё')
+            if cyrillic_yo_ind >= 0:
+                prepared_word = prepared_word[0:(cyrillic_yo_ind + 1)] + '+' + prepared_word[(cyrillic_yo_ind + 1):]
             else:
                 counter = 0
                 for cur in prepared_word:
@@ -203,7 +203,7 @@ class Grapheme2Phoneme:
                     else:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 8)
                 elif ind == (n - 2):
-                    if (ind > 0) and (letters_list[ind] == 'г') and (letters_list[ind + 1] == 'о') and (
+                    if (ind) and (letters_list[ind] == 'г') and (letters_list[ind + 1] == 'о') and (
                         letters_list[ind - 1] in ['о', 'е', 'о+', 'е+']) \
                             and (not prepared_word in ['мно+го', 'до+рого', 'стро+го']):
                         new_phonemes, ind = self.__apply_rule26(letters_list, ind)
@@ -429,10 +429,10 @@ class Grapheme2Phoneme:
                 new_letter += cur_word[ind]
             else:
                 assert cur_word[ind] in self.__all_russian_letters, error_message
-                if len(new_letter) > 0:
+                if len(new_letter):
                     letters_list.append(new_letter)
                 new_letter = cur_word[ind]
-        if len(new_letter) > 0:
+        if len(new_letter):
             letters_list.append(new_letter)
         del vocal_letters
         return letters_list
@@ -530,7 +530,7 @@ class Grapheme2Phoneme:
                             if self.__get_place_of_articulation(_prev_phoneme) != place_of_articulation:
                                 break
                             if not _prev_phoneme in ['CH', 'SH0']:
-                                transcription[k] = _prev_phoneme + '0'
+                                transcription[k] = '{0}0'.format(_prev_phoneme)
                             k -= 1
         return transcription
 

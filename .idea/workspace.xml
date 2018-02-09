@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/check_accentor.py" afterPath="$PROJECT_DIR$/check_accentor.py" />
-      <change beforePath="$PROJECT_DIR$/prepare_all_forms.py" afterPath="$PROJECT_DIR$/prepare_all_forms.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/Accentor.py" afterPath="$PROJECT_DIR$/russian_g2p/Accentor.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" afterPath="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/test.py" afterPath="$PROJECT_DIR$/russian_g2p/test.py" />
-      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
+      <change beforePath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" afterPath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,30 +16,8 @@
       <file leaf-file-name="Grapheme2Phoneme.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-846">
-              <caret line="302" column="46" lean-forward="false" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WiktAccentor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/russian_g2p/WiktAccentor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Accentor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/russian_g2p/Accentor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="411" column="25" lean-forward="true" selection-start-line="411" selection-start-column="25" selection-end-line="411" selection-end-column="25" />
+            <state relative-caret-position="170">
+              <caret line="859" column="40" lean-forward="false" selection-start-line="859" selection-start-column="40" selection-end-line="859" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -60,7 +32,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.pyx" />
-        <option value="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
         <option value="$PROJECT_DIR$/russian_g2p/transcribe_words.py" />
         <option value="$PROJECT_DIR$/prepare_accents.py" />
         <option value="$PROJECT_DIR$/check_accentor.py" />
@@ -69,6 +40,7 @@
         <option value="$PROJECT_DIR$/russian_g2p/test.py" />
         <option value="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
         <option value="$PROJECT_DIR$/russian_g2p/Accentor.py" />
+        <option value="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
       </list>
     </option>
   </component>
@@ -78,7 +50,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="107" />
     <option name="y" value="27" />
     <option name="width" value="1400" />
@@ -155,7 +127,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="107" y="27" width="1600" height="840" extended-state="6" />
+    <frame x="107" y="27" width="1600" height="840" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -270,7 +242,7 @@
         <state relative-caret-position="9252">
           <caret line="514" column="24" lean-forward="false" selection-start-line="514" selection-start-column="24" selection-end-line="514" selection-end-column="24" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -456,7 +428,7 @@
         <state relative-caret-position="323">
           <caret line="530" column="0" lean-forward="false" selection-start-line="530" selection-start-column="0" selection-end-line="536" selection-end-column="56" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -474,15 +446,15 @@
         <state relative-caret-position="216">
           <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#45#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/russian_g2p/WiktAccentor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="84">
+          <caret line="113" column="43" lean-forward="true" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -491,7 +463,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/russian_g2p/Accentor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
+        <state relative-caret-position="990">
           <caret line="411" column="25" lean-forward="true" selection-start-line="411" selection-start-column="25" selection-end-line="411" selection-end-column="25" />
           <folding />
         </state>
@@ -499,8 +471,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-846">
-          <caret line="302" column="46" lean-forward="false" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="46" />
+        <state relative-caret-position="170">
+          <caret line="859" column="40" lean-forward="false" selection-start-line="859" selection-start-column="40" selection-end-line="859" selection-end-column="40" />
           <folding />
         </state>
       </provider>
