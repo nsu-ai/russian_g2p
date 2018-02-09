@@ -70,16 +70,16 @@ def main():
         all_prompts = sorted(list(get_all_prompts(init_dir_name)))
         accentor = Accentor()
         morpho_predictor = RNNMorphPredictor()
-        i=0
+        i = 0
         for cur_prompt in all_prompts[:100]:
-            trouble = 'no'
+            trouble = False
             unknown_words = []
             for cur_subsentence in select_subsentences(cur_prompt):
                 morphotags = ['{0} {1}'.format(cur_morpho.pos, cur_morpho.tag)
                               for cur_morpho in morpho_predictor.predict_sentence_tags(cur_subsentence)]
                 accent_variants = accentor.do_accents(cur_subsentence, morphotags)
                 if len(accent_variants) > 1:
-                    trouble = 'yes'
+                    trouble = True
                 else:
                     accented_phrase = accent_variants[0]
                     for cur_word in accented_phrase:
@@ -89,16 +89,15 @@ def main():
                                 vowels_counter += 1
                         if ('+' not in cur_word) and (vowels_counter > 1):
                             unknown_words += [cur_word]
-            if trouble == 'yes':
+            if trouble:
                 print('`{0}`: this phrase cannot be unambiguously accented!'.format(cur_prompt))
                 i += 1
-            if unknown_words != []:
+            if unknown_words:
                 for unknown_word in list(set(unknown_words)):
                     print('`{0}`: word `{1}` in this this phrase is unknown!'.format(cur_prompt, unknown_word))
         print(i)
     else:
         print("Usage: input_directory_with_voxforge_ru")
-
 
 
 if __name__ == '__main__':

@@ -528,6 +528,14 @@ class TestRussianAccentor(unittest.TestCase):
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
+    def test_do_accents_positive06(self):
+        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-кому']
+        target_variants = [
+            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-кому+']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
     def test_do_accents_negative01(self):
         source_phrase = ['подарок', 'для', 'кума']
         morphotags = [

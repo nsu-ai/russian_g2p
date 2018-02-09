@@ -113,7 +113,7 @@ class Grapheme2Phoneme:
                     assert nwords >= 2, error_message
                     word_name = words_of_line[0].lower()
                     assert any([c in (self.__all_russian_letters | {'-', '+'}) for c in word_name]), error_message
-                    assert not word_name in words_and_transcriptions, error_message
+                    assert word_name not in words_and_transcriptions, error_message
                     word_transcription = list()
                     for cur_phoneme in words_of_line[1:]:
                         prepared_phoneme = cur_phoneme.upper()
@@ -411,16 +411,11 @@ class Grapheme2Phoneme:
         return ''.join(list(filter(lambda a: a != removed_char, source_word.lower())))
 
     def __prepare_word(self, cur_word: str) -> str:
-        prepared_word = cur_word.lower().strip().replace('стн', 'сн')
-        prepared_word = prepared_word.replace('стл', 'сл')
-        prepared_word = prepared_word.replace('нтг', 'нг')
-        prepared_word = prepared_word.replace('здн', 'зн')
-        prepared_word = prepared_word.replace('здц', 'зц')
-        prepared_word = prepared_word.replace('ндц', 'нц')
-        prepared_word = prepared_word.replace('рдц', 'рц')
-        prepared_word = prepared_word.replace('ндш', 'нш')
-        prepared_word = prepared_word.replace('гдт', 'гт')
-        prepared_word = prepared_word.replace('лнц', 'нц')
+        prepared_word = cur_word.lower().strip()
+        replace_pairs = [('стн', 'сн'), ('стл', 'сл'), ('нтг', 'нг'), ('здн', 'зн'), ('здц', 'зц'),
+                         ('ндц', 'нц'), ('рдц', 'рц'), ('ндш', 'нш'), ('гдт', 'гт'), ('лнц', 'нц')]
+        for repl_from, repl_to in replace_pairs:
+            prepared_word = prepared_word.replace(repl_from, repl_to)
         return prepared_word
 
     def __word_to_letters_list(self, cur_word: str) -> list:

@@ -18,6 +18,5 @@ def main():
         print("Usage: accents.json")
 
 
-
 if __name__ == '__main__':
     main()

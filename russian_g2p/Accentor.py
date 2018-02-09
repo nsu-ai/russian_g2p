@@ -79,12 +79,11 @@ class Accentor:
         del self.__re_for_morphotag
 
     def get_correct_omograph_wiki(self, root_text, cur_word, morphotag='X'):
-
-        '''
+        """
         Разбор омографии.
-        Использование морфологической информации о 
+        Использование морфологической информации о
         слове для их разграничения.
-        '''
+        """
         langs = root_text.split('<hr />')
         #print('hello?')
         root = None
@@ -99,10 +98,11 @@ class Accentor:
         good_headers = []
         shallow_vars = set()
         results = set()
+        parts_of_speech = ['Noun', 'Verb', 'Adjective', 'Adverb', 'Conjunction', 'Determiner', 'Interjection',
+                           'Morpheme', 'Numeral', 'Particle', 'Predicative', 'Preposition', 'Pronoun']
         for header in root.findall('.//*[@class="mw-headline"]'):
             #print(cur_word, morphotag)
-            if header.text_content() in ['Noun', 'Verb', 'Adjective', 'Adverb', 'Conjunction', 'Determiner', 'Interjection',
-    'Morpheme', 'Numeral', 'Particle', 'Predicative', 'Preposition', 'Pronoun']:
+            if header.text_content() in parts_of_speech:
                 good_headers.append(header.text_content())
                 acc_word = header.getparent().getnext()
                 while acc_word.tag != 'p':
@@ -154,26 +154,17 @@ class Accentor:
                                 results.add(result)
                     else:
                         results.add(result)
-            elif (header.text_content()[0] == 'D') and (morphotag.find('PRON') != -1):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
             elif (header.text_content() == 'Numeral') and (morphotag.find('NUM') != -1):
                 acc_word = header.getparent().getnext()
                 result = acc_word.find_class('Cyrl headword')[0].text_content()
                 results.add(result)
-            elif (header.text_content()[0] == 'P') and (morphotag.find('PART') != -1):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
-            elif (header.text_content()[0] == 'Adverb') and (morphotag.find('ADV') != -1):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
-            elif (header.text_content()[0] == 'Adjective') and (morphotag.find('ADJ') != -1):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
+            else:
+                pairs_of_tags = [('D', 'PRON'), ('P', 'PART'), ('Adverb', 'ADV'), ('Adjective', 'ADJ')]
+                for tag_1, tag_2 in pairs_of_tags:
+                    if (header.text_content()[0] == tag_1) and (morphotag.find(tag_2) != -1):
+                        acc_word = header.getparent().getnext()
+                        result = acc_word.find_class('Cyrl headword')[0].text_content()
+                        results.add(result)
         if len(list(shallow_vars)) == 1:
             if list(shallow_vars)[0].replace('ё', 'е+').replace('+', '') == cur_word:
                 return list(shallow_vars)[0].replace('ё', 'ё+')
@@ -186,10 +177,10 @@ class Accentor:
 
     def get_simple_form_wiki(self, root_text, form):
 
-        '''
+        """
         Непосредственное нахождение релевантной формы
         и ударение без морфологической информации.
-        '''
+        """
         root = lxml.html.document_fromstring(root_text)
         rel_forms = set()
         for header in root.findall('.//*[@class="Cyrl headword"][@lang="ru"]'):
@@ -231,7 +222,7 @@ class Accentor:
         return list(rel_forms)
 
     def load_wiki_page(self, cur_form):
-        query = urllib.parse.urlencode({ 'title' : cur_form })
+        query = urllib.parse.urlencode({'title': cur_form})
         try:
             with urllib.request.urlopen('https://en.wiktionary.org/w/index.php?{}&#printable=yes'.format(query)) as f:
                 root_text = f.read().decode('utf-8')
@@ -360,7 +351,6 @@ class Accentor:
     def get_bad_words(self):
         return self.__bad_words
 
-
     def __do_accents(self, words_list: list, morphotags_list: list=None) -> list:
         n = len(words_list)
         if morphotags_list is not None:
@@ -398,7 +388,7 @@ class Accentor:
                     accented_wordforms = [self.__homonyms[cur_word][morpho_variants[best_ind]]]
                 else:
                     root_text = self.load_wiki_page(cur_word)
-                    if root_text != None:
+                    if root_text is not None:
                         #print('am I even here?')
                         accented_wordforms = sorted(self.get_correct_omograph_wiki(root_text, cur_word, morphotags_list[0]))
                         if len(accented_wordforms) == 1:
@@ -413,7 +403,7 @@ class Accentor:
                         warnings.warn('Word `{0}` has too many accent variants!'.format(words_list[0]))
         else:
             root_text = self.load_wiki_page(cur_word)
-            if root_text != None:
+            if root_text is not None:
                 accented_wordforms = sorted(self.get_simple_form_wiki(root_text, cur_word))
                 if len(accented_wordforms) == 1:
                     self.__new_simple_words[cur_word] = accented_wordforms[0]
