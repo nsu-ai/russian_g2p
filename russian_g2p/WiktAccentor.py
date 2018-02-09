@@ -112,19 +112,7 @@ def get_correct_acc_morf(cur_word, morphotag, accented_wordforms):
                             results.add(result)
                 else:
                     results.add(result)
-            elif (header.text_content()[0] == 'D') and (treetagged_sentence[i][1][0] == 'P'):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
             elif (header.text_content() == 'Numeral') and (treetagged_sentence[i][1][0] == 'M'):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
-            elif (header.text_content()[0] == 'P') and (treetagged_sentence[i][1][0] == 'S'):
-                acc_word = header.getparent().getnext()
-                result = acc_word.find_class('Cyrl headword')[0].text_content()
-                results.add(result)
-            elif (header.text_content()[0] == 'A') and (treetagged_sentence[i][1][0] == 'P'):
                 acc_word = header.getparent().getnext()
                 result = acc_word.find_class('Cyrl headword')[0].text_content()
                 results.add(result)
@@ -132,6 +120,13 @@ def get_correct_acc_morf(cur_word, morphotag, accented_wordforms):
                 acc_word = header.getparent().getnext()
                 result = acc_word.find_class('Cyrl headword')[0].text_content()
                 results.add(result)
+            else:
+                pairs_of_tags = [('D', 'P'), ('P', 'S'), ('A', 'P')]
+                for tag_1, tag_2 in pairs_of_tags:
+                    if (header.text_content()[0] == tag_1) and (treetagged_sentence[i][1][0] == tag_2):
+                        acc_word = header.getparent().getnext()
+                        result = acc_word.find_class('Cyrl headword')[0].text_content()
+                        results.add(result)
 
     # print(list(shallow_vars))
 

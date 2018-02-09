@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/check_accentor.py" afterPath="$PROJECT_DIR$/check_accentor.py" />
-      <change beforePath="$PROJECT_DIR$/prepare_accents.py" afterPath="$PROJECT_DIR$/prepare_accents.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/Accentor.py" afterPath="$PROJECT_DIR$/russian_g2p/Accentor.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" afterPath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
       <change beforePath="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" afterPath="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/transcribe_words.py" afterPath="$PROJECT_DIR$/russian_g2p/transcribe_words.py" />
-      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,14 +16,14 @@
       <file leaf-file-name="Accentor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/russian_g2p/Accentor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
-              <caret line="403" column="13" lean-forward="true" selection-start-line="403" selection-start-column="13" selection-end-line="403" selection-end-column="13" />
+            <state relative-caret-position="84">
+              <caret line="153" column="44" lean-forward="false" selection-start-line="153" selection-start-column="44" selection-end-line="153" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transcribe_words.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transcribe_words.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/russian_g2p/transcribe_words.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
@@ -44,8 +38,8 @@
       <file leaf-file-name="WiktAccentor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/russian_g2p/WiktAccentor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1374">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="2298">
+              <caret line="128" column="43" lean-forward="false" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -53,10 +47,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_accentor.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="check_accentor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/check_accentor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="162">
               <caret line="72" column="12" lean-forward="false" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -79,8 +73,8 @@
         <option value="$PROJECT_DIR$/prepare_accents.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/check_accentor.py" />
-        <option value="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
         <option value="$PROJECT_DIR$/russian_g2p/Accentor.py" />
+        <option value="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
       </list>
     </option>
   </component>
@@ -461,30 +455,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/russian_g2p/WiktAccentor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1374">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_accentor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="72" column="12" lean-forward="false" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/russian_g2p/Accentor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="403" column="13" lean-forward="true" selection-start-line="403" selection-start-column="13" selection-end-line="403" selection-end-column="13" />
+        <state relative-caret-position="84">
+          <caret line="153" column="44" lean-forward="false" selection-start-line="153" selection-start-column="44" selection-end-line="153" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -495,6 +469,26 @@
           <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/russian_g2p/WiktAccentor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2298">
+          <caret line="128" column="43" lean-forward="false" selection-start-line="128" selection-start-column="43" selection-end-line="128" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/check_accentor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="72" column="12" lean-forward="false" selection-start-line="72" selection-start-column="12" selection-end-line="72" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
