@@ -384,14 +384,10 @@ class Accentor:
         return res
 
     def get_new_dics(self):
-        return self.__new_homonyms, self.__new_simple_words
+        return self.__new_homonyms, sorted(list(self.__new_simple_words))
 
     def get_bad_words(self):
         return self.__bad_words
-
-    def merge_dics(self, accents_dictionary_name, new_homonyms, new_simple_words):
-        with codecs.open(accents_dictionary_name, mode='w', encoding='utf-8') as fp:
-            data = json.dump([self.__homonyms.update(new_homonyms), self.__simple_words.update(new_simple_words)])
 
     def __do_accents(self, words_list: list, morphotags_list: list=None) -> list:
         n = len(words_list)
@@ -462,7 +458,7 @@ class Accentor:
                         cur_accented_wordforms = sorted(self.get_simple_form_wiki(root_text, cur_word))
                         if len(cur_accented_wordforms) == 1:
                             accented_wordforms += [cur_accented_wordforms[0]]
-                            self.__new_simple_words[cur_word] = cur_accented_wordforms[0]
+                            self.__new_simple_words.add(cur_accented_wordforms[0])
                         elif len(cur_accented_wordforms) == 0:
                             accented_wordforms += [cur_word]
                             warn = 'no'
