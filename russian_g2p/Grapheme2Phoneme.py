@@ -23,11 +23,12 @@ class Grapheme2Phoneme:
                              'ч', 'ш', 'щ'}
         self.__nonpair_consonants = {'й', 'м', 'н', 'р', 'л', 'ц', 'ч', 'х', 'щ'}
 
-        self.__vocals_transformations = {'а': 'A', 'о': 'A', 'у': 'U', 'э': 'E', 'ы': 'Y', 'и': 'I', 'я': 'A', 'ё': 'O',
-                                         'ю': 'U', 'е': 'E',  'а+': 'A0', 'о+': 'O', 'у+': 'U0', 'э+': 'E0', 'ы+': 'Y0',
-                                         'и+': 'I0', 'я+': 'A0', 'ё+': 'O', 'ю+': 'U0', 'е+': 'E0'}
+        self.__vocals_transformations = {'а': 'A', 'о': 'A', 'у': 'U', 'э': 'Y', 'ы': 'Y', 'и': 'I', 'я': 'I',
+                                         'ю': 'U', 'е': 'E',  'а+': 'A0', 'о+': 'O', 'у+': 'U0', 'э+': 'E0',
+                                         'ы+': 'Y0', 'и+': 'I0', 'я+': 'A0', 'ё+': 'O', 'ю+': 'U0', 'е+': 'E0'}
         self.__transformations_by_rules = {
-            3: {'й': 'J', 'ц': 'C', 'ч': 'CH', 'щ': 'SH0'},
+
+            3: {'й': 'J', 'ц': 'C', 'ч': 'CH', 'щ': 'SH0', 'ш': 'SH'},
             4: {'м': 'M0', 'н': 'N0', 'р': 'R0', 'л': 'L0', 'х': 'H0'},
             5: {'м': 'M', 'н': 'N', 'р': 'R', 'л': 'L', 'х': 'H'},
             6: {'н': 'N0'},
@@ -161,6 +162,8 @@ class Grapheme2Phoneme:
                     warnings.warn('`{0}`: the accent for this word is unknown!'.format(source_word))
         if prepared_word in self.__exclusions_dictionary:
             return self.__exclusions_dictionary[prepared_word]
+        if '\'' in prepared_word:
+            prepared_word = prepared_word.replace('\'', '')
         if '-' in prepared_word:
             if (not self.in_function_words_1(prepared_word)) and (not self.in_function_words_2(prepared_word)):
                 word_parts = list(filter(lambda a: len(a) > 0, map(lambda b: b.strip(), prepared_word.split('-'))))
@@ -312,6 +315,8 @@ class Grapheme2Phoneme:
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
         words_in_phrase = list()
         for cur_word in source_phrase.lower().split(' '):
+            if '\'' in cur_word:
+                cur_word = cur_word.replace('\'', '')
             if '-' in cur_word:
                 if self.in_function_words_1(cur_word) or self.in_function_words_2(cur_word) \
                         or cur_word in self.__exclusions_dictionary:
@@ -439,7 +444,7 @@ class Grapheme2Phoneme:
 
     def __apply_rule01(self, letters_list: list, cur_pos: int) -> tuple:
         new_phonemes_list = list()
-        if letters_list[cur_pos] in ['я', 'ё', 'ю', 'е', 'я+', 'ё+', 'ю+', 'е+']:
+        if letters_list[cur_pos] in ['я', 'ю', 'е', 'я+', 'ё+', 'ю+', 'е+']:
             new_phonemes_list.append('J')
         new_phonemes_list.append(self.__vocals_transformations[letters_list[cur_pos]])
         return new_phonemes_list, cur_pos + 1
@@ -449,11 +454,23 @@ class Grapheme2Phoneme:
         if cur_pos == 0:
             new_phonemes_list.append(self.__vocals_transformations[letters_list[cur_pos]])
         else:
-            if (letters_list[cur_pos] in ['и', 'и+']) and (letters_list[cur_pos - 1] in ['ц', 'ш']):
+            if (letters_list[cur_pos] in ['и', 'и+', 'е']) and (letters_list[cur_pos - 1] in ['ц', 'ж', 'ш']):
                 if letters_list[cur_pos] == 'и':
+                    new_phonemes_list.append('Y')
+                elif letters_list[cur_pos] == 'е':
                     new_phonemes_list.append('Y')
                 else:
                     new_phonemes_list.append('Y0')
+            elif (letters_list[cur_pos] in ['а', 'е']) and (letters_list[cur_pos - 1] in ['ч', 'щ']) and ((letters_list[cur_pos + 1] not in [' ', '\n', '.', '!', '?', ',', ':', ';', '(', ')', 'sil']) or not letters_list[cur_pos + 1]):
+                if letters_list[cur_pos] == 'а':
+                    new_phonemes_list.append('I')
+                elif letters_list[cur_pos] == 'е':
+                    new_phonemes_list.append('I')
+            elif ((letters_list[cur_pos] == 'я') and ((letters_list[cur_pos + 1] in [' ', '\n', '.', '!', '?', ',', ':', ';', '(', ')', 'sil']) or not letters_list[cur_pos + 1])) or (letters_list[cur_pos] == 'я+'):
+                if letters_list[cur_pos] == 'я':
+                    new_phonemes_list.append('A')
+                else:
+                    new_phonemes_list.append('A0')
             else:
                 new_phonemes_list.append(self.__vocals_transformations[letters_list[cur_pos]])
         return new_phonemes_list, cur_pos + 1
@@ -644,6 +661,9 @@ class Grapheme2Phoneme:
         letters_list_2 = self.__word_to_letters_list(self.__prepare_word(word2.replace('-', '').replace(' ', '')))
         nword1 = len(letters_list_1)
         nword2 = len(letters_list_2)
+        if letters_list_1[-1] in ['я', 'а', 'е']:
+            if (letters_list_1[-1] == 'я' or letters_list_1[-2] in ['ч', 'щ']):
+                letters_list_1[-1] = 'и'
         if (letters_list_1[nword1 - 1] in self.__consonants) or (letters_list_1[nword1 - 1] == 'ь'):
             new_phonemes = None
             ind = None
