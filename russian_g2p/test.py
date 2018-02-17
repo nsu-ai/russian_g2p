@@ -223,16 +223,16 @@ class TestRussianG2P(unittest.TestCase):
         target_warning_message = '`через`: the accent for this word is unknown!'
         with self.assertWarnsRegex(UserWarning, re.escape(target_warning_message)):
             self.__g2p.word_to_phonemes(source_word)
-    '''
+
     def test_phrase_to_phonemes_positive001(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Служебное слово - обычная частица. """
-        self.assertEqual(['N0', 'E', 'D0', 'E0', 'L', 'A', 'T0'], self.__g2p.phrase_to_phonemes('не де+лать'))
+        self.assertEqual(['N0', 'I', 'D0', 'E0', 'L', 'A', 'T0'], self.__g2p.phrase_to_phonemes('не де+лать'))
 
     def test_phrase_to_phonemes_positive002(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Служебное слово - частица, присоединяемая дефисом. """
-        self.assertEqual(['P', 'A', 'SH', 'O', 'L', 'T', 'A', 'K0', 'I'], self.__g2p.phrase_to_phonemes('пошё+л-таки'))
+        self.assertEqual(['P', 'A', 'SH', 'O0', 'L', 'T', 'A', 'K0', 'I'], self.__g2p.phrase_to_phonemes('пошё+л-таки'))
 
     def test_phrase_to_phonemes_positive003(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
@@ -242,36 +242,36 @@ class TestRussianG2P(unittest.TestCase):
     def test_phrase_to_phonemes_positive004(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Для первого слова: первое слово заканчивается гласной. """
-        self.assertEqual(['P', 'A', 'D', 'A', 'R', 'O', 'G0', 'E'], self.__g2p.phrase_to_phonemes('по доро+ге'))
+        self.assertEqual(['P', 'A', 'D', 'A', 'R', 'O0', 'G0', 'I'], self.__g2p.phrase_to_phonemes('по доро+ге'))
         self.assertEqual(['N', 'A', 'S', 'T', 'A', 'L0', 'E0'], self.__g2p.phrase_to_phonemes('на столе+'))
 
     def test_phrase_to_phonemes_positive005(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Для первого слова: первое слово заканчивается согласной, проверка ассимиляции по глухости-звонкости. """
         self.assertEqual(['F', 'S', 'A', 'D', 'U0'], self.__g2p.phrase_to_phonemes('в саду+'))
-        self.assertEqual(['V', 'L0', 'E', 'S', 'U0'], self.__g2p.phrase_to_phonemes('в лесу+'))
-        self.assertEqual(['Z', 'D', 'A', 'R', 'O', 'G0', 'I'], self.__g2p.phrase_to_phonemes('с доро+ги'))
-        self.assertEqual(['S', 'V', 'A0', 'S0', 'E', 'J'], self.__g2p.phrase_to_phonemes('с Ва+сей'))
+        self.assertEqual(['V', 'L0', 'I', 'S', 'U0'], self.__g2p.phrase_to_phonemes('в лесу+'))
+        self.assertEqual(['Z', 'D', 'A', 'R', 'O0', 'G0', 'I'], self.__g2p.phrase_to_phonemes('с доро+ги'))
+        self.assertEqual(['S', 'V', 'A0', 'S0', 'I', 'J'], self.__g2p.phrase_to_phonemes('с Ва+сей'))
 
     def test_phrase_to_phonemes_positive006(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Для первого слова: первое слово заканчивается твёрдой согласной, которая не должна переходить в мягкую фонему
         перед гласными Я, Ё, Ю, Е, И. """
-        self.assertEqual(['P', 'A', 'D', 'J', 'O', 'L', 'K', 'A', 'J'], self.__g2p.phrase_to_phonemes('под ё+лкой'))
+        self.assertEqual(['P', 'A', 'D', 'J', 'O0', 'L', 'K', 'A', 'J'], self.__g2p.phrase_to_phonemes('под ё+лкой'))
 
     def test_phrase_to_phonemes_positive007(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Для первого слова: первое слово заканчивается согласной, и она не должна ассимилироваться с последующей мягкой
         согласной, одинаковой по месту образования. """
         self.assertEqual(['P', 'A', 'T', 'S0', 'E0', 'N', 'A', 'M'], self.__g2p.phrase_to_phonemes('под се+ном'))
-        self.assertEqual(['B0', 'E', 'Z', 'D0', 'E0', 'D', 'A'], self.__g2p.phrase_to_phonemes('без де+да'))
+        self.assertEqual(['B0', 'I', 'Z', 'D0', 'E0', 'D', 'A'], self.__g2p.phrase_to_phonemes('без де+да'))
 
     def test_phrase_to_phonemes_positive008(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Для второго слова: первое слово заканчивается мягким знаком, а второе слово начинается с гласной О или с
         гласной И, и эти гласные ни в коем случае не должны переходить в сочетания фонем [J O] или [J I]
         ([J I0], если под ударением) соответственно. """
-        self.assertEqual(['I', 'L0', 'O', 'S0', 'E', 'N0'], self.__g2p.phrase_to_phonemes('иль о+сень'))
+        self.assertEqual(['I', 'L0', 'O0', 'S0', 'I', 'N0'], self.__g2p.phrase_to_phonemes('иль о+сень'))  # выдает O
         self.assertEqual(['I', 'L0', 'I0', 'V', 'A', 'L', 'G', 'A'], self.__g2p.phrase_to_phonemes('иль и+волга'))
 
     def test_phrase_to_phonemes_positive009(self):
@@ -281,7 +281,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['P', 'A', 'D', 'Y0', 'V', 'A', 'J'], self.__g2p.phrase_to_phonemes('под и+вой'))
         self.assertEqual(['S', 'Y', 'V', 'A0', 'N', 'A', 'M'], self.__g2p.phrase_to_phonemes('с Ива+ном'))
         # для второго слова: если первое слово заканчивается мягким знаком, то правило не должно выполняться
-        self.assertEqual(['V0', 'E', 'D0', 'I', 'V', 'A0', 'N'], self.__g2p.phrase_to_phonemes('ведь Ива+н'))
+        self.assertEqual(['V0', 'I', 'D0', 'I', 'V', 'A0', 'N'], self.__g2p.phrase_to_phonemes('ведь Ива+н'))  # хм
 
     def test_phrase_to_phonemes_positive010(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке двух знаменательных слов.
@@ -289,11 +289,11 @@ class TestRussianG2P(unittest.TestCase):
         предпоследняя буква, а последняя - мягкий знак), то эта глухая согласная должна озвончаться, если первой буквой
         второго слова является Б, Д, Г, З или Ж. При этом появляются "неканонические", вспомогательные фонемы, которых
         нет при обычном внутрисловном преобразовании: Щ -> [ZH0], Ц -> [DZ], Ч -> [DZH] """
-        self.assertEqual(['B', 'O', 'R', 'ZH0', 'G', 'A', 'R0', 'A0', 'CH', 'I', 'J'],
+        self.assertEqual(['B', 'O0', 'R', 'ZH0', 'G', 'A', 'R0', 'A0', 'CH', 'I', 'J'],
                          self.__g2p.phrase_to_phonemes('бо+рщ горя+чий'))
-        self.assertEqual(['Z', 'A0', 'J', 'A', 'DZ', 'B0', 'E', 'L0', 'A0', 'K'],
+        self.assertEqual(['Z', 'A0', 'J', 'I', 'DZ', 'B0', 'I', 'L0', 'A0', 'K'],
                          self.__g2p.phrase_to_phonemes('за+яц беля+к'))
-        self.assertEqual(['D', 'O', 'DZH', 'G', 'U', 'L0', 'A0', 'J', 'E', 'T'],
+        self.assertEqual(['D', 'O0', 'DZH', 'G', 'U', 'L0', 'A0', 'J', 'I', 'T'],
                          self.__g2p.phrase_to_phonemes('до+чь гуля+ет'))
 
     def test_phrase_to_phonemes_positive011(self):
@@ -301,28 +301,28 @@ class TestRussianG2P(unittest.TestCase):
         Для первого слова: если последняя буква первого слова - звонкая согласная Б, В, Г, Д, Ж или З (либо
         предпоследняя буква, а последняя - мягкий знак), то она не оглушается тогда и только тогда, когда первой буквой
         второго слова являются Б, Д, Г, З или Ж """
-        self.assertEqual(['D', 'U0', 'B', 'Z0', 'E', 'L0', 'O', 'N', 'Y', 'J'],
+        self.assertEqual(['D', 'U0', 'B', 'Z0', 'I', 'L0', 'O0', 'N', 'Y', 'J'],
                          self.__g2p.phrase_to_phonemes('ду+б зелё+ный'))
-        self.assertEqual(['B', 'R', 'O', 'V0', 'Z', 'O', 'I'],
+        self.assertEqual(['B', 'R', 'O0', 'V0', 'Z', 'O0', 'I'],
                          self.__g2p.phrase_to_phonemes('бро+вь Зо+и'))
         # пример, когда правило не должно работать, поскольку первая буква второго слова не удовлетворяет условию
-        self.assertEqual(['B', 'R', 'O', 'F0', 'N0', 'I0', 'N', 'Y'],
+        self.assertEqual(['B', 'R', 'O0', 'F0', 'N0', 'I0', 'N', 'Y'],
                          self.__g2p.phrase_to_phonemes('бро+вь Ни+ны'))
 
     def test_phrase_to_phonemes_positive012(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке двух знаменательных слов.
         Для первого слова: если последняя буква первого слова - твёрдая согласная, то она не должна переходить в мягкую
         фонему перед гласными Я, Ё, Ю, Е, И """
-        self.assertEqual(['S', 'A0', 'T', 'J', 'O', 'L', 'A', 'K'],
+        self.assertEqual(['S', 'A0', 'T', 'J', 'O0', 'L', 'A', 'K'],
                          self.__g2p.phrase_to_phonemes('са+д ё+лок'))
-        self.assertEqual(['G', 'O', 'R', 'A', 'T', 'J', 'E', 'R0', 'E', 'V', 'A0', 'N'],
+        self.assertEqual(['G', 'O0', 'R', 'A', 'T', 'J', 'I', 'R0', 'I', 'V', 'A0', 'N'],
                          self.__g2p.phrase_to_phonemes('го+род Ерева+н'))
 
     def test_phrase_to_phonemes_positive013(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке двух знаменательных слов.
         Для первого слова: если последняя буква первого слова - согласная, то она не ассимилилуется с последующей мягкой
         согласной, одинаковой по месту образования. """
-        self.assertEqual(['G', 'O', 'R', 'A', 'T', 'S0', 'I', 'M0', 'B0', 'I0', 'R', 'S', 'K'],
+        self.assertEqual(['G', 'O0', 'R', 'A', 'T', 'S0', 'I', 'M0', 'B0', 'I0', 'R', 'S', 'K'],
                          self.__g2p.phrase_to_phonemes('го+род Симби+рск'))
 
     def test_phrase_to_phonemes_positive014(self):
@@ -331,7 +331,7 @@ class TestRussianG2P(unittest.TestCase):
         (или [Y0], если под ударением) после всех согласных, кроме Й """
         self.assertEqual(['L0', 'I0', 'S', 'T', 'Y0', 'V', 'Y'],
                          self.__g2p.phrase_to_phonemes('ли+ст и+вы'))
-        self.assertEqual(['N', 'O', 'S', 'Y', 'V', 'A0', 'N', 'A'],
+        self.assertEqual(['N', 'O0', 'S', 'Y', 'V', 'A0', 'N', 'A'],
                          self.__g2p.phrase_to_phonemes('но+с Ива+на'))
         # если первое слово заканчивается мягким знаком, то правило не должно выполняться
         self.assertEqual(['M', 'A0', 'T0', 'I', 'V', 'A0', 'N', 'A'],
@@ -340,14 +340,14 @@ class TestRussianG2P(unittest.TestCase):
     def test_phrase_to_phonemes_positive015(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке двух знаменательных слов.
         Два знаменательных слова объединены в одно через дефис. """
-        self.assertEqual(['K', 'A', 'Z', 'A', 'K0', 'I0', 'R', 'A', 'Z', 'B', 'O', 'J', 'N0', 'I', 'K0', 'I'],
+        self.assertEqual(['K', 'A', 'Z', 'A', 'K0', 'I0', 'R', 'A', 'Z', 'B', 'O0', 'J', 'N0', 'I', 'K0', 'I'],
                          self.__g2p.phrase_to_phonemes('казаки+-разбо+йники'))
-        self.assertEqual(['J', 'E', 'D', 'R0', 'I0', 'T0', 'K', 'A', 'L', 'A', 'T0', 'I0', 'T0'],
+        self.assertEqual(['J', 'I', 'D', 'R0', 'I0', 'T0', 'K', 'A', 'L', 'A', 'T0', 'I0', 'T0'],
                          self.__g2p.phrase_to_phonemes('едри+ть-колоти+ть'))
 
     def test_phrase_to_phonemes_positive016(self):
         """ Проверка корректного транскрибирования некоторых междометий. """
-        self.assertEqual(['O', 'H', 'O', 'H', 'O', 'H'], self.__g2p.phrase_to_phonemes('о+х-о+х-о+х'))
+        self.assertEqual(['O0', 'H', 'O0', 'H', 'O0', 'H'], self.__g2p.phrase_to_phonemes('о+х-о+х-о+х'))
         self.assertEqual(['B', 'A0', 'J', 'U', 'SH', 'K0', 'I', 'B', 'A', 'J', 'U0'],
                          self.__g2p.phrase_to_phonemes('ба+юшки-баю+'))
         self.assertEqual(['T', 'R', 'A0', 'H', 'T', 'A0', 'H', 'T', 'A0', 'H'],
@@ -357,14 +357,14 @@ class TestRussianG2P(unittest.TestCase):
     def test_phrase_to_phonemes_positive017(self):
         """ Проверка корректности транскрибирования целых фраз, состоящих более чем из двух слов.
         Простое предложение. """
-        self.assertEqual(['J', 'O', 'L', 'K', 'A', 'S', 'T', 'A', 'J', 'A0', 'L', 'A', 'U', 'A', 'K', 'N', 'A0'],
+        self.assertEqual(['J', 'O0', 'L', 'K', 'A', 'S', 'T', 'A', 'J', 'A0', 'L', 'A', 'U', 'A', 'K', 'N', 'A0'],
                          self.__g2p.phrase_to_phonemes('ё+лка стоя+ла у окна+'))
-        self.assertEqual(['SH', 'A', 'F0', 'O', 'R', 'V0', 'E', 'D0', 'O', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U'],
+        self.assertEqual(['SH', 'A', 'F0', 'O0', 'R', 'V0', 'I', 'D0', 'O0', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U'],
                          self.__g2p.phrase_to_phonemes('шофё+р ведё+т маши+ну'))
-        self.assertEqual(['A', 'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'E', 'V', 'Y0', 'D0', 'E', 'R', 'ZH', 'A', 'L',
-                          'A', 'P0', 'E', 'R0', 'E', 'G', 'R', 'U0', 'S', 'K0', 'I'],
+        self.assertEqual(['A', 'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'I', 'V', 'Y0', 'D0', 'I', 'R', 'ZH', 'A', 'L',
+                          'A', 'P0', 'I', 'R0', 'I', 'G', 'R', 'U0', 'S', 'K0', 'I'],
                          self.__g2p.phrase_to_phonemes('а маши+на не вы+держала перегру+зки'))
-        self.assertEqual(['M', 'O', 'S', 'T', 'CH', 'E0', 'R0', 'E', 'Z', 'N', 'A', 'V', 'A', 'S0', 'I', 'B0', 'I0',
+        self.assertEqual(['M', 'O0', 'S', 'T', 'CH', 'E0', 'R0', 'I', 'Z', 'N', 'A', 'V', 'A', 'S0', 'I', 'B0', 'I0',
                           'R', 'S', 'K'],
                          self.__g2p.phrase_to_phonemes('мо+ст че+рез новосиби+рск'))
 
@@ -372,9 +372,9 @@ class TestRussianG2P(unittest.TestCase):
         """ Проверка корректности транскрибирования целых фраз, состоящих более чем из двух слов.
         Простое предложение с двумя словами-фонетическими исключениями ("мужчины" и "декольте"). """
         self.assertEqual(
-            ['P', 'A', 'C', 'E', 'L', 'U0', 'J', 'M', 'U', 'SH0', 'I0', 'N', 'Y', 'F', 'SH0', 'E0', 'D', 'R', 'A', 'T',
-             'K', 'R', 'Y0', 'T', 'A', 'J', 'E', 'ZH', 'E0', 'N', 'S', 'K', 'A', 'J', 'E', 'D', 'E', 'K', 'A', 'L0',
-             'T', 'E0', 'V', 'O', 'F', 'S0', 'E', 'N0', 'E', 'SH0', 'I', 'T', 'A0', 'L', 'S0', 'A', 'N0', 'E', 'P',
+            ['P', 'A', 'C', 'Y', 'L', 'U0', 'J', 'M', 'U', 'SH0', 'I0', 'N', 'Y', 'F', 'SH0', 'E0', 'D', 'R', 'A', 'T',
+             'K', 'R', 'Y0', 'T', 'A', 'J', 'I', 'ZH', 'E0', 'N', 'S', 'K', 'A', 'J', 'I', 'D', 'E', 'K', 'A', 'L0',
+             'T', 'E0', 'V', 'O0', 'F', 'S0', 'I', 'N0', 'I', 'SH0', 'I', 'T', 'A0', 'L', 'S0', 'A', 'N0', 'I', 'P',
              'R0', 'I', 'L0', 'I0', 'CH', 'N', 'Y', 'M'],
             self.__g2p.phrase_to_phonemes('поцелу+й мужчи+ны в ще+дро откры+тое же+нское декольте+ во+все не счита+лся '
                                           'неприли+чным')
@@ -384,22 +384,22 @@ class TestRussianG2P(unittest.TestCase):
         """ Проверка корректности транскрибирования целых фраз, состоящих более чем из двух слов.
         Сложное предложение с паузой, которая разделяет составляющие его простые предложения. """
         self.assertEqual(
-            ['sil', 'SH', 'A', 'F0', 'O', 'R', 'V0', 'E', 'D0', 'O', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U', 'sil', 'A',
-             'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'E', 'V', 'Y0', 'D0', 'E', 'R', 'ZH', 'A', 'L', 'A', 'P0', 'E', 'R0',
-             'E', 'G', 'R', 'U0', 'S', 'K0', 'I', 'sil'],
+            ['sil', 'SH', 'A', 'F0', 'O0', 'R', 'V0', 'I', 'D0', 'O0', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U', 'sil', 'A',
+             'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'I', 'V', 'Y0', 'D0', 'I', 'R', 'ZH', 'A', 'L', 'A', 'P0', 'I', 'R0',
+             'I', 'G', 'R', 'U0', 'S', 'K0', 'I', 'sil'],
             self.__g2p.phrase_to_phonemes('sil шофё+р ведё+т маши+ну sil а маши+на не вы+держала перегру+зки sil')
         )
 
     def test_phrase_to_phonemes_positive020(self):
         """ Проверка стыка знаменательного и служебного слов в ситуации, когда служебное слово идёт вторым. """
-        self.assertEqual(['J', 'E0', 'S0', 'L0', 'I', 'B', 'Y', 'N0', 'E', 'T', 'Y0'],
+        self.assertEqual(['J', 'E0', 'S', 'L0', 'I', 'B', 'Y', 'N0', 'I', 'T', 'Y0'],
                          self.__g2p.phrase_to_phonemes('е+сли бы не ты+'))
-        self.assertEqual(['J', 'E0', 'S0', 'L0', 'I', 'P', 'N0', 'E0', 'B', 'Y', 'L', 'A', 'T0', 'E', 'B0', 'A0'],
-                         self.__g2p.phrase_to_phonemes('е+сли б не+ было тебя+'))
+        self.assertEqual(['J', 'E0', 'S', 'L0', 'I', 'P', 'N0', 'E0', 'B', 'Y', 'L', 'A', 'T0', 'I', 'B0', 'A0'],
+                         self.__g2p.phrase_to_phonemes('е+сли б не+ было тебя+'))  # "есьли" очень смущает
 
     def test_phrase_to_phonemes_positive021(self):
         """ Проверка стыка знаменательного и служебного слов в ситуации, когда служебное слово - частица с дефисом. """
-        self.assertEqual(['D', 'A', 'V', 'A0', 'J', 'K', 'A', 'R', 'A', 'Z', 'B0', 'E', 'R0', 'O', 'M', 'S0', 'A'],
+        self.assertEqual(['D', 'A', 'V', 'A0', 'J', 'K', 'A', 'R', 'A', 'Z', 'B0', 'I', 'R0', 'O0', 'M', 'S0', 'A'],
                          self.__g2p.phrase_to_phonemes('дава+й-ка разберё+мся'))
 
     def test_phrase_to_phonemes_negative001(self):
@@ -470,7 +470,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertTrue(self.__g2p.in_function_words_2('-нибу+дь'))
         self.assertFalse(self.__g2p.in_function_words_2('нибудь'))
         self.assertFalse(self.__g2p.in_function_words_2('нибу+дь'))
-'''
+
 '''
 class TestRussianAccentor(unittest.TestCase):
     def setUp(self):

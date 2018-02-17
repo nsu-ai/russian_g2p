@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="" />
+    <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" afterPath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
+      <change beforePath="$PROJECT_DIR$/russian_g2p/test.py" afterPath="$PROJECT_DIR$/russian_g2p/test.py" />
+      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,18 +15,29 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/russian_g2p$Grapheme2Phoneme.coverage" NAME="Grapheme2Phoneme Coverage Results" MODIFIED="1518849705731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/russian_g2p" />
-    <SUITE FILE_PATH="coverage/russian_g2p$test.coverage" NAME="test Coverage Results" MODIFIED="1518855072736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/russian_g2p$test.coverage" NAME="test Coverage Results" MODIFIED="1518861746423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Grapheme2Phoneme.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Grapheme2Phoneme.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5305">
-              <caret line="261" column="36" lean-forward="true" selection-start-line="261" selection-start-column="36" selection-end-line="261" selection-end-column="36" />
+            <state relative-caret-position="108">
+              <caret line="171" column="26" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#2643#6322#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/russian_g2p/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="611" column="26" lean-forward="true" selection-start-line="611" selection-start-column="26" selection-end-line="611" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -30,8 +45,8 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9378">
-              <caret line="524" column="41" lean-forward="true" selection-start-line="524" selection-start-column="41" selection-end-line="524" selection-end-column="41" />
+            <state relative-caret-position="208">
+              <caret line="483" column="48" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,6 +67,9 @@
       <find>е+сли</find>
       <find>__vocals_transformations</find>
       <find>'H', 'K', 'O0']</find>
+      <find>__apply_rule_for_one_letter</find>
+      <find>яц</find>
+      <find>СЕНЬ</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -66,10 +84,10 @@
         <option value="$PROJECT_DIR$/check_accentor.py" />
         <option value="$PROJECT_DIR$/prepare_all_forms.py" />
         <option value="$PROJECT_DIR$/russian_g2p/WiktAccentor.py" />
-        <option value="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
-        <option value="$PROJECT_DIR$/russian_g2p/test.py" />
         <option value="$PROJECT_DIR$/russian_g2p/Accentor.py" />
+        <option value="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/russian_g2p/test.py" />
       </list>
     </option>
   </component>
@@ -79,7 +97,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="27" />
     <option name="width" value="800" />
     <option name="height" value="840" />
@@ -205,14 +223,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1600" height="840" extended-state="7" />
+    <frame x="0" y="27" width="1600" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286517" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7724719" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -267,7 +285,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>247</line>
+          <line>251</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -276,38 +294,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>558</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>589</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>423</line>
+          <line>413</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>281</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>283</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>287</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py</url>
-          <line>288</line>
-          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="16" />
@@ -321,6 +309,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2643#6322#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -339,6 +328,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2643#6322#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -357,6 +347,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2643#6322#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -374,6 +365,7 @@
           <caret line="302" column="46" lean-forward="false" selection-start-line="302" selection-start-column="40" selection-end-line="302" selection-end-column="46" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2643#6322#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -552,29 +544,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/russian_g2p/test.py">
+    <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="108">
+          <caret line="171" column="26" lean-forward="false" selection-start-line="171" selection-start-column="26" selection-end-line="171" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#2643#6322#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9378">
-          <caret line="524" column="41" lean-forward="true" selection-start-line="524" selection-start-column="41" selection-end-line="524" selection-end-column="41" />
+        <state relative-caret-position="208">
+          <caret line="483" column="48" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="633" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
+    <entry file="file://$PROJECT_DIR$/russian_g2p/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5305">
-          <caret line="261" column="36" lean-forward="true" selection-start-line="261" selection-start-column="36" selection-end-line="261" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="224">
+          <caret line="611" column="26" lean-forward="true" selection-start-line="611" selection-start-column="26" selection-end-line="611" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
