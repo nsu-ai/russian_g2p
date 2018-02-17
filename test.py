@@ -472,7 +472,6 @@ class TestRussianG2P(unittest.TestCase):
 
 class TestRussianAccentor(unittest.TestCase):
     def setUp(self):
-        print('HEEEEY')
         self.__accentor = Accentor()
 
     def tearDown(self):
@@ -529,9 +528,9 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive06(self):
-        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-кому']
+        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-чему', 'красно-синий']
         target_variants = [
-            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-кому+']
+            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-чему+', 'кра+сно-си+ний']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
