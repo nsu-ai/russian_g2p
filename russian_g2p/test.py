@@ -516,8 +516,7 @@ class TestRussianAccentor(unittest.TestCase):
     def test_do_accents_positive04(self):
         source_phrase = ['оружие', 'для', 'кубы']
         target_variants = [
-            ['ору+жие', 'для', 'ку+бы'],
-            ['ору+жие', 'для', 'кубы+']
+            ['ору+жие', 'для', 'кубы']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
