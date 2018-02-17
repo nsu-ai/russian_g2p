@@ -17,8 +17,8 @@ class Accentor:
         self.__russian_vowels = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е'}
         self.__homonyms = None
         self.__simple_words = None
-        self.__new_homonyms = {}
-        self.__new_simple_words = {}
+        self.__new_homonyms = set()
+        self.__new_simple_words = set()
         self.__bad_words = []
         self.__re_for_morphosplit = re.compile(r'[\,\s\|]+', re.U)
         self.__re_for_morphotag = re.compile(r'^(\w+|\w+[\-\=]\w+)$', re.U)
@@ -90,7 +90,7 @@ class Accentor:
 
         '''
         Разбор омографии.
-        Использование морфологической информации о 
+        Использование морфологической информации о
         слове для их разграничения.
         '''
         langs = root_text.split('<hr />')
@@ -160,7 +160,7 @@ class Accentor:
                         for variant in gramm_info.find_class('form-of-definition'):
                             #print(variant.text_content())
                             t = 0
-                            if (variant.text_content().find('indicative') != -1) and (morphotag.find('Mood=Ind') != -1):                          
+                            if (variant.text_content().find('indicative') != -1) and (morphotag.find('Mood=Ind') != -1):
                                 if ((variant.text_content().find('future') != -1) or (variant.text_content().find('present') != -1)) and (morphotag.find('Tense=Notpast') != -1):
                                     #print('I should be here')
                                     results.add(result)
@@ -427,6 +427,7 @@ class Accentor:
                     if (morphotags_list is None) or morphotags_list[0].isdigit():
                         #accented_wordforms = sorted([self.__homonyms[cur_word][it] for it in self.__homonyms[cur_word]])
                         accented_wordforms += [cur_word]
+                        warn = 'many'
                     else:
                         best_ind = -1
                         best_similarity = 0.0
@@ -474,7 +475,6 @@ class Accentor:
                     else:
                         accented_wordforms += [cur_word]
                         warn = 'no'
-                print(accented_wordforms)
                 if (i == 0):
                     if (accented_wordforms[0].find('+') != -1):
                         break
