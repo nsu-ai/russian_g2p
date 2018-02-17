@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/Accentor.py" afterPath="$PROJECT_DIR$/russian_g2p/Accentor.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" afterPath="$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py" />
-      <change beforePath="$PROJECT_DIR$/russian_g2p/test.py" afterPath="$PROJECT_DIR$/russian_g2p/test.py" />
-      <change beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
-    </list>
+    <list default="true" id="16c18012-f29c-421b-a150-a574af3412be" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,10 +15,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Grapheme2Phoneme.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Grapheme2Phoneme.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
+            <state relative-caret-position="-5305">
               <caret line="261" column="36" lean-forward="true" selection-start-line="261" selection-start-column="36" selection-end-line="261" selection-end-column="36" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -33,7 +27,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="9378">
@@ -56,8 +50,8 @@
       <find>__apply_rule02</find>
       <find>simil</find>
       <find>е+сли</find>
-      <find>'H', 'K', 'O0']</find>
       <find>__vocals_transformations</find>
+      <find>'H', 'K', 'O0']</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -566,21 +560,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="261" column="36" lean-forward="true" selection-start-line="261" selection-start-column="36" selection-end-line="261" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="9378">
           <caret line="524" column="41" lean-forward="true" selection-start-line="524" selection-start-column="41" selection-end-line="524" selection-end-column="41" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/russian_g2p/Grapheme2Phoneme.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5305">
+          <caret line="261" column="36" lean-forward="true" selection-start-line="261" selection-start-column="36" selection-end-line="261" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
