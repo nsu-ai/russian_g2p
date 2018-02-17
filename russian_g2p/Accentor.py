@@ -90,7 +90,7 @@ class Accentor:
 
         '''
         Разбор омографии.
-        Использование морфологической информации о
+        Использование морфологической информации о 
         слове для их разграничения.
         '''
         langs = root_text.split('<hr />')
@@ -160,7 +160,7 @@ class Accentor:
                         for variant in gramm_info.find_class('form-of-definition'):
                             #print(variant.text_content())
                             t = 0
-                            if (variant.text_content().find('indicative') != -1) and (morphotag.find('Mood=Ind') != -1):
+                            if (variant.text_content().find('indicative') != -1) and (morphotag.find('Mood=Ind') != -1):                          
                                 if ((variant.text_content().find('future') != -1) or (variant.text_content().find('present') != -1)) and (morphotag.find('Tense=Notpast') != -1):
                                     #print('I should be here')
                                     results.add(result)
