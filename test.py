@@ -174,7 +174,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['V0', 'I', 'Z0', 'D0', 'E0'], self.__g2p.word_to_phonemes('везде+'))
         self.assertEqual(['S0', 'T0', 'E0', 'P0'], self.__g2p.word_to_phonemes('сте+пь'))
         self.assertEqual(['SH0', 'I', 'T', 'A0', 'L', 'S0', 'A'], self.__g2p.word_to_phonemes('счита+лся'))
-        self.assertEqual(['J', 'E0', 'S', 'L0', 'I'], self.__g2p.word_to_phonemes('е+сли'))
+        self.assertEqual(['J', 'E0', 'S0', 'L0', 'I'], self.__g2p.word_to_phonemes('е+сли'))
 
     def test_word_to_phonemes_positive028(self):
         """ Проверка словаря фонетических исключений. """
@@ -392,10 +392,10 @@ class TestRussianG2P(unittest.TestCase):
 
     def test_phrase_to_phonemes_positive020(self):
         """ Проверка стыка знаменательного и служебного слов в ситуации, когда служебное слово идёт вторым. """
-        self.assertEqual(['J', 'E0', 'S', 'L0', 'I', 'B', 'Y', 'N0', 'I', 'T', 'Y0'],
+        self.assertEqual(['J', 'E0', 'S0', 'L0', 'I', 'B', 'Y', 'N0', 'I', 'T', 'Y0'],
                          self.__g2p.phrase_to_phonemes('е+сли бы не ты+'))
-        self.assertEqual(['J', 'E0', 'S', 'L0', 'I', 'P', 'N0', 'E0', 'B', 'Y', 'L', 'A', 'T0', 'I', 'B0', 'A0'],
-                         self.__g2p.phrase_to_phonemes('е+сли б не+ было тебя+'))  # "есьли" очень смущает
+        self.assertEqual(['J', 'E0', 'S0', 'L0', 'I', 'P', 'N0', 'E0', 'B', 'Y', 'L', 'A', 'T0', 'I', 'B0', 'A0'],
+                         self.__g2p.phrase_to_phonemes('е+сли б не+ было тебя+'))
 
     def test_phrase_to_phonemes_positive021(self):
         """ Проверка стыка знаменательного и служебного слов в ситуации, когда служебное слово - частица с дефисом. """
@@ -471,7 +471,6 @@ class TestRussianG2P(unittest.TestCase):
         self.assertFalse(self.__g2p.in_function_words_2('нибудь'))
         self.assertFalse(self.__g2p.in_function_words_2('нибу+дь'))
 
-'''
 class TestRussianAccentor(unittest.TestCase):
     def setUp(self):
         print('HEEEEY')
@@ -627,7 +626,6 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'a|b c|d|e'), 1.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|g h|i|j'), 0.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|b h|d|j'), 0.25, places=7)
-'''
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

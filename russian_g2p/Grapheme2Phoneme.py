@@ -761,7 +761,8 @@ class Grapheme2Phoneme:
         letters_list_2 = self.__word_to_letters_list(self.__prepare_word(word2.replace('-', '').replace(' ', '')))
         nword1 = len(letters_list_1)
         nword2 = len(letters_list_2)
-        if letters_list_1[-1] in ['я', 'а', 'е'] and (letters_list_1[-1] == 'я' or letters_list_1[-2] in ['ч', 'щ']):
+        if (letters_list_1[-1] in ['я', 'а', 'е']) and (letters_list_1[-1] == 'я' or (
+                len(letters_list_1) > 1 and letters_list_1[-2] in ['ч', 'щ'])):
             letters_list_1[-1] = 'и'
         if (letters_list_1[nword1 - 1] in self.__consonants) or (letters_list_1[nword1 - 1] == 'ь'):
             new_phonemes = None
@@ -978,7 +979,7 @@ class Grapheme2Phoneme:
                     if letters_list_2[0] == 'о':
                         new_phonemes = ['A']
                     elif letters_list_2[0] == 'о+':
-                        new_phonemes = ['O']
+                        new_phonemes = ['O0']
                     elif letters_list_2[0] == 'и':
                         new_phonemes = ['I']
                     else:
