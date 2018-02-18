@@ -14,8 +14,3 @@
 **/.Rhistory
 *.pkl
 *.pickle
-*.gz
-*.zip
-*.tgz
-*.tar
-*.rar
