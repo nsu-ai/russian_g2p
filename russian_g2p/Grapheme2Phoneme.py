@@ -733,7 +733,7 @@ class Grapheme2Phoneme:
                     if letters_list_2[0] == 'о':
                         new_phonemes = ['A']
                     elif letters_list_2[0] == 'о+':
-                        new_phonemes = ['O']
+                        new_phonemes = ['O0']
                     elif letters_list_2[0] == 'и':
                         new_phonemes = ['I']
                     else:
