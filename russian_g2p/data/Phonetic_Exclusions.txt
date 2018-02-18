@@ -116,27 +116,27 @@
 альтерна+торе A L0 T Y R N A0 T A R0 I
 альтерна+торами A L0 T Y R N A0 T A R A M0 I
 
-альтернацио+нном A L0 T Y R N A C Y O N A M
-альтернацио+нною A L0 T Y R N A C Y O N A J U
-альтернацио+нен A L0 T Y R N A C Y O N0 I N
-альтернацио+нными A L0 T Y R N A C Y O N Y M0 I
-альтернацио+нного A L0 T Y R N A C Y O N A V A
-альтернацио+нных A L0 T Y R N A C Y O N Y H
-альтернацио+нное A L0 T Y R N A C Y O N A J I
-альтернацио+нно A L0 T Y R N A C Y O N A
-альтернацио+нней A L0 T Y R N A C Y O N0 I J
-альтернацио+ннее A L0 T Y R N A C Y O N0 I J E
-альтернацио+нный A L0 T Y R N A C Y O N Y J
-альтернацио+нному A L0 T Y R N A C Y O N A M U
-альтернацио+нные A L0 T Y R N A C Y O N Y J E
-альтернацио+нную A L0 T Y R N A C Y O N U J U
-поальтернацио+ннее P A L0 T Y R N A C Y O N0 I J E
-альтернацио+нны A L0 T Y R N A C Y O N Y
-альтернацио+нна A L0 T Y R N A C Y O N A
-альтернацио+нная A L0 T Y R N A C Y O N A J A
-поальтернацио+нней P A L0 T Y R N A C Y O N0 I J
-альтернацио+нным A L0 T Y R N A C Y O N Y M
-альтернацио+нной A L0 T Y R N A C Y O N A J
+альтернацио+нном A L0 T Y R N A C Y O0 N A M
+альтернацио+нною A L0 T Y R N A C Y O0 N A J U
+альтернацио+нен A L0 T Y R N A C Y O0 N0 I N
+альтернацио+нными A L0 T Y R N A C Y O0 N Y M0 I
+альтернацио+нного A L0 T Y R N A C Y O0 N A V A
+альтернацио+нных A L0 T Y R N A C Y O0 N Y H
+альтернацио+нное A L0 T Y R N A C Y O0 N A J I
+альтернацио+нно A L0 T Y R N A C Y O0 N A
+альтернацио+нней A L0 T Y R N A C Y O0 N0 I J
+альтернацио+ннее A L0 T Y R N A C Y O0 N0 I J E
+альтернацио+нный A L0 T Y R N A C Y O0 N Y J
+альтернацио+нному A L0 T Y R N A C Y O0 N A M U
+альтернацио+нные A L0 T Y R N A C Y O0 N Y J E
+альтернацио+нную A L0 T Y R N A C Y O0 N U J U
+поальтернацио+ннее P A L0 T Y R N A C Y O0 N0 I J E
+альтернацио+нны A L0 T Y R N A C Y O0 N Y
+альтернацио+нна A L0 T Y R N A C Y O0 N A
+альтернацио+нная A L0 T Y R N A C Y O0 N A J A
+поальтернацио+нней P A L0 T Y R N A C Y O0 N0 I J
+альтернацио+нным A L0 T Y R N A C Y O0 N Y M
+альтернацио+нной A L0 T Y R N A C Y O0 N A J
 
 альтерна+циею A L0 T Y R N A0 C Y J I J U
 альтерна+цию A L0 T Y R N A0 C Y J U
@@ -148,16 +148,16 @@
 альтерна+циям A L0 T Y R N A0 C Y J A M
 альтерна+циях A L0 T Y R N A0 C Y J A H
 
-альтернио+ном A L0 T E R N0 I O N A M
-альтернио+не A L0 T E R N0 I O N0 E
-альтернио+ну A L0 T E R N0 I O N U
-альтернио+нов A L0 T E R N0 I O N A F
-альтернио+нам A L0 T E R N0 I O N A M
-альтернио+нах A L0 T E R N0 I O N A H
-альтернио+нами A L0 T E R N0 I O N A M0 I
-альтернио+ны A L0 T E R N0 I O N Y
-альтернио+на A L0 T E R N0 I O N A
-альтернио+н A L0 T E R N0 I O N
+альтернио+ном A L0 T E R N0 I O0 N A M
+альтернио+не A L0 T E R N0 I O0 N0 E
+альтернио+ну A L0 T E R N0 I O0 N U
+альтернио+нов A L0 T E R N0 I O0 N A F
+альтернио+нам A L0 T E R N0 I O0 N A M
+альтернио+нах A L0 T E R N0 I O0 N A H
+альтернио+нами A L0 T E R N0 I O0 N A M0 I
+альтернио+ны A L0 T E R N0 I O0 N Y
+альтернио+на A L0 T E R N0 I O0 N A
+альтернио+н A L0 T E R N0 I O0 N
 
 альтерни+рованье A L0 T Y R N0 I0 R A V A N0 J E
 альтерни+рованием A L0 T Y R N0 I0 R A V A N0 I J E M
@@ -285,16 +285,16 @@
 
 бо+г B O0 H
 
-бутербро+д B U T0 I R B R O T
-бутербро+да B U T0 I R B R O D A
-бутербро+ду B U T0 I R B R O D U
-бутербро+дом B U T0 I R B R O D A M
-бутербро+де B U T0 I R B R O D0 E
-бутербро+ды B U T0 I R B R O D Y
-бутербро+дов B U T0 I R B R O D A F
-бутербро+дам B U T0 I R B R O D A M
-бутербро+дами B U T0 I R B R O D A M0 I
-бутербро+дах B U T0 I R B R O D A H
+бутербро+д B U T0 I R B R O0 T
+бутербро+да B U T0 I R B R O0 D A
+бутербро+ду B U T0 I R B R O0 D U
+бутербро+дом B U T0 I R B R O0 D A M
+бутербро+де B U T0 I R B R O0 D0 E
+бутербро+ды B U T0 I R B R O0 D Y
+бутербро+дов B U T0 I R B R O0 D A F
+бутербро+дам B U T0 I R B R O0 D A M
+бутербро+дами B U T0 I R B R O0 D A M0 I
+бутербро+дах B U T0 I R B R O0 D A H
 
 варьете+ V A R0 J I T E0
 
@@ -375,11 +375,11 @@
 декупа+жами D0 I K U P A0 ZH A M0 I
 декупа+жах D0 I K U P A0 ZH A H
 
-депо+ D0 I P O
+депо+ D0 I P O0
 
 Душанбе+ D U SH A N B E0
 
-забо+ться Z A B O C S0 A
+забо+ться Z A B O0 C S0 A
 
 здра+вствуй Z D R A0 S T V U J
 
@@ -509,27 +509,27 @@
 интервенциони+стская I N T Y R V0 I N C Y A N0 I0 S C K A J A
 интервенциони+стски I N T Y R V0 I N C Y A N0 I0 S C K0 I
 
-интервенцио+нной I N T Y R V0 I N C Y O N A J
-интервенцио+нное I N T Y R V0 I N C Y O N A J E
-поинтервенцио+ннее P A I N T Y R V0 I N C Y O N0 I J I
-интервенцио+нным I N T Y R V0 I N C Y O N Y M
-интервенцио+нные I N T Y R V0 I N C Y O N Y J E
-интервенцио+нных I N T Y R V0 I N C Y O N Y H
-интервенцио+нно I N T Y R V0 I N C Y O N A
-интервенцио+нными I N T Y R V0 I N C Y O N Y M0 I
-интервенцио+нному I N T Y R V0 I N C Y O N A M U
-интервенцио+ннее I N T Y R V0 I N C Y O N0 I J I
-интервенцио+нна I N T Y R V0 I N C Y O N A
-интервенцио+нны I N T Y R V0 I N C Y O N Y
-интервенцио+нную I N T Y R V0 I N C Y O N U J U
-интервенцио+нней I N T Y R V0 I N C Y O N0 E J
-интервенцио+нною I N T Y R V0 I N C Y O N A J U
-интервенцио+нный I N T Y R V0 I N C Y O N Y J
-интервенцио+нном I N T Y R V0 I N C Y O N A M
-интервенцио+нен I N T Y R V0 I N C Y O N0 E N
-интервенцио+нная I N T Y R V0 I N C Y O N A J A
-интервенцио+нного I N T Y R V0 I N C Y O N A V A
-поинтервенцио+нней P A I N T Y R V0 I N C Y O N0 E J
+интервенцио+нной I N T Y R V0 I N C Y O0 N A J
+интервенцио+нное I N T Y R V0 I N C Y O0 N A J E
+поинтервенцио+ннее P A I N T Y R V0 I N C Y O0 N0 I J I
+интервенцио+нным I N T Y R V0 I N C Y O0 N Y M
+интервенцио+нные I N T Y R V0 I N C Y O0 N Y J E
+интервенцио+нных I N T Y R V0 I N C Y O0 N Y H
+интервенцио+нно I N T Y R V0 I N C Y O0 N A
+интервенцио+нными I N T Y R V0 I N C Y O0 N Y M0 I
+интервенцио+нному I N T Y R V0 I N C Y O0 N A M U
+интервенцио+ннее I N T Y R V0 I N C Y O0 N0 I J I
+интервенцио+нна I N T Y R V0 I N C Y O0 N A
+интервенцио+нны I N T Y R V0 I N C Y O0 N Y
+интервенцио+нную I N T Y R V0 I N C Y O0 N U J U
+интервенцио+нней I N T Y R V0 I N C Y O0 N0 E J
+интервенцио+нною I N T Y R V0 I N C Y O0 N A J U
+интервенцио+нный I N T Y R V0 I N C Y O0 N Y J
+интервенцио+нном I N T Y R V0 I N C Y O0 N A M
+интервенцио+нен I N T Y R V0 I N C Y O0 N0 E N
+интервенцио+нная I N T Y R V0 I N C Y O0 N A J A
+интервенцио+нного I N T Y R V0 I N C Y O0 N A V A
+поинтервенцио+нней P A I N T Y R V0 I N C Y O0 N0 E J
 
 интерве+нции I N T Y R V0 E0 N C Y I
 интерве+нция I N T Y R V0 E0 N C Y J A
@@ -827,7 +827,7 @@
 компьютеризи+рованном K A M P0 J U T0 I R0 I Z0 I0 R A V A N A M
 
 компьютеризи+руемом K A M P0 J U T0 I R0 I Z0 I0 R U J E M A M
-компьютеризи+рующая K A M P0 J U T0 IE R0 I Z0 I0 R U J U SH0 A J A
+компьютеризи+рующая K A M P0 J U T0 E R0 I Z0 I0 R U J U SH0 A J A
 компьютеризи+руемы K A M P0 J U T0 I R0 I Z0 I0 R U J E M Y
 компьютеризи+рующему K A M P0 J U T0 I R0 I Z0 I0 R U J U SH0 E M U
 компьютеризи+руемых K A M P0 J U T0 I R0 I Z0 I0 R U J E M Y H
@@ -891,57 +891,57 @@
 компьютеризи+рующими K A M P0 J U T0 I R0 I Z0 I0 R U J U SH0 I M0 I
 
 компьютеризу+ют K A M P0 J U T0 I R0 I Z U0 J U T
-компьютеризо+ванное K A M P0 J U T0 I R0 I Z O V A N A J E
+компьютеризо+ванное K A M P0 J U T0 I R0 I Z O0 V A N A J E
 компьютеризу+й K A M P0 J U T0 I R0 I Z U0 J
 компьютеризу+ешь K A M P0 J U T0 I R0 I Z U0 J E SH0
 компьютеризу+емо K A M P0 J U T0 I R0 I Z U0 J E M A
 компьютеризова+вшему K A M P0 J U T0 I R0 I Z A V A0 F SH E M U
 компьютеризу+ема K A M P0 J U T0 I R0 I Z U0 J E M A
-компьютеризо+ванный K A M P0 J U T0 I R0 I Z O V A N Y J
+компьютеризо+ванный K A M P0 J U T0 I R0 I Z O0 V A N Y J
 компьютеризу+емый K A M P0 J U T0 I R0 I Z U0 J E M Y J
-компьютеризо+ванную K A M P0 J U T0 I R0 I Z O V A N U J U
+компьютеризо+ванную K A M P0 J U T0 I R0 I Z O0 V A N U J U
 компьютеризу+ющая K A M P0 J U T0 I R0 I Z U0 J U SH0 A J A
 компьютеризу+ющему K A M P0 J U T0 I R0 I Z U0 J U SH0 E M U
-компьютеризо+ванного K A M P0 J U T0 I R0 I Z O V A N A V A
+компьютеризо+ванного K A M P0 J U T0 I R0 I Z O0 V A N A V A
 компьютеризу+емой K A M P0 J U T0 I R0 I Z U0 J E M A J
 компьютеризу+ющий K A M P0 J U T0 I R0 I Z U0 J U SH0 I J
 компьютеризова+вшим K A M P0 J U T0 I R0 I Z A V A0 F SH Y M
 компьютеризова+вши K A M P0 J U T0 I R0 I Z A V A0 F SH Y
-компьютеризо+ванным K A M P0 J U T0 I R0 I Z O V A N Y M
+компьютеризо+ванным K A M P0 J U T0 I R0 I Z O0 V A N Y M
 компьютеризу+емте K A M P0 J U T0 I R0 I Z U0 J E M T0 E
 компьютеризу+ющей K A M P0 J U T0 I R0 I Z U0 J U SH0 E J
 компьютеризова+ть K A M P0 J U T0 I R0 I Z A V A0 T0
 компьютеризу+емому K A M P0 J U T0 I R0 I Z U0 J E M A M U
 компьютеризова+вшем K A M P0 J U T0 I R0 I Z A V A0 F SH E M
 компьютеризова+в K A M P0 J U T0 I R0 I Z A V A0 F
-компьютеризо+ванная K A M P0 J U T0 I R0 I Z O V A N A J A
+компьютеризо+ванная K A M P0 J U T0 I R0 I Z O0 V A N A J A
 компьютеризу+я K A M P0 J U T0 I R0 I Z U0 J A
 компьютеризу+ющую K A M P0 J U T0 I R0 I Z U0 J U SH0 U J U
-компьютеризо+вана K A M P0 J U T0 I R0 I Z O V A N A
-компьютеризо+ванными K A M P0 J U T0 I R0 I Z O V A N Y M0 I
+компьютеризо+вана K A M P0 J U T0 I R0 I Z O0 V A N A
+компьютеризо+ванными K A M P0 J U T0 I R0 I Z O0 V A N Y M0 I
 компьютеризу+емое K A M P0 J U T0 I R0 I Z U0 J E M A J E
 компьютеризова+вших K A M P0 J U T0 I R0 I Z A V A0 F SH Y H
 компьютеризова+вшее K A M P0 J U T0 I R0 I Z A V A0 F SH E J E
-компьютеризо+вано K A M P0 J U T0 I R0 I Z O V A N A
+компьютеризо+вано K A M P0 J U T0 I R0 I Z O0 V A N A
 компьютеризу+ет K A M P0 J U T0 I R0 I Z U0 J E T
 компьютеризу+ющие K A M P0 J U T0 I R0 I Z U0 J U SH0 I J E
 компьютеризу+ющее K A M P0 J U T0 I R0 I Z U0 J U SH0 E J E
 компьютеризу+ющем K A M P0 J U T0 I R0 I Z U0 J U SH0 E M
-компьютеризо+ванному K A M P0 J U T0 I R0 I Z O V A N A M U
+компьютеризо+ванному K A M P0 J U T0 I R0 I Z O0 V A N A M U
 компьютеризу+ющих K A M P0 J U T0 I R0 I Z U0 J U SH0 I H
 компьютеризу+емом K A M P0 J U T0 I R0 I Z U0 J E M A M
 компьютеризу+йте K A M P0 J U T0 I R0 I Z U0 J T0 E
 компьютеризу+емы K A M P0 J U T0 I R0 I Z U0 J E M Y
 компьютеризу+ющего K A M P0 J U T0 I R0 I Z U0 J U SH0 E V A
 компьютеризова+вшая K A M P0 J U T0 I R0 I Z A V A0 F SH A J A
-компьютеризо+ванной K A M P0 J U T0 I R0 I Z O V A N A J
+компьютеризо+ванной K A M P0 J U T0 I R0 I Z O0 V A N A J
 компьютеризу+емая K A M P0 J U T0 I R0 I Z U0 J E M A J A
 компьютеризу+емою K A M P0 J U T0 I R0 I Z U0 J E M A J U
-компьютеризо+ван K A M P0 J U T0 I R0 I Z O V A N
+компьютеризо+ван K A M P0 J U T0 I R0 I Z O0 V A N
 компьютеризова+вшую K A M P0 J U T0 I R0 I Z A V A0 F SH U J U
 компьютеризу+ем K A M P0 J U T0 I R0 I Z U0 J E M
 компьютеризу+емые K A M P0 J U T0 I R0 I Z U0 J E M Y J E
-компьютеризо+ванном K A M P0 J U T0 I R0 I Z O V A N A M
+компьютеризо+ванном K A M P0 J U T0 I R0 I Z O0 V A N A M
 компьютеризова+ло K A M P0 J U T0 I R0 I Z A V A0 L A
 компьютеризова+ла K A M P0 J U T0 I R0 I Z A V A0 L A
 компьютеризу+емого K A M P0 J U T0 I R0 I Z U0 J E M A V A
@@ -951,13 +951,13 @@
 компьютеризу+ющим K A M P0 J U T0 I R0 I Z U0 J U SH0 I M
 компьютеризу+емым K A M P0 J U T0 I R0 I Z U0 J E M Y M
 компьютеризу+ю K A M P0 J U T0 I R0 I Z U0 J U
-компьютеризо+ваны K A M P0 J U T0 I R0 I Z O V A N Y
+компьютеризо+ваны K A M P0 J U T0 I R0 I Z O0 V A N Y
 компьютеризова+ли K A M P0 J U T0 I R0 I Z A V A0 L0 I
 компьютеризу+емыми K A M P0 J U T0 I R0 I Z U0 J E M Y M0 I
 компьютеризова+л K A M P0 J U T0 I R0 I Z A V A0 L
-компьютеризо+ванные K A M P0 J U T0 I R0 I Z O V A N Y J E
+компьютеризо+ванные K A M P0 J U T0 I R0 I Z O0 V A N Y J E
 компьютеризу+емых K A M P0 J U T0 I R0 I Z U0 J E M Y H
-компьютеризо+ванных K A M P0 J U T0 I R0 I Z O V A N Y H
+компьютеризо+ванных K A M P0 J U T0 I R0 I Z O0 V A N Y H
 компьютеризу+ете K A M P0 J U T0 I R0 I Z U0 J E T0 E
 компьютеризу+емую K A M P0 J U T0 I R0 I Z U0 J E M U J U
 компьютеризова+вший K A M P0 J U T0 I R0 I Z A V A0 F SH Y J
@@ -965,7 +965,7 @@
 компьютеризова+вшими K A M P0 J U T0 I R0 I Z A V A0 F SH Y M0 I
 компьютеризова+вшей K A M P0 J U T0 I R0 I Z A V A0 F SH E J
 компьютеризова+вшего K A M P0 J U T0 I R0 I Z A V A0 F SH E V A
-компьютеризо+ванною K A M P0 J U T0 I R0 I Z O V A N A J U
+компьютеризо+ванною K A M P0 J U T0 I R0 I Z O0 V A N A J U
 
 компьютеризова+лся K A M P0 J U T0 I R0 I Z A V A0 L0 S0 A
 компьютеризу+юсь K A M P0 J U T0 I R0 I Z U0 J U S0
@@ -1155,16 +1155,16 @@
 модели+ровавшею M A D Y L0 I0 R A V A F SH Y J U
 модели+руйте M A D Y L0 I0 R U J T0 I
 
-моделиро+вках M A D Y L0 I R O F K A H
-моделиро+вки M A D Y L0 I R O F K0 I
-моделиро+вок M A D Y L0 I R O V A K
-моделиро+вкой M A D Y L0 I R O F K A J
-моделиро+вками M A D Y L0 I R O F K A M0 I
-моделиро+вку M A D Y L0 I R O F K U
-моделиро+вка M A D Y L0 I R O F K A
-моделиро+вкою M A D Y L0 I R O F K A J U
-моделиро+вке M A D Y L0 I R O F K0 I
-моделиро+вкам M A D Y L0 I R O F K A M
+моделиро+вках M A D Y L0 I R O0 F K A H
+моделиро+вки M A D Y L0 I R O0 F K0 I
+моделиро+вок M A D Y L0 I R O0 V A K
+моделиро+вкой M A D Y L0 I R O0 F K A J
+моделиро+вками M A D Y L0 I R O0 F K A M0 I
+моделиро+вку M A D Y L0 I R O0 F K U
+моделиро+вка M A D Y L0 I R O0 F K A
+моделиро+вкою M A D Y L0 I R O0 F K A J U
+моделиро+вке M A D Y L0 I R O0 F K0 I
+моделиро+вкам M A D Y L0 I R O0 F K A M
 
 модели+рующим M A D Y L0 I0 R U J U SH0 I M
 модели+рующей M A D Y L0 I0 R U J U SH0 I J
@@ -1385,19 +1385,19 @@
 несинтети+ческая N0 I S0 I N T Y T0 I0 CH I S K A J A
 несинтети+ческую N0 I S0 I N T Y T0 I0 CH I S K U J U
 
-несро+сшиеся N0 I S R O SH Y J I S0 A
-несро+сшеюся N0 I S R O SH Y J U S0 A
-несро+сшуюся N0 I S R O SH U J U S0 A
-несро+сшимся N0 I S R O SH Y M S0 A
-несро+сшаяся N0 I S R O SH A J A S0 A
-несро+сшейся N0 I S R O SH Y J S0 A
-несро+сшийся N0 I S R O SH Y J S0 A
-несро+сшихся N0 I S R O SH Y H S0 A
-несро+сшимися N0 I S R O SH Y M0 I S0 A
-несро+сшемся N0 I S R O SH Y M S0 A
-несро+сшемуся N0 I S R O SH Y M U S0 A
-несро+сшееся N0 I S R O SH Y J I S0 A
-несро+сшегося N0 I S R O SH Y G A S0 A
+несро+сшиеся N0 I S R O0 SH Y J I S0 A
+несро+сшеюся N0 I S R O0 SH Y J U S0 A
+несро+сшуюся N0 I S R O0 SH U J U S0 A
+несро+сшимся N0 I S R O0 SH Y M S0 A
+несро+сшаяся N0 I S R O0 SH A J A S0 A
+несро+сшейся N0 I S R O0 SH Y J S0 A
+несро+сшийся N0 I S R O0 SH Y J S0 A
+несро+сшихся N0 I S R O0 SH Y H S0 A
+несро+сшимися N0 I S R O0 SH Y M0 I S0 A
+несро+сшемся N0 I S R O0 SH Y M S0 A
+несро+сшемуся N0 I S R O0 SH Y M U S0 A
+несро+сшееся N0 I S R O0 SH Y J I S0 A
+несро+сшегося N0 I S R O0 SH Y G A S0 A
 
 нестро+го N0 I S T R O0 G A
 
@@ -1502,27 +1502,27 @@
 
 пятьдеся+т P0 I D0 E S0 A0 T
 
-о+ргси+нтез O R K S0 I0 N T Y S
-о+ргси+нтезам O R K S0 I0 N T Y Z A M
-о+ргси+нтеза O R K S0 I0 N T Y Z A
-о+ргси+нтезом O R K S0 I0 N T Y Z A M
-о+ргси+нтезах O R K S0 I0 N T Y Z A H
-о+ргси+нтезов O R K S0 I0 N T Y Z A F
-о+ргси+нтезе O R K S0 I0 N T Y Z0 E
-о+ргси+нтезы O R K S0 I0 N T Y Z Y
-о+ргси+нтезами O R K S0 I0 N T Y Z A M0 I
-о+ргси+нтезу O R K S0 I0 N T Y Z U
+о+ргси+нтез O0 R K S0 I0 N T Y S
+о+ргси+нтезам O0 R K S0 I0 N T Y Z A M
+о+ргси+нтеза O0 R K S0 I0 N T Y Z A
+о+ргси+нтезом O0 R K S0 I0 N T Y Z A M
+о+ргси+нтезах O0 R K S0 I0 N T Y Z A H
+о+ргси+нтезов O0 R K S0 I0 N T Y Z A F
+о+ргси+нтезе O0 R K S0 I0 N T Y Z0 E
+о+ргси+нтезы O0 R K S0 I0 N T Y Z Y
+о+ргси+нтезами O0 R K S0 I0 N T Y Z A M0 I
+о+ргси+нтезу O0 R K S0 I0 N T Y Z U
 
-о+стеоси+нтезе O S0 T0 E A S0 I0 N T Y Z0 E
-о+стеоси+нтезам O S0 T0 E A S0 I0 N T Y Z A M
-о+стеоси+нтезами O S0 T0 E A S0 I0 N T Y Z A M0 I
-о+стеоси+нтезу O S0 T0 E A S0 I0 N T Y Z U
-о+стеоси+нтезах O S0 T0 E A S0 I0 N T Y Z A H
-о+стеоси+нтезом O S0 T0 E A S0 I0 N T Y Z A M
-о+стеоси+нтезов O S0 T0 E A S0 I0 N T Y Z A F
-о+стеоси+нтеза O S0 T0 E A S0 I0 N T Y Z A
-о+стеоси+нтезы O S0 T0 E A S0 I0 N T Y Z Y
-о+стеоси+нтез O S0 T0 E A S0 I0 N T Y S
+о+стеоси+нтезе O0 S0 T0 E A S0 I0 N T Y Z0 E
+о+стеоси+нтезам O0 S0 T0 E A S0 I0 N T Y Z A M
+о+стеоси+нтезами O0 S0 T0 E A S0 I0 N T Y Z A M0 I
+о+стеоси+нтезу O0 S0 T0 E A S0 I0 N T Y Z U
+о+стеоси+нтезах O0 S0 T0 E A S0 I0 N T Y Z A H
+о+стеоси+нтезом O0 S0 T0 E A S0 I0 N T Y Z A M
+о+стеоси+нтезов O0 S0 T0 E A S0 I0 N T Y Z A F
+о+стеоси+нтеза O0 S0 T0 E A S0 I0 N T Y Z A
+о+стеоси+нтезы O0 S0 T0 E A S0 I0 N T Y Z Y
+о+стеоси+нтез O0 S0 T0 E A S0 I0 N T Y S
 
 параси+нтезах P A R A S0 I0 N T Y Z A H
 параси+нтеза P A R A S0 I0 N T Y Z A
@@ -1680,34 +1680,34 @@
 подтести+ровавшись P A T Y S0 T0 I0 R A V A F SH Y S0
 подтести+ровался P A T Y S0 T0 I0 R A V A L0 S0 A
 
-по+лисинтети+ческий P O L0 I S0 I N T Y T0 I0 CH I S K0 I J
-по+лисинтети+ческая P O L0 I S0 I N T Y T0 I0 CH I S K A J A
-по+лисинтети+ческими P O L0 I S0 I N T Y T0 I0 CH I S K0 I M0 I
-по+лисинтети+чески P O L0 I S0 I N T Y T0 I0 CH I S K0 I
-по+лисинтети+ческое P O L0 I S0 I N T Y T0 I0 CH I S K A J E
-по+лисинтети+ческою P O L0 I S0 I N T Y T0 I0 CH I S K A J U
-по+лисинтети+ческого P O L0 I S0 I N T Y T0 I0 CH I S K A V A
-по+лисинтети+ческим P O L0 I S0 I N T Y T0 I0 CH I S K0 I M
-по+лисинтети+ческой P O L0 I S0 I N T Y T0 I0 CH I S K A J
-по+лисинтети+ческом P O L0 I S0 I N T Y T0 I0 CH I S K A M
-по+лисинтети+ческих P O L0 I S0 I N T Y T0 I0 CH I S K0 I H
-по+лисинтети+ческому P O L0 I S0 I N T Y T0 I0 CH I S K A M U
-по+лисинтети+ческую P O L0 I S0 I N T Y T0 I0 CH I S K U J U
-по+лисинтети+ческие P O L0 I S0 I N T Y T0 I0 CH I S K0 I J E
+по+лисинтети+ческий P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I J
+по+лисинтети+ческая P O0 L0 I S0 I N T Y T0 I0 CH I S K A J A
+по+лисинтети+ческими P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I M0 I
+по+лисинтети+чески P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I
+по+лисинтети+ческое P O0 L0 I S0 I N T Y T0 I0 CH I S K A J E
+по+лисинтети+ческою P O0 L0 I S0 I N T Y T0 I0 CH I S K A J U
+по+лисинтети+ческого P O0 L0 I S0 I N T Y T0 I0 CH I S K A V A
+по+лисинтети+ческим P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I M
+по+лисинтети+ческой P O0 L0 I S0 I N T Y T0 I0 CH I S K A J
+по+лисинтети+ческом P O0 L0 I S0 I N T Y T0 I0 CH I S K A M
+по+лисинтети+ческих P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I H
+по+лисинтети+ческому P O0 L0 I S0 I N T Y T0 I0 CH I S K A M U
+по+лисинтети+ческую P O0 L0 I S0 I N T Y T0 I0 CH I S K U J U
+по+лисинтети+ческие P O0 L0 I S0 I N T Y T0 I0 CH I S K0 I J E
 
-по+слете+стовыми P O S L0 E T E0 S T A V Y M0 I
-по+слете+стовым P O S L0 E T E0 S T A V Y M
-по+слете+стовый P O S L0 E T E0 S T A V Y J
-по+слете+стовых P O S L0 E T E0 S T A V Y H
-по+слете+стовою P O S L0 E T E0 S T A V A J U
-по+слете+стовые P O S L0 E T E0 S T A V Y J E
-по+слете+стовой P O S L0 E T E0 S T A V A J
-по+слете+стовому P O S L0 E T E0 S T A V A M U
-по+слете+стового P O S L0 E T E0 S T A V A V A
-по+слете+стовом P O S L0 E T E0 S T A V A M
-по+слете+стовую P O S L0 E T E0 S T A V U J U
-по+слете+стовая P O S L0 E T E0 S T A V A J A
-по+слете+стовое P O S L0 E T E0 S T A V A J E
+по+слете+стовыми P O0 S L0 E T E0 S T A V Y M0 I
+по+слете+стовым P O0 S L0 E T E0 S T A V Y M
+по+слете+стовый P O0 S L0 E T E0 S T A V Y J
+по+слете+стовых P O0 S L0 E T E0 S T A V Y H
+по+слете+стовою P O0 S L0 E T E0 S T A V A J U
+по+слете+стовые P O0 S L0 E T E0 S T A V Y J E
+по+слете+стовой P O0 S L0 E T E0 S T A V A J
+по+слете+стовому P O0 S L0 E T E0 S T A V A M U
+по+слете+стового P O0 S L0 E T E0 S T A V A V A
+по+слете+стовом P O0 S L0 E T E0 S T A V A M
+по+слете+стовую P O0 S L0 E T E0 S T A V U J U
+по+слете+стовая P O0 S L0 E T E0 S T A V A J A
+по+слете+стовое P O0 S L0 E T E0 S T A V A J E
 
 протести+рованною P R A T Y S0 T0 I0 R A V A N A J U
 протести+руем P R A T Y S0 T0 I0 R U J E M
@@ -1785,11 +1785,11 @@
 протести+руется P R A T Y S0 T0 I0 R U J E C A
 протести+ровавшуюся P R A T Y S0 T0 I0 R A V A F SH U J U S0 A
 
-про+фтести+ровании P R O F T Y S0 T0 I0 R A V A N0 I
-про+фтести+рованию P R O F T Y S0 T0 I0 R A V A N0 I J U
-про+фтести+рования P R O F T Y S0 T0 I0 R A V A N0 I J A
-про+фтести+рование P R O F T Y S0 T0 I0 R A V A N0 I J E
-про+фтести+рованием P R O F T Y S0 T0 I0 R A V A N0 I J E M
+про+фтести+ровании P R O0 F T Y S0 T0 I0 R A V A N0 I
+про+фтести+рованию P R O0 F T Y S0 T0 I0 R A V A N0 I J U
+про+фтести+рования P R O0 F T Y S0 T0 I0 R A V A N0 I J A
+про+фтести+рование P R O0 F T Y S0 T0 I0 R A V A N0 I J E
+про+фтести+рованием P R O0 F T Y S0 T0 I0 R A V A N0 I J E M
 
 психоси+нтезу P S0 I H A S0 I0 N T Y Z U
 психоси+нтезов P S0 I H A S0 I0 N T Y Z A F
@@ -2024,19 +2024,19 @@
 скри+нинг-те+ст S K R0 I0 N0 I N K T E0 S T
 скри+нинг-те+стов S K R0 I0 N0 I N K T E0 S T A F
 
-сро+сшиеся S R O SH Y J I S0 A
-сро+сшеюся S R O SH Y J U S0 A
-сро+сшуюся S R O SH U J U S0 A
-сро+сшимся S R O SH Y M S0 A
-сро+сшаяся S R O SH A J A S0 A
-сро+сшейся S R O SH Y J S0 A
-сро+сшийся S R O SH Y J S0 A
-сро+сшихся S R O SH Y H S0 A
-сро+сшимися S R O SH Y M0 I S0 A
-сро+сшемся S R O SH Y M S0 A
-сро+сшемуся S R O SH Y M U S0 A
-сро+сшееся S R O SH Y J I S0 A
-сро+сшегося S R O SH Y G A S0 A
+сро+сшиеся S R O0 SH Y J I S0 A
+сро+сшеюся S R O0 SH Y J U S0 A
+сро+сшуюся S R O0 SH U J U S0 A
+сро+сшимся S R O0 SH Y M S0 A
+сро+сшаяся S R O0 SH A J A S0 A
+сро+сшейся S R O0 SH Y J S0 A
+сро+сшийся S R O0 SH Y J S0 A
+сро+сшихся S R O0 SH Y H S0 A
+сро+сшимися S R O0 SH Y M0 I S0 A
+сро+сшемся S R O0 SH Y M S0 A
+сро+сшемуся S R O0 SH Y M U S0 A
+сро+сшееся S R O0 SH Y J I S0 A
+сро+сшегося S R O0 SH Y G A S0 A
 
 сте+нде S T E0 N0 D0 E
 сте+нда S T E0 N D A
@@ -2172,35 +2172,35 @@
 те+ннисными T E0 N0 I S N Y M0 I
 те+ннисных T E0 N0 I S N Y H
 
-тенденцио+зность T Y N D Y N C Y O Z N A S0 T0
-тенденцио+зностях T Y N D Y N C Y O Z N A S0 T0 A H
-тенденцио+зности T Y N D Y N C Y O Z N A S0 T0 I
-тенденцио+зностью T Y N D Y N C Y O Z N A S0 T0 J U
-тенденцио+зностями T Y N D Y N C Y O Z N A S0 T0 A M0 I
-тенденцио+зностям T Y N D Y N C Y O Z N A S0 T0 A M
-тенденцио+зностей T Y N D Y N C Y O Z N A S0 T0 I J
+тенденцио+зность T Y N D Y N C Y O0 Z N A S0 T0
+тенденцио+зностях T Y N D Y N C Y O0 Z N A S0 T0 A H
+тенденцио+зности T Y N D Y N C Y O0 Z N A S0 T0 I
+тенденцио+зностью T Y N D Y N C Y O0 Z N A S0 T0 J U
+тенденцио+зностями T Y N D Y N C Y O0 Z N A S0 T0 A M0 I
+тенденцио+зностям T Y N D Y N C Y O0 Z N A S0 T0 A M
+тенденцио+зностей T Y N D Y N C Y O0 Z N A S0 T0 I J
 
-тенденцио+зной T Y N D Y N C Y O Z N A J
-потенденцио+знее P A T Y N D Y N C Y O Z0 N0 I J E
-тенденцио+зном T Y N D Y N C Y O Z N A M
-тенденцио+зные T Y N D Y N C Y O Z N Y J E
-тенденцио+зная T Y N D Y N C Y O Z N A J A
-тенденцио+зною T Y N D Y N C Y O Z N A J U
-тенденцио+зный T Y N D Y N C Y O Z N Y J
-тенденцио+зно T Y N D Y N C Y O Z N A
-тенденцио+зных T Y N D Y N C Y O Z N Y H
-тенденцио+зней T Y N D Y N C Y O Z0 N0 I J
-тенденцио+зна T Y N D Y N C Y O Z N A
-тенденцио+зны T Y N D Y N C Y O Z N Y
-тенденцио+зного T Y N D Y N C Y O Z N A V A
-тенденцио+зным T Y N D Y N C Y O Z N Y M
-тенденцио+зному T Y N D Y N C Y O Z N A M U
-тенденцио+зен T Y N D Y N C Y O Z0 I N
-тенденцио+зную T Y N D Y N C Y O Z N U J U
-тенденцио+знее T Y N D Y N C Y O Z0 N0 I J E
-тенденцио+зными T Y N D Y N C Y O Z N Y M0 I
-потенденцио+зней P A T Y N D Y N C Y O Z0 N0 E J
-тенденцио+зное T Y N D Y N C Y O Z N A J E
+тенденцио+зной T Y N D Y N C Y O0 Z N A J
+потенденцио+знее P A T Y N D Y N C Y O0 Z0 N0 I J E
+тенденцио+зном T Y N D Y N C Y O0 Z N A M
+тенденцио+зные T Y N D Y N C Y O0 Z N Y J E
+тенденцио+зная T Y N D Y N C Y O0 Z N A J A
+тенденцио+зною T Y N D Y N C Y O0 Z N A J U
+тенденцио+зный T Y N D Y N C Y O0 Z N Y J
+тенденцио+зно T Y N D Y N C Y O0 Z N A
+тенденцио+зных T Y N D Y N C Y O0 Z N Y H
+тенденцио+зней T Y N D Y N C Y O0 Z0 N0 I J
+тенденцио+зна T Y N D Y N C Y O0 Z N A
+тенденцио+зны T Y N D Y N C Y O0 Z N Y
+тенденцио+зного T Y N D Y N C Y O0 Z N A V A
+тенденцио+зным T Y N D Y N C Y O0 Z N Y M
+тенденцио+зному T Y N D Y N C Y O0 Z N A M U
+тенденцио+зен T Y N D Y N C Y O0 Z0 I N
+тенденцио+зную T Y N D Y N C Y O0 Z N U J U
+тенденцио+знее T Y N D Y N C Y O0 Z0 N0 I J E
+тенденцио+зными T Y N D Y N C Y O0 Z N Y M0 I
+потенденцио+зней P A T Y N D Y N C Y O0 Z0 N0 E J
+тенденцио+зное T Y N D Y N C Y O0 Z N A J E
 
 тенде+нциями T Y N D E0 N C Y J A M0 I
 тенде+нциях T Y N D E0 N C Y J A H
@@ -2279,15 +2279,15 @@
 те+ст-а+кта T E0 S T A0 K T A
 
 те+ст-до+зою T E0 S D O0 Z A J U
-те+ст-до+за T E0 S D O+ Z A
-те+ст-до+зы T E0 S D O+ Z Y
-те+ст-до+зу T E0 S D O+ Z U
-те+ст-до+зах T E0 S D O+ Z A H
-те+ст-до+зой T E0 S D O+ Z A J
-те+ст-до+зам T E0 S D O+ Z A M
-те+ст-до+зами T E0 S D O+ Z A M0 I
-те+ст-до+зе T E0 S D O+ Z0 E
-те+ст-до+з T E0 S D O+ S
+те+ст-до+за T E0 S D O0 Z A
+те+ст-до+зы T E0 S D O0 Z Y
+те+ст-до+зу T E0 S D O0 Z U
+те+ст-до+зах T E0 S D O0 Z A H
+те+ст-до+зой T E0 S D O0 Z A J
+те+ст-до+зам T E0 S D O0 Z A M
+те+ст-до+зами T E0 S D O0 Z A M0 I
+те+ст-до+зе T E0 S D O0 Z0 E
+те+ст-до+з T E0 S D O0 S
 
 те+ст-систе+мой T E0 S S0 I S0 T0 E0 M A J
 те+ст-систе+му T E0 S S0 I S0 T0 E0 M U
@@ -2459,16 +2459,16 @@
 те+стовых T E0 S T A V Y H
 те+стовые T E0 S T A V Y J E
 
-тестостеро+нам T Y S T A S T Y R O+ N A M
-тестостеро+нах T Y S T A S T Y R O+ N A H
-тестостеро+на T Y S T A S T Y R O+ N A
-тестостеро+ну T Y S T A S T Y R O+ N U
-тестостеро+нов T Y S T A S T Y R O+ N A F
-тестостеро+ном T Y S T A S T Y R O+ N A M
-тестостеро+ны T Y S T A S T Y R O+ N Y
-тестостеро+не T Y S T A S T Y R O+ N0 E
-тестостеро+н T Y S T A S T Y R O+ N
-тестостеро+нами T Y S T A S T Y R O+ N A M0 I
+тестостеро+нам T Y S T A S T Y R O0 N A M
+тестостеро+нах T Y S T A S T Y R O0 N A H
+тестостеро+на T Y S T A S T Y R O0 N A
+тестостеро+ну T Y S T A S T Y R O0 N U
+тестостеро+нов T Y S T A S T Y R O0 N A F
+тестостеро+ном T Y S T A S T Y R O0 N A M
+тестостеро+ны T Y S T A S T Y R O0 N Y
+тестостеро+не T Y S T A S T Y R O0 N0 E
+тестостеро+н T Y S T A S T Y R O0 N
+тестостеро+нами T Y S T A S T Y R O0 N A M0 I
 
 филатели+зму F0 I L A T Y L0 I0 Z M U
 филатели+змах F0 I L A T Y L0 I0 Z M A H
