@@ -78,7 +78,7 @@ python3 test.py
 
 * **Daniil Vodolazsky** - *Systematization of rules for Transcriptor and refactoring of code* - [s231644](https://github.com/s231644)
 
-See also the list of [contributors](https://github.com/russian_g2p/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/nsu-ai/russian_g2p/contributors) who participated in this project.
 
 ## License
 
