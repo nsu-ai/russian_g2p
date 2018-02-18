@@ -410,7 +410,7 @@ class Grapheme2Phoneme:
             transcription += new_phonemes
             assert ind > old_ind, error_message
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        print (transcription)
+        # print (transcription)
         return self.__remove_repeats_from_transcription(self.__apply_rule27(transcription))
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:

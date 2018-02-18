@@ -271,7 +271,7 @@ class TestRussianG2P(unittest.TestCase):
         Для второго слова: первое слово заканчивается мягким знаком, а второе слово начинается с гласной О или с
         гласной И, и эти гласные ни в коем случае не должны переходить в сочетания фонем [J O] или [J I]
         ([J I0], если под ударением) соответственно. """
-        self.assertEqual(['I', 'L0', 'O0', 'S0', 'I', 'N0'], self.__g2p.phrase_to_phonemes('иль о+сень'))  # выдает O
+        self.assertEqual(['I', 'L0', 'O0', 'S0', 'I', 'N0'], self.__g2p.phrase_to_phonemes('иль о+сень'))
         self.assertEqual(['I', 'L0', 'I0', 'V', 'A', 'L', 'G', 'A'], self.__g2p.phrase_to_phonemes('иль и+волга'))
 
     def test_phrase_to_phonemes_positive009(self):
@@ -281,7 +281,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['P', 'A', 'D', 'Y0', 'V', 'A', 'J'], self.__g2p.phrase_to_phonemes('под и+вой'))
         self.assertEqual(['S', 'Y', 'V', 'A0', 'N', 'A', 'M'], self.__g2p.phrase_to_phonemes('с Ива+ном'))
         # для второго слова: если первое слово заканчивается мягким знаком, то правило не должно выполняться
-        self.assertEqual(['V0', 'I', 'D0', 'I', 'V', 'A0', 'N'], self.__g2p.phrase_to_phonemes('ведь Ива+н'))  # хм
+        self.assertEqual(['V0', 'I', 'D0', 'I', 'V', 'A0', 'N'], self.__g2p.phrase_to_phonemes('ведь Ива+н'))
 
     def test_phrase_to_phonemes_positive010(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке двух знаменательных слов.
