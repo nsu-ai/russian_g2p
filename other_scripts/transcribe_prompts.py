@@ -20,7 +20,7 @@ with codecs.open('corpus/transcribed_voxforge_fragment.csv', mode='wb', encoding
 						f.writelines('{}\t{}\n'.format(word.replace('+', ''), ' '.join(g2p.word_to_phonemes(word))))
 				wr.writerow([id_name,
 					prompts_words.replace('+', ''),
-					' '.join([' '.join(word) for word in transcription])])
+					' '.join(transcription)])
 		except AssertionError:
 			continue
 
