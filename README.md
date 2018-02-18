@@ -1,2 +1,2 @@
 # russian_g2p
-Readme
+## Accentor & Transcriptor for Russian Language
