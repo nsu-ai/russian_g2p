@@ -708,7 +708,7 @@ class Grapheme2Phoneme:
                     elif (letters_list_1[nword1 - 1] == 'г') and (letters_list_2[0] == 'к') \
                             and (letters_list_2[1] in {'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+'}):
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                             nword1 - 1, 9)
+                                                                             nword1 - 1, 10)
                     elif letters_list_2[0] in {'п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                              nword1 - 1, 8)
@@ -720,7 +720,7 @@ class Grapheme2Phoneme:
                                                                              nword1 - 1, 12)
                     elif letters_list_2[0] in {'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                             nword1 - 1, 12)
+                                                                             nword1 - 1, 13)
                     elif letters_list_2[0] in {'л', 'м', 'н', 'р'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                              nword1 - 1, 20)
@@ -762,7 +762,7 @@ class Grapheme2Phoneme:
         nword1 = len(letters_list_1)
         nword2 = len(letters_list_2)
         if (letters_list_1[-1] in ['я', 'а', 'е']) and (letters_list_1[-1] == 'я' or (
-                len(letters_list_1) > 1 and letters_list_1[-2] in ['ч', 'щ'])):
+                nword1 > 1 and letters_list_1[-2] in ['ч', 'щ'])):
             letters_list_1[-1] = 'и'
         if (letters_list_1[nword1 - 1] in self.__consonants) or (letters_list_1[nword1 - 1] == 'ь'):
             new_phonemes = None
@@ -789,7 +789,7 @@ class Grapheme2Phoneme:
                 elif (not letters_list_1[nword1 - 1] in self.__nonpair_consonants) \
                         and (letters_list_2[0] in ['я', 'ё', 'ю', 'е', 'и', 'я+', 'ё+', 'ю+', 'е+', 'и+']):
                     new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                         nword1 - 1, 12)
+                                                                         nword1 - 1, 13)
                 else:
                     if nword2 > 1:
                         if letters_list_1[nword1 - 1] in self.__nonpair_consonants:
@@ -807,19 +807,17 @@ class Grapheme2Phoneme:
                             if (letters_list_1[nword1 - 1] == 'г') and (letters_list_2[0] == 'к') \
                                     and (letters_list_2[1] in ['ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+', 'ы',
                                                                'ы+']):
-                                new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                                     nword1 - 1, 9)
+                                new_phonemes = ['K']
                             elif (letters_list_1[nword1 - 1] == 'г') and (letters_list_2[0] == 'к') \
                                     and (letters_list_2[1] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+']):
-                                new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                                     nword1 - 1, 9)
+                                new_phonemes = ['K0']
                             elif letters_list_2[0] in ['п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ']:
                                 new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                                      nword1 - 1, 8)
                             elif letters_list_2[0] in ['б', 'д', 'г', 'з', 'ж']:
                                 new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                                      nword1 - 1, 11)
-                            elif letters_list_2[0] in ['в', 'ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+', 'ы', 'ы+']:
+                            elif letters_list_2[0] in ['в', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+']:
                                 new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                                      nword1 - 1, 12)
                             elif letters_list_2[0] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+']:
@@ -832,7 +830,7 @@ class Grapheme2Phoneme:
                         if letters_list_1[nword1 - 1] in self.__nonpair_consonants:
                             if (letters_list_1[nword1 - 1] in ['м', 'н', 'р', 'л', 'х']) \
                                     and (
-                                    not letters_list_2[0] in ['я', 'ё', 'ю', 'е', 'и', 'я+', 'ё+', 'ю+', 'е+', 'и+']):
+                                    not letters_list_2[0] in ['я', 'и', 'я+', 'и+']):
                                 new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                                      nword1 - 1, 5)
                         else:
@@ -923,13 +921,11 @@ class Grapheme2Phoneme:
                                 if (letters_list_1[nword1 - 1] == 'г') and (letters_list_2[0] == 'к') \
                                         and (letters_list_2[1] in ['ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+', 'ы',
                                                                    'ы+']):
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(
-                                        letters_list_1 + letters_list_2, nword1 - 1, 9)
+                                    new_phonemes = ['K']
                                 elif (letters_list_1[nword1 - 1] == 'г') and (letters_list_2[0] == 'к') \
                                         and (letters_list_2[1] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и',
                                                                    'и+']):
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(
-                                        letters_list_1 + letters_list_2, nword1 - 1, 9)
+                                    new_phonemes = ['K0']
                                 elif letters_list_2[0] in ['п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ']:
                                     new_phonemes, ind = self.__apply_rule_for_one_letter(
                                         letters_list_1 + letters_list_2, nword1 - 1, 8)
