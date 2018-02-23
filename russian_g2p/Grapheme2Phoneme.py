@@ -688,7 +688,7 @@ class Grapheme2Phoneme:
                                                                              nword1 - 1, 12)
                     elif letters_list_2[0] in {'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
-                                                                             nword1 - 1, 12)
+                                                                             nword1 - 1, 13)
                     elif letters_list_2[0] in {'л', 'м', 'н', 'р'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                              nword1 - 1, 20)
