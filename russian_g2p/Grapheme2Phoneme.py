@@ -4,78 +4,7 @@ import os
 import re
 import warnings
 
-
-class Consonant:
-    def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None, pl=None):
-        self.forms = dict(
-            # normal, deaf and voiced x soft and hard
-            n_hard=nh, d_hard=dh, v_hard=vh, n_soft=ns, d_soft=ds, v_soft=vs
-        )
-        self.place = pl
-        self.special_cases = dict()
-
-
-class Vocal:
-    def __init__(self, c1=None, c2=None, c3=None, c4=None, c5=None, c6=None, c7=None, c8=None):
-        self.forms = dict(
-            case1=c1, case2=c2, case3=c3, case4=c4, case5=c5, case6=c6, case7=c7, case8=c8
-        )
-        self.special_cases = dict()
-
-
-class RulesForLetters:
-    def __init__(self):
-        self.cons = {
-            'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0', 'palatal'),
-            'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'alveolar'),
-            'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'alveolar'),
-            'ц': Consonant('TS', 'TS', 'TS', 'TS', 'TS', 'TS', 'dental'),
-
-            'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0', 'dental'),
-            'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0', 'labial'),
-            'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0', 'dental'),
-            'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0', 'alveolar'),
-
-            'х': Consonant('H', 'H', 'H', 'H0', 'H0', 'H0', 'palatal'),
-
-            'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0', 'labial'),
-            'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0', 'labial'),
-            'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0', 'labial'),
-            'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0', 'labial'),
-            'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0', 'palatal'),
-            'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0', 'palatal'),
-            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0', 'dental'),
-            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0', 'dental'),
-            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0', 'dental'),
-            'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0', 'dental'),
-            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH', 'alveolar'),
-            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH', 'alveolar')}
-
-        self.vocs = {
-            'ё+': Vocal('J0O0', 'J0O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-            'ю+': Vocal('J0U0', 'J0U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-            'я+': Vocal('J0A0', 'J0A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-            'е+': Vocal('J0E0', 'J0E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-
-            'о+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-            'у+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-            'а+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-            'э+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-            'ы+': Vocal('Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0'),
-            'и+': Vocal('I0', 'I0', 'I0', 'I0', 'Y0', 'Y0', 'I0', 'I0'),
-
-            'ё': Vocal('J0O', 'J0O', 'O', 'O', 'O', 'O', 'O', 'O'),
-            'ю': Vocal('J0U', 'J0U', 'U', 'U', 'U', 'U', 'U', 'U'),
-            'я': Vocal('J0A', 'J0I', 'A', 'I', 'A', 'Y', 'A', 'I'),
-            'е': Vocal('J0I', 'J0I', 'I', 'I', 'Y', 'Y', 'I', 'I'),
-
-            'о': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-            'у': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-            'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-            'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-            'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-            'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
-        }
+from russian_g2p import RulesForGraphemes
 
 
 class Grapheme2Phoneme:
@@ -102,8 +31,8 @@ class Grapheme2Phoneme:
         self.__double_vocals = {'е', 'ё', 'ю', 'я', 'е+', 'ё+', 'ю+', 'я+'}
 
         # назвать получше
-        self.__gen_vocals_hard = {'ъ', 'а', 'о', 'у', 'э', 'ы'}
-        self.__gen_vocals_soft = {'ь', 'я', 'ё', 'ю', 'е', 'и'}
+        self.__gen_vocals_hard = {'ъ', 'а', 'о', 'у', 'э', 'ы', 'а+', 'о+', 'у+', 'э+', 'ы+'}
+        self.__gen_vocals_soft = {'ь', 'я', 'ё', 'ю', 'е', 'и', 'я+', 'ё+', 'ю+', 'е+', 'и+'}
 
         self.__consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц',
                              'ч', 'ш', 'щ'}
@@ -144,7 +73,7 @@ class Grapheme2Phoneme:
         self.__exclusions_dictionary = self.load_exclusions_dictionary(exclusions_dictionary_name)
         self.__re_for_phrase_split = re.compile(r'[\s\-]+', re.U)
 
-        self.__r4l = RulesForLetters()
+        self.__r4l = RulesForGraphemes()
 
     '''
     def __del__(self):
@@ -409,7 +338,7 @@ class Grapheme2Phoneme:
                 or (letters_list[cur_pos - 1] not in self.__all_russian_letters):
             # мы могли сюда прийти только после гласной или Ь, Ъ => нужно добавить J
             if letters_list[cur_pos] in self.__double_vocals:
-                new_phonemes_list.append('J')
+                new_phonemes_list.append('J0')
             # случаи 1-3 и 4-6 на самом деле (для такой модели) одинаковые
             if cur_pos + 1 >= len(letters_list):
                 new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case1'])
@@ -441,32 +370,32 @@ class Grapheme2Phoneme:
         new_phonemes_list = list()
         n = len(letters_list)
         if cur_pos == n - 1:
-            new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['d_hard'])
+            new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_hard'])
         else:
-            if letters_list[cur_pos + 1][0] in self.__deaf_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['d_hard'])
-            elif letters_list[cur_pos + 1][0] in self.__voiced_weak_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['n_hard'])
-            elif letters_list[cur_pos + 1][0] in self.__gen_vocals_hard:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['n_hard'])
-            elif letters_list[cur_pos + 1][0] in self.__voiced_strong_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['v_hard'])
-            elif letters_list[cur_pos + 1][0] in self.__gen_vocals_soft - {'ь'}:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['n_soft'])
-            elif letters_list[cur_pos + 1][0] == 'ь':
+            if letters_list[cur_pos + 1] in self.__deaf_consonants:
+                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_hard'])
+            elif letters_list[cur_pos + 1] in self.__voiced_weak_consonants:
+                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_hard'])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_hard:
+                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_hard'])
+            elif letters_list[cur_pos + 1] in self.__voiced_strong_consonants:
+                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['v_hard'])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_soft - {'ь'}:
+                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+            elif letters_list[cur_pos + 1] == 'ь':
                 if cur_pos == n - 2:
-                    new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['d_soft'])
+                    new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
                 else:
-                    if letters_list[cur_pos + 2][0] in self.__deaf_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['d_soft'])
-                    elif letters_list[cur_pos + 2][0] in self.__gen_vocals_hard:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['d_soft'])
-                    elif letters_list[cur_pos + 2][0] in self.__gen_vocals_soft:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['n_soft'])
-                    elif letters_list[cur_pos + 2][0] in self.__voiced_weak_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['n_soft'])
-                    elif letters_list[cur_pos + 2][0] in self.__voiced_strong_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos][0]].forms['v_soft'])
+                    if letters_list[cur_pos + 2] in self.__deaf_consonants:
+                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
+                    elif letters_list[cur_pos + 2] in self.__gen_vocals_hard:
+                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
+                    elif letters_list[cur_pos + 2] in self.__gen_vocals_soft:
+                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+                    elif letters_list[cur_pos + 2] in self.__voiced_weak_consonants:
+                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+                    elif letters_list[cur_pos + 2] in self.__voiced_strong_consonants:
+                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['v_soft'])
                     else:
                         assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
             else:
@@ -493,10 +422,10 @@ class Grapheme2Phoneme:
         previous_phoneme = ''
         # проблемы с Аа+рон
         for current_phoneme in source_transcription:
-            if current_phoneme != previous_phoneme:
+            if re.sub(r'[0l]', '', current_phoneme) != re.sub(r'[0l]', '', previous_phoneme):
                 prepared_transcription.append(current_phoneme)
             else:
-                prepared_transcription[-1] += 'l'
+                prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
 
@@ -843,4 +772,4 @@ class Grapheme2Phoneme:
 
 
 g2p = Grapheme2Phoneme()
-print(g2p.word_to_phonemes('бесси+льный'))
+print(g2p.word_to_phonemes('зонди+рование'))
