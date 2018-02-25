@@ -5,36 +5,119 @@ import re
 import warnings
 
 
-class Grapheme2Phoneme:
+class Consonant:
+    def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None, pl=None):
+        self.__forms = dict(
+            # normal, deaf and voiced
+            n_hard=nh,
+            d_hard=dh,
+            v_hard=vh,
+            n_soft=ns,
+            d_soft=ds,
+            v_soft=vs
+        )
+        self.__place = pl
+        self.__special_cases = dict()
+
+
+class Vocal:
+    def __init__(self, st=None, unst=None):
+        self.__forms = dict(
+            stressed=st,
+            unstressed=unst
+        )
+
+
+class RulesForLetters:
+    def __init__(self):
+        '''
+        # перечисляем графемы
+        self.__all_russian_letters = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
+                                      'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
+                                      'я'}
+
+        self.__signs_hard_and_soft = {'ъ', 'ь'}
+
+        self.__vocals = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е',
+                         'а+', 'о+', 'у+', 'э+', 'ы+', 'и+', 'я+', 'ё+', 'ю+', 'е+'}
+        self.__vocals_double = {'е', 'ё', 'ю', 'я', 'е+', 'ё+', 'ю+', 'я+'}
+        self.__vocals_gen_hard = {'ъ', 'а', 'о', 'у', 'э', 'ы'}
+        self.__vocals_gen_soft = {'ь', 'я', 'ё', 'ю', 'е', 'и'}
+
+        self.__consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц',
+                             'ч', 'ш', 'щ'}
+        self.__consonants_deaf = {'к', 'п', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'}
+        self.__consonants_voiced_weak_ = {'в', 'й', 'л', 'м', 'н', 'р'}
+        self.__consonants_voiced_strong = {'б', 'г', 'д', 'з', 'ж'}
+        self.__consonants_j = {'й'}
+
+        self.__pair_consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'к', 'п', 'с', 'т', 'ф', 'ш'}
+        self.__nonpair_consonants = {'й', 'м', 'н', 'р', 'л', 'ц', 'ч', 'х', 'щ'}
+        self.__hardsoft_consonants = {'б', 'в', 'г', 'д', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х'}
+        self.__hard_consonants = {'ж', 'ш', 'ц'}
+        self.__soft_consonants = {'й', 'ч', 'щ'}
+        '''
+    table_for_consonants = {'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0', 'palatal'),
+                            'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'alveolar'),
+                            'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'alveolar'),
+                            'ц': Consonant('TS', 'TS', 'TS', 'TS', 'TS', 'TS', 'dental'),
+
+                            'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0', 'dental'),
+                            'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0', 'labial'),
+                            'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0', 'dental'),
+                            'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0', 'alveolar'),
+
+                            'х': Consonant('H', 'H', 'H', 'H0', 'H0', 'H0', 'palatal'),
+
+                            'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0', 'labial'),
+                            'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0', 'labial'),
+                            'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0', 'labial'),
+                            'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0', 'labial'),
+                            'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0', 'palatal'),
+                            'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0', 'palatal'),
+                            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0', 'dental'),
+                            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0', 'dental'),
+                            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0', 'dental'),
+                            'с': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0', 'dental'),
+                            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH', 'alveolar'),
+                            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH', 'alveolar')}
+
+
+class Grapheme2Phoneme(RulesForLetters):
     def __init__(self):
         self.__re_for_phrase_split = None
 
-        # пауза
         self.__silence_name = 'sil'
 
-        # все фонемы
-        self.__russian_phonemes_set = {'U0', 'U', 'O', 'A0', 'A', 'E0', 'E', 'Y0', 'Y', 'I0', 'I', 'K0', 'K', 'H0',
+        self.__russian_phonemes_set = {'U0', 'U', 'O0', 'O', 'A0', 'A', 'E0', 'E', 'Y0', 'Y', 'I0', 'I', 'K0', 'K', 'H0',
                                        'H', 'G0', 'G', 'J', 'CH', 'SH0', 'SH', 'ZH', 'R0', 'R', 'T0', 'T', 'C', 'S0',
                                        'S', 'D0', 'D', 'Z0', 'Z', 'N0', 'N', 'L0', 'L', 'P0', 'P', 'F0', 'F', 'B0', 'B',
                                        'V0', 'V', 'M0', 'M', 'ZH0', 'DZ', 'DZH'}
 
-        # все буквы
         self.__all_russian_letters = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
                                       'п', 'р',  'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
                                       'я'}
 
-        # твердый и мягкий знаки
         self.__hard_and_soft_signs = {'ъ', 'ь'}
 
-        # гласные буквы
         self.__vocals = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е', 'а+', 'о+', 'у+', 'э+', 'ы+', 'и+', 'я+',
                          'ё+', 'ю+', 'е+'}
 
         self.__double_vocals = {'е', 'ё', 'ю', 'я', 'е+', 'ё+', 'ю+', 'я+'}
 
-        # согласные буквы
+        # назвать получше
+        self.__gen_vocals_hard = {'ъ', 'а', 'о', 'у', 'э', 'ы'}
+        self.__gen_vocals_soft = {'ь', 'я', 'ё', 'ю', 'е', 'и'}
+
         self.__consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц',
                              'ч', 'ш', 'щ'}
+
+        self.__deaf_consonants = {'к', 'п', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'}
+
+        self.__voiced_weak_consonants = {'в', 'л', 'м', 'н', 'р'}
+
+        self.__voiced_strong_consonants = {'б', 'г', 'д', 'з', 'ж'}
+
 
         # парные по звонкости согласные
         self.__pair_consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'к', 'п', 'с', 'т', 'ф', 'ш'}
@@ -42,16 +125,14 @@ class Grapheme2Phoneme:
         # непарные по звонкости согласные
         self.__nonpair_consonants = {'й', 'м', 'н', 'р', 'л', 'ц', 'ч', 'х', 'щ'}
 
-        # парные по твердости согласные
-        self.__pair_hardsoft_consonants = {'б', 'в', 'г', 'д', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х'}
+        self.__hardsoft_consonants = {'б', 'в', 'г', 'д', 'з', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х'}
 
-        # непарные по твердости согласные
-        self.__nonpair_hard_consonants = {'ж', 'ш', 'ц'}
-        self.__nonpair_soft_consonants = {'й', 'ч', 'щ'}
+        self.__hard_consonants = {'ж', 'ш', 'ц'}
+        self.__soft_consonants = {'й', 'ч', 'щ'}
 
         # классификация согласных звуков по месту образования
         self.__palatal_consonants = {'K', 'K0', 'H', 'H0', 'G', 'G0', 'J'}
-        self.__alveolar_consonants = {'CH', 'SH', 'SH0', 'ZH', 'R0', 'R'}
+        self.__alveolar_consonants = {'CH', 'SH', 'SH0', 'ZH', 'R', 'R0'}
         self.__dental_consonants = {'T', 'T0', 'C', 'S', 'S0', 'D', 'D0', 'Z', 'Z0', 'N', 'N0', 'L', 'L0'}
         self.__labial_consonants = {'P', 'P0', 'F', 'F0', 'B', 'B0', 'V', 'V0', 'M', 'M0'}
 
@@ -130,6 +211,46 @@ class Grapheme2Phoneme:
                 'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'I'}
         }
 
+        # простейший вариант с минимумом правил
+        self.__consonants_transforms = {
+            1: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L0', 'м': 'M0', 'н': 'N0', 'р': 'R0', 'х': 'H0',
+                'б': 'P0', 'в': 'F0', 'г': 'K0', 'д': 'T0', 'з': 'S0', 'ж': 'SH0',
+                'п': 'P0', 'ф': 'F0', 'к': 'K0', 'т': 'T0', 'с': 'S0', 'ш': 'SH0'
+            },
+            2: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L', 'м': 'M', 'н': 'N', 'р': 'R', 'х': 'H',
+                'б': 'P', 'в': 'F', 'г': 'K', 'д': 'T', 'з': 'S', 'ж': 'SH',
+                'п': 'P', 'ф': 'F', 'к': 'K', 'т': 'T', 'с': 'S', 'ш': 'SH'
+            },
+            3: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L', 'м': 'M', 'н': 'N', 'р': 'R', 'х': 'H',
+                'б': 'B', 'в': 'V', 'г': 'G', 'д': 'D', 'з': 'Z', 'ж': 'ZH',
+                'п': 'P', 'ф': 'F', 'к': 'K', 'т': 'T', 'с': 'S', 'ш': 'SH'
+            },
+            4: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L0', 'м': 'M0', 'н': 'N0', 'р': 'R0', 'х': 'H0',
+                'б': 'B0', 'в': 'V0', 'г': 'G0', 'д': 'D0', 'з': 'Z0', 'ж': 'ZH',
+                'п': 'P0', 'ф': 'F0', 'к': 'K0', 'т': 'T0', 'с': 'S0', 'ш': 'SH'
+            },
+            5: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L', 'м': 'M', 'н': 'N', 'р': 'R', 'х': 'H',
+                'б': 'B', 'в': 'V', 'г': 'G', 'д': 'D', 'з': 'Z', 'ж': 'ZH',
+                'п': 'B', 'ф': 'V', 'к': 'G', 'т': 'D', 'с': 'Z', 'ш': 'ZH'
+            },
+            6: {
+                'й': 'J', 'ч': 'CH', 'щ': 'SH0', 'ц': 'C',
+                'л': 'L0', 'м': 'M0', 'н': 'N0', 'р': 'R0', 'х': 'H0',
+                'б': 'B0', 'в': 'V0', 'г': 'G0', 'д': 'D0', 'з': 'Z0', 'ж': 'ZH',
+                'п': 'B0', 'ф': 'V0', 'к': 'G0', 'т': 'D0', 'с': 'Z0', 'ш': 'ZH'
+            },
+        }
+
         self.__transformations_by_rules = {
 
             3: {'й': 'J', 'ц': 'C', 'ч': 'CH', 'щ': 'SH0', 'ш': 'SH'},
@@ -175,7 +296,6 @@ class Grapheme2Phoneme:
         self.__exclusions_dictionary = self.load_exclusions_dictionary(exclusions_dictionary_name)
         self.__re_for_phrase_split = re.compile(r'[\s\-]+', re.U)
 
-    '''
     def __del__(self):
         if self.__exclusions_dictionary is not None:
             del self.__exclusions_dictionary
@@ -191,7 +311,7 @@ class Grapheme2Phoneme:
         del self.__function_words_1
         del self.__function_words_2
         del self.__all_russian_letters
-    '''
+
 
     @property
     def russian_letters(self) -> list:
@@ -224,7 +344,7 @@ class Grapheme2Phoneme:
                     word_transcription = list()
                     for cur_phoneme in words_of_line[1:]:
                         prepared_phoneme = cur_phoneme.upper()
-                        assert prepared_phoneme in self.__russian_phonemes_set, error_message
+                        #assert prepared_phoneme in self.__russian_phonemes_set, error_message # ggggg
                         word_transcription.append(prepared_phoneme)
                     words_and_transcriptions[word_name] = copy.copy(word_transcription)
                 cur_line = dictionary_file.readline()
@@ -297,116 +417,11 @@ class Grapheme2Phoneme:
             # если текущая буква гласная
             if letters_list[ind] in self.__vocals:
                 new_phonemes, ind = self.__apply_rule_for_vocals_ru(letters_list, ind)
+            # если текущая буква согласная
             else:
                 assert letters_list[ind] in self.__consonants, error_message
-                if ind == (n - 1):
-                    if letters_list[ind] in self.__nonpair_consonants:
-                        if letters_list[ind] in ['й', 'ц', 'ч', 'щ']:
-                            new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 3)
-                        else:
-                            new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 5)
-                    else:
-                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 8)
-                elif ind == (n - 2):
-                    if (ind > 0) and (letters_list[ind] == 'г') and (letters_list[ind + 1] == 'о') and (
-                        letters_list[ind - 1] in ['о', 'е', 'о+', 'е+']) \
-                            and (prepared_word not in ['мно+го', 'до+рого', 'стро+го']):
-                        new_phonemes, ind = self.__apply_rule26(letters_list, ind)
-                    elif (letters_list[ind] in ['с', 'ж']) and (letters_list[ind + 1] == 'ч'):
-                        new_phonemes, ind = self.__apply_rule_for_two_letters(letters_list, ind, 24)
-                    else:
-                        if str(letters_list[ind:(ind + 2)]) in ['тс', 'тц', 'дс', 'дц', 'сш', 'зж']:
-                            new_phonemes, ind = self.__apply_rule25(letters_list, ind)
-                        else:
-                            if letters_list[ind] in self.__nonpair_consonants:
-                                if letters_list[ind] in ['й', 'ц', 'ч', 'щ']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 3)
-                                else:
-                                    if letters_list[ind + 1] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и',
-                                                                 'и+']:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 4)
-                                    else:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 5)
-                            else:
-                                if letters_list[ind + 1] in ['п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 8)
-                                elif letters_list[ind + 1] in ['б', 'д', 'г', 'з', 'ж']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 11)
-                                elif letters_list[ind + 1] in ['в', 'ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+',
-                                                               'ы', 'ы+']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 12)
-                                elif letters_list[ind + 1] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 13)
-                                elif letters_list[ind + 1] == 'ь':
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 14)
-                                elif letters_list[ind + 1] in ['л', 'м', 'н', 'р']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 20)
-                else:
-                    if (letters_list[ind] in ['с', 'ж']) and (letters_list[ind + 1] == 'ч'):
-                        new_phonemes, ind = self.__apply_rule_for_two_letters(letters_list, ind, 24)
-                    else:
-                        if (''.join(letters_list[ind:(ind + 2)]) in ['тс', 'тц', 'дс', 'дц', 'сш', 'зж']) \
-                                or (''.join(letters_list[ind:(ind + 3)]) == 'тьс'):
-                            new_phonemes, ind = self.__apply_rule25(letters_list, ind)
-                        else:
-                            if letters_list[ind] in self.__nonpair_consonants:
-                                if letters_list[ind] in ['й', 'ц', 'ч', 'щ']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 3)
-                                else:
-                                    if letters_list[ind + 1] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и',
-                                                                 'и+']:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 4)
-                                    else:
-                                        if (letters_list[ind] == letters_list[ind + 1]) \
-                                                and (letters_list[ind + 2] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+',
-                                                                               'е', 'е+', 'и', 'и+']):
-                                            new_phonemes, ind = self.__apply_rule_for_two_letters(letters_list, ind, 7)
-                                        elif (letters_list[ind] == 'н') \
-                                                and (letters_list[ind + 1] in ['н', 'д', 'т', 'с']) \
-                                                and (letters_list[ind + 2] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+',
-                                                                               'е', 'е+', 'и', 'и+']):
-                                            new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 6)
-                                        else:
-                                            new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 5)
-                            else:
-                                if (letters_list[ind] == 'с') and (letters_list[ind + 1] in ['н', 'т', 'с']) \
-                                        and (letters_list[ind + 2] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+',
-                                                                       'и', 'и+']):
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 18)
-                                elif (letters_list[ind] == letters_list[ind + 1]) \
-                                        and (letters_list[ind + 2] in ['ь', 'я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+',
-                                                                       'и', 'и+']):
-                                    new_phonemes, ind = self.__apply_rule_for_two_letters(letters_list, ind, 19)
-                                elif (letters_list[ind] == 'г') and (letters_list[ind + 1] == 'к') \
-                                        and (letters_list[ind + 2] in ['ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+',
-                                                                       'ы', 'ы+']):
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 9)
-                                elif (letters_list[ind] == 'г') and (letters_list[ind + 1] == 'к') \
-                                        and (letters_list[ind + 2] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и',
-                                                                       'и+']):
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 10)
-                                elif letters_list[ind + 1] in ['п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 8)
-                                elif letters_list[ind + 1] in ['б', 'д', 'г', 'з', 'ж']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 11)
-                                elif letters_list[ind + 1] in ['в', 'ъ', 'а', 'а+', 'о', 'о+', 'у', 'у+', 'э', 'э+',
-                                                               'ы', 'ы+']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 12)
-                                elif letters_list[ind + 1] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и', 'и+']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 13)
-                                elif letters_list[ind + 1] in ['л', 'м', 'н', 'р']:
-                                    new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 20)
-                                elif letters_list[ind + 1] == 'ь':
-                                    if letters_list[ind + 2] in ['п', 'т', 'к', 'ф', 'с', 'ц', 'ш', 'ч', 'х', 'щ']:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 14)
-                                    elif letters_list[ind + 2] in ['я', 'я+', 'ё', 'ё+', 'ю', 'ю+', 'е', 'е+', 'и',
-                                                                   'и+']:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 15)
-                                    elif letters_list[ind + 2] in ['б', 'д', 'г', 'з', 'ж']:
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 16)
-                                    else:
-                                        assert letters_list[ind + 2] in ['й', 'м', 'н', 'р', 'л'], error_message
-                                        new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list, ind, 17)
+                # сначала применяем правила 21-26, но пока пропустим это
+                new_phonemes, ind = self.__apply_rule_for_consonants_ru(letters_list, ind)
             transcription += new_phonemes
             assert ind > old_ind, error_message
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
@@ -558,19 +573,19 @@ class Grapheme2Phoneme:
             else:
                 new_phonemes_list.append(self.__vocals_transforms[4][letters_list[cur_pos]])
         # не начало слова, слева Й, Ч, Щ
-        elif letters_list[cur_pos - 1] in self.__nonpair_soft_consonants:
+        elif letters_list[cur_pos - 1] in self.__soft_consonants:
             if cur_pos + 1 >= len(letters_list):
                 new_phonemes_list.append(self.__vocals_transforms[7][letters_list[cur_pos]])
             else:
                 new_phonemes_list.append(self.__vocals_transforms[8][letters_list[cur_pos]])
         # не начало слова, слева Ж, Ц, Ш
-        elif letters_list[cur_pos - 1] in self.__nonpair_hard_consonants:
+        elif letters_list[cur_pos - 1] in self.__hard_consonants:
             if cur_pos + 1 >= len(letters_list):
                 new_phonemes_list.append(self.__vocals_transforms[9][letters_list[cur_pos]])
             else:
                 new_phonemes_list.append(self.__vocals_transforms[10][letters_list[cur_pos]])
         # не начало слова, слева парная по твердости
-        elif letters_list[cur_pos - 1] in self.__pair_hardsoft_consonants:
+        elif letters_list[cur_pos - 1] in self.__hardsoft_consonants:
             if cur_pos + 1 >= len(letters_list):
                 new_phonemes_list.append(self.__vocals_transforms[11][letters_list[cur_pos]])
             else:
@@ -578,6 +593,52 @@ class Grapheme2Phoneme:
         else:
             pass
         return new_phonemes_list, cur_pos + 1
+
+    def __apply_rule_for_consonants_ru(self, letters_list: list, cur_pos: int) -> tuple:
+        new_phonemes_list = list()
+        n = len(letters_list)
+        if cur_pos == n - 1:
+            new_phonemes_list.append(self.__consonants_transforms[2][letters_list[cur_pos]])
+        # на будущее -- убрать копипасту
+        elif cur_pos == n - 2:
+            if letters_list[cur_pos + 1] in self.__deaf_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[2][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_hard:
+                new_phonemes_list.append(self.__consonants_transforms[3][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__voiced_weak_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[3][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__voiced_strong_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[5][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_soft:
+                new_phonemes_list.append(self.__consonants_transforms[4][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] == 'й':
+                new_phonemes_list.append(self.__consonants_transforms[4][letters_list[cur_pos]])
+            else:
+                new_phonemes_list.append(self.__consonants_transforms[1][letters_list[cur_pos]])
+        else:
+            if letters_list[cur_pos + 1] in self.__deaf_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[2][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_hard:
+                new_phonemes_list.append(self.__consonants_transforms[3][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__voiced_weak_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[3][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__voiced_strong_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[5][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] in self.__gen_vocals_soft:
+                new_phonemes_list.append(self.__consonants_transforms[4][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 1] == 'й':
+                new_phonemes_list.append(self.__consonants_transforms[4][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 2] in self.__gen_vocals_hard:
+                new_phonemes_list.append(self.__consonants_transforms[1][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 2] in self.__deaf_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[1][letters_list[cur_pos]])
+            elif letters_list[cur_pos + 2] in self.__voiced_strong_consonants:
+                new_phonemes_list.append(self.__consonants_transforms[6][letters_list[cur_pos]])
+            else:
+                new_phonemes_list.append(self.__consonants_transforms[4][letters_list[cur_pos]])
+        return new_phonemes_list, cur_pos + 1
+
+
 
     def __apply_rule_for_one_letter(self, letters_list: list, cur_pos: int, rule_number: int) -> tuple:
         cur_letter = letters_list[cur_pos]
@@ -724,7 +785,7 @@ class Grapheme2Phoneme:
                     elif letters_list_2[0] in {'л', 'м', 'н', 'р'}:
                         new_phonemes, ind = self.__apply_rule_for_one_letter(letters_list_1 + letters_list_2,
                                                                              nword1 - 1, 20)
-            if not new_phonemes is None:
+            if new_phonemes is not None:
                 transcription1 = transcription1[0:(len(transcription1) - 1)] + new_phonemes
         if letters_list_2[0] in self.__vocals:
             new_phonemes = None
@@ -998,3 +1059,7 @@ class Grapheme2Phoneme:
                 else:
                     transcription2 = new_phonemes + transcription2[1:]
         return self.__remove_repeats_from_transcription(transcription1 + transcription2)
+
+
+g2m = Grapheme2Phoneme()
+print(g2m.word_to_phonemes('ры+бка'))
