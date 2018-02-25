@@ -54,11 +54,7 @@ class Grapheme2Phoneme:
         self.__hard_consonants = {'ж', 'ш', 'ц'}
         self.__soft_consonants = {'й', 'ч', 'щ'}
 
-        # классификация согласных звуков по месту образования
-        self.__palatal_consonants = {'K', 'K0', 'H', 'H0', 'G', 'G0', 'J'}
-        self.__alveolar_consonants = {'CH', 'SH', 'SH0', 'ZH', 'R', 'R0'}
-        self.__dental_consonants = {'T', 'T0', 'C', 'S', 'S0', 'D', 'D0', 'Z', 'Z0', 'N', 'N0', 'L', 'L0'}
-        self.__labial_consonants = {'P', 'P0', 'F', 'F0', 'B', 'B0', 'V', 'V0', 'M', 'M0'}
+        self.__letters_for_rule_27 = {'н', 'т', 'с', 'д', 'з', 'л', 'м', 'п', 'б', 'в', 'ф'}
 
         self.__function_words_1 = {'без', 'безо', 'близ', 'в', 'во', 'вне', 'для', 'до', 'за', 'из', 'изо', 'к', 'ко',
                                    'меж', 'на', 'над', 'о', 'об', 'обо', 'от', 'ото', 'по', 'под', 'подо', 'пред',
@@ -74,24 +70,6 @@ class Grapheme2Phoneme:
         self.__re_for_phrase_split = re.compile(r'[\s\-]+', re.U)
 
         self.__r4l = RulesForGraphemes()
-
-    '''
-    def __del__(self):
-        if self.__exclusions_dictionary is not None:
-            del self.__exclusions_dictionary
-        if self.__re_for_phrase_split is not None:
-            del self.__re_for_phrase_split
-        del self.__transformations_by_rules
-        del self.__vocals_transforms
-        del self.__nonpair_consonants
-        del self.__consonants
-        del self.__vocals
-        #del self.__russian_phonemes_set
-        del self.__silence_name
-        del self.__function_words_1
-        del self.__function_words_2
-        del self.__all_russian_letters
-    '''
 
     @property
     def russian_letters(self) -> list:
@@ -195,7 +173,7 @@ class Grapheme2Phoneme:
             transcription += new_phonemes
             assert ind > old_ind, error_message
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        return self.__remove_repeats_from_transcription(self.__apply_rule27(transcription))
+        return self.__remove_repeats_from_transcription(transcription)
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
         self.check_phrase(source_phrase)
@@ -309,6 +287,8 @@ class Grapheme2Phoneme:
                          ('ндц', 'нц'), ('рдц', 'рц'), ('ндш', 'нш'), ('гдт', 'гт'), ('лнц', 'нц'),
                          ('сч', 'щ'), ('жч', 'щ'), ('сш', 'ш'), ('зж', 'ж'),
                          ('тс', 'ц'), ('тьс', 'ц'), ('тц', 'ц'), ('дс', 'ц'), ('дц', 'ц')]
+        if len(prepared_word) > 2 and prepared_word[-2:] == 'го':
+            prepared_word = prepared_word[:-2] + 'ва'
         for repl_from, repl_to in replace_pairs:
             prepared_word = prepared_word.replace(repl_from, repl_to)
         return prepared_word
@@ -334,93 +314,94 @@ class Grapheme2Phoneme:
 
     def __apply_rule_for_vocals_ru(self, letters_list: list, cur_pos: int) -> tuple:
         new_phonemes_list = list()
+        case = 0
         if (cur_pos == 0) or (letters_list[cur_pos - 1] in self.__vocals | self.__hard_and_soft_signs) \
                 or (letters_list[cur_pos - 1] not in self.__all_russian_letters):
-            # мы могли сюда прийти только после гласной или Ь, Ъ => нужно добавить J
+            # мы могли сюда прийти только после гласной или Ь, Ъ => нужно добавить J0
             if letters_list[cur_pos] in self.__double_vocals:
                 new_phonemes_list.append('J0')
-            # случаи 1-3 и 4-6 на самом деле (для такой модели) одинаковые
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case1'])
+                case = 1
             else:
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case2'])
+                case = 2
         # не начало слова, слева Й, Ч, Щ
         elif letters_list[cur_pos - 1] in self.__soft_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case3'])
+                case = 3
             else:
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case4'])
+                case = 4
         # не начало слова, слева Ж, Ц, Ш
         elif letters_list[cur_pos - 1] in self.__hard_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case5'])
+                case = 5
             else:
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case6'])
+                case = 6
         # не начало слова, слева парная по твердости
         elif letters_list[cur_pos - 1] in self.__hardsoft_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case7'])
+                case = 7
             else:
-                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case8'])
+                case = 8
         else:
             assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
+        new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case' + str(case)])
         return new_phonemes_list, cur_pos + 1
 
     def __apply_rule_for_consonants_ru(self, letters_list: list, cur_pos: int) -> tuple:
         new_phonemes_list = list()
         n = len(letters_list)
         if cur_pos == n - 1:
-            new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_hard'])
+            case = 'd_hard'
         else:
-            if letters_list[cur_pos + 1] in self.__deaf_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_hard'])
+            # правило 27
+            if cur_pos < n - 2 and letters_list[cur_pos] in {'н', 'т', 'с', 'д', 'з'} and \
+                                   letters_list[cur_pos + 1] in self.__letters_for_rule_27 and \
+                                   letters_list[cur_pos + 2] in self.__gen_vocals_soft:
+                case = 'n_soft'
+            elif letters_list[cur_pos] == 'н' and letters_list[cur_pos + 1] in {'ч', 'щ'}:
+                case = 'n_soft'
+            # конец правила 27
+            elif cur_pos < n - 2 and letters_list[cur_pos] == 'г' and letters_list[cur_pos + 1] == 'к':
+                if letters_list[cur_pos + 2] in self.__gen_vocals_soft:
+                    return ['H0'], cur_pos + 1
+                elif letters_list[cur_pos + 2] in self.__gen_vocals_hard:
+                    return ['H'], cur_pos + 1
+                else:
+                    case = 'd_hard'
+            elif letters_list[cur_pos + 1] in self.__deaf_consonants:
+                case = 'd_hard'
             elif letters_list[cur_pos + 1] in self.__voiced_weak_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_hard'])
+                case = 'n_hard'
             elif letters_list[cur_pos + 1] in self.__gen_vocals_hard:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_hard'])
+                case = 'n_hard'
             elif letters_list[cur_pos + 1] in self.__voiced_strong_consonants:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['v_hard'])
+                case = 'v_hard'
             elif letters_list[cur_pos + 1] in self.__gen_vocals_soft - {'ь'}:
-                new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+                case = 'n_soft'
             elif letters_list[cur_pos + 1] == 'ь':
                 if cur_pos == n - 2:
-                    new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
+                    case = 'd_soft'
                 else:
                     if letters_list[cur_pos + 2] in self.__deaf_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
+                        case = 'd_soft'
                     elif letters_list[cur_pos + 2] in self.__gen_vocals_hard:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['d_soft'])
+                        case = 'd_soft'
                     elif letters_list[cur_pos + 2] in self.__gen_vocals_soft:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+                        case = 'n_soft'
                     elif letters_list[cur_pos + 2] in self.__voiced_weak_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['n_soft'])
+                        case = 'n_soft'
                     elif letters_list[cur_pos + 2] in self.__voiced_strong_consonants:
-                        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms['v_soft'])
+                        case = 'v_soft'
                     else:
                         assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
             else:
                 assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
+        new_phonemes_list.append(self.__r4l.cons[letters_list[cur_pos]].forms[case])
         return new_phonemes_list, cur_pos + 1
-
-    def __get_place_of_articulation(self, phoneme: str) -> str:
-        result = ''
-        if phoneme in self.__palatal_consonants:
-            result = 'palatal'
-        elif phoneme in self.__alveolar_consonants:
-            result = 'alveolar'
-        elif phoneme in self.__dental_consonants:
-            result = 'dental'
-        elif phoneme in self.__labial_consonants:
-            result = 'labial'
-        return result
-
-    def __apply_rule27(self, transcription: list) -> list:
-        return transcription
 
     def __remove_repeats_from_transcription(self, source_transcription: list) -> list:
         prepared_transcription = list()
         previous_phoneme = ''
-        # проблемы с Аа+рон
         for current_phoneme in source_transcription:
             if re.sub(r'[0l]', '', current_phoneme) != re.sub(r'[0l]', '', previous_phoneme):
                 prepared_transcription.append(current_phoneme)
@@ -769,7 +750,3 @@ class Grapheme2Phoneme:
                     transcription2 = new_phonemes + transcription2[1:]
         return self.__remove_repeats_from_transcription(transcription1 + transcription2)
     """
-
-
-g2p = Grapheme2Phoneme()
-print(g2p.word_to_phonemes('зонди+рование'))

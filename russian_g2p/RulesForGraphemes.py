@@ -1,11 +1,9 @@
 class Consonant:
-    def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None, pl=None):
+    def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None):
         self.forms = dict(
             # normal, deaf and voiced x soft and hard
             n_hard=nh, d_hard=dh, v_hard=vh, n_soft=ns, d_soft=ds, v_soft=vs
         )
-        self.place = pl
-        self.special_cases = dict()
 
 
 class Vocal:
@@ -13,36 +11,35 @@ class Vocal:
         self.forms = dict(
             case1=c1, case2=c2, case3=c3, case4=c4, case5=c5, case6=c6, case7=c7, case8=c8
         )
-        self.special_cases = dict()
 
 
 class RulesForGraphemes:
     def __init__(self):
         self.cons = {
-            'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0', 'palatal'),
-            'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'alveolar'),
-            'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'alveolar'),
-            'ц': Consonant('TS', 'TS', 'TS', 'TS', 'TS', 'TS', 'dental'),
+            'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0'),
+            'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0'),
+            'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0'),
+            'ц': Consonant('TS', 'TS', 'TS', 'TS', 'TS', 'TS'),
 
-            'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0', 'dental'),
-            'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0', 'labial'),
-            'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0', 'dental'),
-            'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0', 'alveolar'),
+            'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0'),
+            'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0'),
+            'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0'),
+            'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0'),
 
-            'х': Consonant('H', 'H', 'H', 'H0', 'H0', 'H0', 'palatal'),
+            'х': Consonant('H', 'H', 'H', 'H0', 'H0', 'H0'),
 
-            'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0', 'labial'),
-            'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0', 'labial'),
-            'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0', 'labial'),
-            'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0', 'labial'),
-            'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0', 'palatal'),
-            'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0', 'palatal'),
-            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0', 'dental'),
-            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0', 'dental'),
-            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0', 'dental'),
-            'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0', 'dental'),
-            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH', 'alveolar'),
-            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH', 'alveolar')}
+            'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0'),
+            'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0'),
+            'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0'),
+            'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0'),
+            'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0'),
+            'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0'),
+            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0'),
+            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0'),
+            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
+            'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
+            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
+            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH')}
 
         self.vocs = {
             # считаем, что J0 уже добавили, где нужно
@@ -68,5 +65,4 @@ class RulesForGraphemes:
             'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
             'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
             'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-            'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
-        }
+            'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')}
