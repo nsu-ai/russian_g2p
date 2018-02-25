@@ -8,29 +8,24 @@ import warnings
 class Consonant:
     def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None, pl=None):
         self.forms = dict(
-            # normal, deaf and voiced
-            n_hard=nh,
-            d_hard=dh,
-            v_hard=vh,
-            n_soft=ns,
-            d_soft=ds,
-            v_soft=vs
+            # normal, deaf and voiced x soft and hard
+            n_hard=nh, d_hard=dh, v_hard=vh, n_soft=ns, d_soft=ds, v_soft=vs
         )
         self.place = pl
         self.special_cases = dict()
 
 
 class Vocal:
-    def __init__(self, st=None, unst=None):
+    def __init__(self, c1=None, c2=None, c3=None, c4=None, c5=None, c6=None, c7=None, c8=None):
         self.forms = dict(
-            stressed=st,
-            unstressed=unst
+            case1=c1, case2=c2, case3=c3, case4=c4, case5=c5, case6=c6, case7=c7, case8=c8
         )
+        self.special_cases = dict()
 
 
 class RulesForLetters:
     def __init__(self):
-         self.cons = {
+        self.cons = {
             'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0', 'palatal'),
             'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'alveolar'),
             'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'alveolar'),
@@ -56,6 +51,32 @@ class RulesForLetters:
             'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH', 'alveolar'),
             'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH', 'alveolar')}
 
+        self.vocs = {
+            'ё+': Vocal('J0O0', 'J0O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
+            'ю+': Vocal('J0U0', 'J0U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
+            'я+': Vocal('J0A0', 'J0A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
+            'е+': Vocal('J0E0', 'J0E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
+
+            'о+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
+            'у+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
+            'а+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
+            'э+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
+            'ы+': Vocal('Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0'),
+            'и+': Vocal('I0', 'I0', 'I0', 'I0', 'Y0', 'Y0', 'I0', 'I0'),
+
+            'ё': Vocal('J0O', 'J0O', 'O', 'O', 'O', 'O', 'O', 'O'),
+            'ю': Vocal('J0U', 'J0U', 'U', 'U', 'U', 'U', 'U', 'U'),
+            'я': Vocal('J0A', 'J0I', 'A', 'I', 'A', 'Y', 'A', 'I'),
+            'е': Vocal('J0I', 'J0I', 'I', 'I', 'Y', 'Y', 'I', 'I'),
+
+            'о': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
+            'у': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
+            'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
+            'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+            'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
+            'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
+        }
+
 
 class Grapheme2Phoneme:
     def __init__(self):
@@ -70,7 +91,7 @@ class Grapheme2Phoneme:
                                        'ZH0', 'DZ', 'DZH'}
 
         self.__all_russian_letters = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
-                                      'п', 'р',  'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
+                                      'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
                                       'я'}
 
         self.__hard_and_soft_signs = {'ъ', 'ь'}
@@ -93,7 +114,6 @@ class Grapheme2Phoneme:
 
         self.__voiced_strong_consonants = {'б', 'г', 'д', 'з', 'ж'}
 
-
         # парные по звонкости согласные
         self.__pair_consonants = {'б', 'в', 'г', 'д', 'ж', 'з', 'к', 'п', 'с', 'т', 'ф', 'ш'}
 
@@ -111,81 +131,6 @@ class Grapheme2Phoneme:
         self.__dental_consonants = {'T', 'T0', 'C', 'S', 'S0', 'D', 'D0', 'Z', 'Z0', 'N', 'N0', 'L', 'L0'}
         self.__labial_consonants = {'P', 'P0', 'F', 'F0', 'B', 'B0', 'V', 'V0', 'M', 'M0'}
 
-        # все случаи переходов гласных для нормативного произношения (Андрей, когда-нибудь мы это запихаем в один класс)
-        self.__vocals_transforms = {
-            1: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё':  'O',  'ю':  'U',  'я':  'A',  'е':  'I',
-                'о':  'A',  'у':  'U',  'а':  'A',  'э':  'Y',   'ы':  'Y',  'и':  'I'},
-
-            2: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'A', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'I'},
-
-            3: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'A', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'I', 'ы': 'Y', 'и': 'I'},
-
-            4: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'I', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'I', 'ы': 'Y', 'и': 'I'},
-
-            5: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'I', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'I', 'ы': 'Y', 'и': 'I'},
-
-            6: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'I', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'I', 'ы': 'Y', 'и': 'I'},
-
-            7: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'A', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'I'},
-
-            8: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'I', 'е': 'I',
-                'о': 'I', 'у': 'U', 'а': 'I', 'э': 'Y', 'ы': 'Y', 'и': 'I'},
-
-            9: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'Y0',
-                'ё': 'O', 'ю': 'U', 'я': 'A', 'е': 'Y',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'Y'},
-
-            10: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'Y0',
-                'ё': 'O', 'ю': 'U', 'я': 'Y', 'е': 'Y',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'Y'},
-
-            11: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'A', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'I'},
-
-            12: {
-                'ё+': 'O0', 'ю+': 'U0', 'я+': 'A0', 'е+': 'E0',
-                'о+': 'O0', 'у+': 'U0', 'а+': 'A0', 'э+': 'E0',  'ы+': 'Y0', 'и+': 'I0',
-                'ё': 'O', 'ю': 'U', 'я': 'I', 'е': 'I',
-                'о': 'A', 'у': 'U', 'а': 'A', 'э': 'Y', 'ы': 'Y', 'и': 'I'}
-        }
-
         self.__function_words_1 = {'без', 'безо', 'близ', 'в', 'во', 'вне', 'для', 'до', 'за', 'из', 'изо', 'к', 'ко',
                                    'меж', 'на', 'над', 'о', 'об', 'обо', 'от', 'ото', 'по', 'под', 'подо', 'пред',
                                    'предо', 'при', 'про', 'с', 'со', 'у', 'чрез', 'через', 'не', 'ни', 'из-за',
@@ -200,6 +145,7 @@ class Grapheme2Phoneme:
         self.__re_for_phrase_split = re.compile(r'[\s\-]+', re.U)
 
         self.__r4l = RulesForLetters()
+
     '''
     def __del__(self):
         if self.__exclusions_dictionary is not None:
@@ -316,12 +262,10 @@ class Grapheme2Phoneme:
                 new_phonemes, ind = self.__apply_rule_for_vocals_ru(letters_list, ind)
             else:
                 assert letters_list[ind] in self.__consonants, error_message
-                # сначала применяем правила 21-26, но пока пропустим это
                 new_phonemes, ind = self.__apply_rule_for_consonants_ru(letters_list, ind)
             transcription += new_phonemes
             assert ind > old_ind, error_message
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        # print (transcription)
         return self.__remove_repeats_from_transcription(self.__apply_rule27(transcription))
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
@@ -464,33 +408,33 @@ class Grapheme2Phoneme:
         if (cur_pos == 0) or (letters_list[cur_pos - 1] in self.__vocals | self.__hard_and_soft_signs) \
                 or (letters_list[cur_pos - 1] not in self.__all_russian_letters):
             # мы могли сюда прийти только после гласной или Ь, Ъ => нужно добавить J
-            if letters_list[cur_pos] in self.__double_vocals:  # для общности добавил безуд. ё
+            if letters_list[cur_pos] in self.__double_vocals:
                 new_phonemes_list.append('J')
             # случаи 1-3 и 4-6 на самом деле (для такой модели) одинаковые
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__vocals_transforms[1][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case1'])
             else:
-                new_phonemes_list.append(self.__vocals_transforms[4][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case2'])
         # не начало слова, слева Й, Ч, Щ
         elif letters_list[cur_pos - 1] in self.__soft_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__vocals_transforms[7][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case3'])
             else:
-                new_phonemes_list.append(self.__vocals_transforms[8][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case4'])
         # не начало слова, слева Ж, Ц, Ш
         elif letters_list[cur_pos - 1] in self.__hard_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__vocals_transforms[9][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case5'])
             else:
-                new_phonemes_list.append(self.__vocals_transforms[10][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case6'])
         # не начало слова, слева парная по твердости
         elif letters_list[cur_pos - 1] in self.__hardsoft_consonants:
             if cur_pos + 1 >= len(letters_list):
-                new_phonemes_list.append(self.__vocals_transforms[11][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case7'])
             else:
-                new_phonemes_list.append(self.__vocals_transforms[12][letters_list[cur_pos]])
+                new_phonemes_list.append(self.__r4l.vocs[letters_list[cur_pos]].forms['case8'])
         else:
-            pass
+            assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
         return new_phonemes_list, cur_pos + 1
 
     def __apply_rule_for_consonants_ru(self, letters_list: list, cur_pos: int) -> tuple:
@@ -555,6 +499,7 @@ class Grapheme2Phoneme:
                 prepared_transcription[-1] += 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
+
     """
     def __unite_transcriptions_of_functional_word_and_content_word(self, word1: str, transcription1: list,
                                                                    word2: str, transcription2: list) -> list:
@@ -895,6 +840,7 @@ class Grapheme2Phoneme:
                     transcription2 = new_phonemes + transcription2[1:]
         return self.__remove_repeats_from_transcription(transcription1 + transcription2)
     """
+
 
 g2p = Grapheme2Phoneme()
 print(g2p.word_to_phonemes('бесси+льный'))
