@@ -363,9 +363,9 @@ class Grapheme2Phoneme:
             # конец правила 27
             elif cur_pos < n - 2 and letters_list[cur_pos] == 'г' and letters_list[cur_pos + 1] == 'к':
                 if letters_list[cur_pos + 2] in self.__gen_vocals_soft:
-                    return ['H0'], cur_pos + 1
+                    return ['KH0'], cur_pos + 1
                 elif letters_list[cur_pos + 2] in self.__gen_vocals_hard:
-                    return ['H'], cur_pos + 1
+                    return ['KH'], cur_pos + 1
                 else:
                     case = 'd_hard'
             elif letters_list[cur_pos + 1] in self.__deaf_consonants:
@@ -410,13 +410,13 @@ class Grapheme2Phoneme:
             previous_phoneme = current_phoneme
         return prepared_transcription
 
-    '''
     def __unite_transcriptions_of_functional_word_and_content_word(self, word1: str, transcription1: list,
                                                                    word2: str, transcription2: list) -> list:
         letters_list_1 = self.__word_to_letters_list(self.__prepare_word(word1.replace('-', '')))
         letters_list_2 = self.__word_to_letters_list(self.__prepare_word(word2.replace('-', '')))
         nword1 = len(letters_list_1)
         nword2 = len(letters_list_2)
+        return self.word_to_phonemes(word1 + word2)
         if letters_list_1[nword1 - 1] in self.__consonants:
             new_phonemes = None
             if nword2 == 1:
@@ -750,7 +750,7 @@ class Grapheme2Phoneme:
                 else:
                     transcription2 = new_phonemes + transcription2[1:]
         return self.__remove_repeats_from_transcription(transcription1 + transcription2)
-'''
+
 
 g = Grapheme2Phoneme()
 print(g.word_to_phonemes('матчбо+л'))
