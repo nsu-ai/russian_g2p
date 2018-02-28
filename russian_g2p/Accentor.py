@@ -270,6 +270,7 @@ class Accentor:
 
     def do_accents(self, source_phrase: list, morphotags_of_phrase: list=None) -> list:
         prepared_phrase = []
+        assert type(source_phrase) == 'list', '`{0}`: the phrase should be of a list format!'.format(source_phrase)
         for cur_word in source_phrase:
             assert len(cur_word.strip()) > 0, '`{0}`: this phrase is wrong!'.format(source_phrase)
             prepared_phrase.append(cur_word.strip().lower())
@@ -415,12 +416,6 @@ class Accentor:
                         accented_wordforms += [cur_word[:(pos+1)] + '+' + cur_word[(pos+1):]]
                     except IndexError:
                         accented_wordforms += [cur_word[:pos] + '+']
-                elif 'ё' in cur_word:
-                    yo_ind = cur_word.find('ё')
-                    try:
-                        accented_wordforms += [cur_word[:(yo_ind+1)] + '+' + cur_word[(yo_ind+1):]]
-                    except IndexError:
-                        accented_wordforms += [cur_word[:yo_ind] + '+']
                 elif cur_word in self.__simple_words:
                     accented_wordforms += [self.__simple_words[cur_word]]
                 elif cur_word in self.__homonyms:
