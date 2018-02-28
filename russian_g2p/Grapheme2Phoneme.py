@@ -410,7 +410,7 @@ class Grapheme2Phoneme:
             previous_phoneme = current_phoneme
         return prepared_transcription
 
-    """
+    '''
     def __unite_transcriptions_of_functional_word_and_content_word(self, word1: str, transcription1: list,
                                                                    word2: str, transcription2: list) -> list:
         letters_list_1 = self.__word_to_letters_list(self.__prepare_word(word1.replace('-', '')))
@@ -508,6 +508,7 @@ class Grapheme2Phoneme:
                                                     word2: str, transcription2: list) -> list:
         if (word1 == self.__silence_name) or (word2 == self.__silence_name):
             return self.__remove_repeats_from_transcription(transcription1 + transcription2)
+        return self.word_to_phonemes(word1 + word2)
         letters_list_1 = self.__word_to_letters_list(self.__prepare_word(word1.replace('-', '').replace(' ', '')))
         letters_list_2 = self.__word_to_letters_list(self.__prepare_word(word2.replace('-', '').replace(' ', '')))
         nword1 = len(letters_list_1)
@@ -749,4 +750,7 @@ class Grapheme2Phoneme:
                 else:
                     transcription2 = new_phonemes + transcription2[1:]
         return self.__remove_repeats_from_transcription(transcription1 + transcription2)
-    """
+'''
+
+g = Grapheme2Phoneme()
+print(g.word_to_phonemes('матчбо+л'))

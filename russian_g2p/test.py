@@ -224,7 +224,6 @@ class TestRussianG2P(unittest.TestCase):
         with self.assertWarnsRegex(UserWarning, re.escape(target_warning_message)):
             self.__g2p.word_to_phonemes(source_word)
 
-    '''
     def test_phrase_to_phonemes_positive001(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Служебное слово - обычная частица. """
@@ -471,7 +470,6 @@ class TestRussianG2P(unittest.TestCase):
         self.assertTrue(self.__g2p.in_function_words_2('-нибу+дь'))
         self.assertFalse(self.__g2p.in_function_words_2('нибудь'))
         self.assertFalse(self.__g2p.in_function_words_2('нибу+дь'))
-    '''
 
 '''
 class TestRussianAccentor(unittest.TestCase):

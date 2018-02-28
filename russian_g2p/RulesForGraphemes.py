@@ -17,16 +17,11 @@ class RulesForGraphemes:
     def __init__(self):
         self.cons = {
             'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0'),
-            'ч': Consonant('CH0', 'CH0', 'CH0', 'CH0', 'CH0', 'CH0'),
-            'щ': Consonant('SH0', 'SH0', 'SH0', 'SH0', 'SH0', 'SH0'),
-            'ц': Consonant('TS', 'TS', 'TS', 'TS', 'TS', 'TS'),
 
             'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0'),
             'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0'),
             'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0'),
             'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0'),
-
-            'х': Consonant('H', 'H', 'H', 'H0', 'H0', 'H0'),
 
             'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0'),
             'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0'),
@@ -39,7 +34,13 @@ class RulesForGraphemes:
             'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
             'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
             'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
-            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH')}
+            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
+
+            'ч': Consonant('TSH0', 'TSH0', 'DSH0', 'TSH0', 'TSH0', 'DSH0'),
+            'щ': Consonant('SH0', 'SH0', 'ZH0', 'SH0', 'SH0', 'ZH0'),
+            'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
+            'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
+        }
 
         self.vocs = {
             # считаем, что J0 уже добавили, где нужно
