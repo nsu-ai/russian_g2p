@@ -135,12 +135,12 @@ class Grapheme2Phoneme(RulesForGraphemes):
         return self.__remove_repeats_from_transcription(transcription)
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
-        self.check_phrase(source_phrase)
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
         words_in_phrase = list()
         source_phrase = source_phrase.lower()
         source_phrase = source_phrase.replace('\'', '')
         source_phrase = source_phrase.replace('-', ' ')
+        self.check_phrase(source_phrase)
         words_in_phrase = source_phrase.split()
         l = len(words_in_phrase)
         long_word = words_in_phrase[0]
@@ -225,4 +225,5 @@ class Grapheme2Phoneme(RulesForGraphemes):
 
 
 g = Grapheme2Phoneme()
-print(g.phrase_to_phonemes('дзе+та-фу+нкция'))
+s = "д'а+ртуа+"
+print(g.phrase_to_phonemes(s))
