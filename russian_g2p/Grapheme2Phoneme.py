@@ -185,7 +185,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
         replace_pairs = [('стн', 'сн'), ('стл', 'сл'), ('нтг', 'нг'), ('здн', 'зн'), ('здц', 'зц'),
                          ('ндц', 'нц'), ('рдц', 'рц'), ('ндш', 'нш'), ('гдт', 'гт'), ('лнц', 'нц'),
                          ('сч', 'щ'), ('жч', 'щ'), ('сш', 'ш'), ('зж', 'ж'),
-                         ('тс', 'ц'), ('тьс', 'ц'), ('тц', 'ц'), ('дс', 'ц'), ('дц', 'ц')]
+                         ('тс', 'ц'), ('тьс', 'ц'), ('тц', 'ц'), ('дс', 'ц'), ('дц', 'ц'),
+                         ('дз', 'z'), ('дж', 'j')]
         if len(prepared_word) > 2 and prepared_word[-2:] == 'го':
             prepared_word = prepared_word[:-2] + 'ва'
         for repl_from, repl_to in replace_pairs:
@@ -223,7 +224,5 @@ class Grapheme2Phoneme(RulesForGraphemes):
         return prepared_transcription
 
 
-# g = Grapheme2Phoneme()
-# g = Grapheme2Phoneme('Modern')
-# g = Grapheme2Phoneme('Classic')
-# print(g.phrase_to_phonemes('счастли+вая сли+ва'))
+g = Grapheme2Phoneme()
+print(g.phrase_to_phonemes('дзе+та-фу+нкция'))
