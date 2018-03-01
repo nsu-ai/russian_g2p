@@ -37,7 +37,7 @@ class RulesForGraphemes:
             'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
             'h': Consonant('GH', 'KH', 'GH', 'GH0', 'KH0', 'GH0'),
             'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
-            'z': Consonant('DS', 'TS', 'DZ', 'DS', 'TS', 'DZ'),
+            'z': Consonant('DZ', 'TS', 'DZ', 'DZ', 'TS', 'DZ'),
             'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
             'j': Consonant('DZH0', 'TSH0', 'DZH0', 'DZH0', 'TSH0', 'DZH0'),
             'ч': Consonant('TSH0', 'TSH0', 'DZH0', 'TSH0', 'TSH0', 'DZH0'),
