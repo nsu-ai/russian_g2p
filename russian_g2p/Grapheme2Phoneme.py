@@ -223,7 +223,3 @@ class Grapheme2Phoneme(RulesForGraphemes):
             previous_phoneme = current_phoneme
         return prepared_transcription
 
-
-g = Grapheme2Phoneme()
-s = "д'а+ртуа+"
-print(g.phrase_to_phonemes(s))
