@@ -127,7 +127,7 @@ class TableG2P:
                     'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
                     'h': Consonant('GH', 'KH', 'GH', 'GH0', 'KH0', 'GH0'),  # боh, аhа, буhалтер
                     'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
-                    'z': Consonant('DZ', 'TS', 'DZ', 'DZ', 'TS', 'DZ'),  # zета, гоzилла
+                    'z': Consonant('DZ', 'TS', 'DZ', 'DZ0', 'TS0', 'DZ0'),  # zета, гоzилла
                     'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
                     'j': Consonant('DZH', 'TSH', 'DZH', 'DZH', 'TSH', 'DZH'),  # маjонг, лоjия
                     'ч': Consonant('TSH0', 'TSH0', 'DZH0', 'TSH0', 'TSH0', 'DZH0'),
