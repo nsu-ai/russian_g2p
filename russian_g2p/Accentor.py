@@ -17,7 +17,7 @@ class Accentor:
         self.__russian_vowels = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е'}
         self.__homonyms = None
         self.__simple_words = None
-        self.__new_homonyms = set()
+        self.__new_homonyms = {}
         self.__new_simple_words = set()
         self.__bad_words = []
         self.__re_for_morphosplit = re.compile(r'[\,\s\|]+', re.U)
@@ -270,7 +270,7 @@ class Accentor:
 
     def do_accents(self, source_phrase: list, morphotags_of_phrase: list=None) -> list:
         prepared_phrase = []
-        assert type(source_phrase) == 'list', '`{0}`: the phrase should be of a list format!'.format(source_phrase)
+        #assert type(source_phrase) == 'list', '`{0}`: the phrase should be of a list format!'.format(source_phrase)
         for cur_word in source_phrase:
             assert len(cur_word.strip()) > 0, '`{0}`: this phrase is wrong!'.format(source_phrase)
             prepared_phrase.append(cur_word.strip().lower())
