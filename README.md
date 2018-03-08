@@ -13,7 +13,7 @@ pip3 install -r requirements.txt
 
 ### Installing and Usage
 
-#### Linux
+#### Linux / MacOS
 To install this project on your local machine, you should run the following commands in Terminal:
 
 ```
@@ -22,7 +22,7 @@ git init
 git clone https://github.com/nsu-ai/russian_g2p.git
 ```
 
-The project now is in YOUR_FOLDER.
+The project is now in YOUR_FOLDER.
 
 To use this project, run
 ```
@@ -78,7 +78,7 @@ python3 test.py
 
 * **Daniil Vodolazsky** - *Systematization of rules for Transcriptor and refactoring of code* - [s231644](https://github.com/s231644)
 
-See also the list of [contributors](https://github.com/russian_g2p/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/nsu-ai/russian_g2p/contributors) who participated in this project.
 
 ## License
 
