@@ -1,7 +1,8 @@
 import re
 import unittest
 
-from russian_g2p import Grapheme2Phoneme, Accentor
+from russian_g2p import Grapheme2Phoneme, Accentor, Preprocessor, Transcription
+
 
 
 class TestRussianG2P(unittest.TestCase):
@@ -473,7 +474,6 @@ class TestRussianG2P(unittest.TestCase):
 
 class TestRussianAccentor(unittest.TestCase):
     def setUp(self):
-        print('HEEEEY')
         self.__accentor = Accentor()
 
     def tearDown(self):
@@ -530,9 +530,9 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive06(self):
-        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-кому']
+        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-чему', 'красно-синий']
         target_variants = [
-            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-кому+']
+            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-чему+', 'кра+сно-си+ний']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
@@ -626,6 +626,69 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'a|b c|d|e'), 1.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|g h|i|j'), 0.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|b h|d|j'), 0.25, places=7)
+
+
+class TestPrep(unittest.TestCase):
+    def setUp(self):
+        self.__prep = Preprocessor.Preprocessor()
+
+    def tearDown(self):
+        del self.__prep
+
+    def test_silence(self):
+        source_phrase = ' - Нет, - сказал он (звали его Андреем Николаевичем).'
+        target_variants = ['<sil>', 'Нет', '<sil>', '<sil>', 'сказал', 'он', '<sil>', 'звали', 'его', 'Андреем',
+                           'Николаевичем', '<sil>'], ['uknown', 'R', 'uknown', 'uknown', 'Vmis-sma-p', 'P-3msnn',
+                                                      'uknown', 'Vmis-p-a-e', 'P-3msan', 'Npmsiy', 'Npmsiy', 'uknown']
+        real_variants = self.__prep.preprocessing(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_tags(self):
+        source_phrase = 'Я громко попросила младшего брата что-нибудь приготовить.'
+        target_variants = ['Я', 'громко', 'попросила', 'младшего', 'брата', 'чтонибудь', 'приготовить', '<sil>'],\
+                          ['P-1-snn', 'R', 'Vmis-sfa-p', 'Afpmsgf', 'Ncmsgy', 'P--msna', 'Vmn----a-p', 'uknown']
+        real_variants = self.__prep.preprocessing(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_nothing(self):
+        source_phrase = '...'
+        target_variants = ['<sil>'], ['uknown']
+        real_variants = self.__prep.preprocessing(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+
+class TestAll(unittest.TestCase):
+    def setUp(self):
+        self.__transcription = Transcription.Transcription()
+
+    def tearDown(self):
+        del self.__transcription
+
+    def test_normal(self):
+        source_phrase = 'Мама мыла раму'
+        target_variants = [['M', 'A0', 'M', 'A', 'M', 'Y0', 'L', 'A', 'R', 'A0', 'M', 'U']]
+        real_variants = self.__transcription.transcribe(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_symbols(self):
+        source_phrase = 'Мама мыла ра-му, а ты?! - Нет.'
+        target_variants = [['M', 'A0', 'M', 'A', 'M', 'Y0', 'L', 'A', 'R', 'A0', 'M', 'U'], ['A', 'T', 'Y0'],
+                           ['N0', 'E0', 'T']]
+        real_variants = self.__transcription.transcribe(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_nothing(self):
+        source_phrase = '...'
+        target_variants = []
+        real_variants = self.__transcription.transcribe(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_begin(self):
+        source_phrase = '- Ого'
+        target_variants = [['O', 'G', 'O0']]
+        real_variants = self.__transcription.transcribe(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
