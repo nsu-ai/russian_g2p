@@ -94,7 +94,7 @@ class Rule27:
         n = len(letters_list)
         case = ''
         if letters_list[cur_pos] == 'н':
-            if next_phoneme in {'TSH0', 'SH0', 'DZH0', 'ZH0', 'D0', 'T0', 'Z0', 'C0'}:
+            if next_phoneme in {'J0', 'TSH0', 'SH0', 'DZH0', 'ZH0', 'D0', 'T0', 'Z0', 'C0'}:
                 case = 'n_soft'
         elif letters_list[cur_pos] in {'с', 'з'}:
             if next_phoneme in {'N0', 'D0', 'T0', 'Z0', 'C0'}:

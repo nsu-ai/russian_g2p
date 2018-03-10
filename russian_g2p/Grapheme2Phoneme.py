@@ -41,33 +41,26 @@ class Grapheme2Phoneme(RulesForGraphemes):
         return self.__silence_name
 
     def load_exclusions_dictionary(self, file_name: str) -> dict:
-        words_and_transcriptions = dict()
+        words_and_words = dict()
         with codecs.open(file_name, mode='r', encoding='utf-8', errors='ignore') as dictionary_file:
             cur_line = dictionary_file.readline()
             cur_line_index = 1
             while len(cur_line):
-                error_message = "File `{0}`, line {1}: description of this word and its transcription is " \
+                error_message = "File `{0}`, line {1}: description of this word and its transformation is " \
                                 "incorrect!".format(file_name, cur_line_index)
                 prepared_line = cur_line.strip()
                 if len(prepared_line):
-                    words_of_line = prepared_line.split()
+                    words_of_line = prepared_line.lower().split()
                     nwords = len(words_of_line)
-                    assert nwords >= 2, error_message
-                    word_name = words_of_line[0].lower()
-                    assert any([c in (self.all_russian_letters | {'-', '+'}) for c in word_name]), error_message
-                    assert word_name not in words_and_transcriptions, error_message
-                    word_transcription = list()
-                    for cur_phoneme in words_of_line[1:]:
-                        prepared_phoneme = cur_phoneme.upper()
-                        # переписать исключения
-                        # assert prepared_phoneme in self.__russian_phonemes_set, error_message
-                        word_transcription.append(prepared_phoneme)
-                    words_and_transcriptions[word_name] = copy.copy(word_transcription)
+                    assert nwords == 2, error_message
+                    word_original, word_transformed = words_of_line
+                    assert any([c in (self.all_russian_letters | {'-', '+'}) for c in word_original]), error_message
+                    assert any([c in (self.all_russian_letters | {'-', '+'}) for c in word_transformed]), error_message
+                    assert len(word_original) > 0 and len(word_transformed) > 0, error_message
+                    words_and_words[word_original] = word_transformed
                 cur_line = dictionary_file.readline()
                 cur_line_index += 1
-        assert len(words_and_transcriptions) > 0, \
-            "File `{0}`: there are no words and their transcriptions!".format(file_name)
-        return words_and_transcriptions
+        return words_and_words
 
     def check_word(self, checked_word: str):
         assert len(checked_word) > 0, 'Checked word is empty string!'
@@ -90,7 +83,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
         error_message = '`{0}`: this word is incorrect!'.format(source_word)
         prepared_word = source_word.lower()
         if prepared_word in self.__exclusions_dictionary:
-            return self.__exclusions_dictionary[prepared_word]
+            prepared_word = self.__exclusions_dictionary[prepared_word]
         if '+' not in prepared_word:
             counter = len(prepared_word) - len(re.sub(r'[аоуэыияёею]', '', prepared_word))
             if counter > 1:
@@ -122,7 +115,6 @@ class Grapheme2Phoneme(RulesForGraphemes):
             if ind > 0 and letters_list[ind] in self.hard_and_soft_signs:
                 ind -= 1
                 continue
-            old_ind = ind
             if letters_list[ind] in self.vocals:
                 new_phonemes, ind = self.apply_rule_for_vocals(letters_list, ind)
             else:
@@ -130,23 +122,23 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 new_phonemes, ind = self.apply_rule_for_consonants(letters_list, next_phoneme, ind)
             transcription = new_phonemes + transcription
             next_phoneme = new_phonemes[0]
-            # assert ind <= old_ind, error_message # ?
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
         return self.__remove_repeats_from_transcription(transcription)
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
-        words_in_phrase = list()
-        source_phrase = source_phrase.lower()
-        source_phrase = source_phrase.replace('\'', '')
-        source_phrase = source_phrase.replace('-', ' ')
+        source_phrase = source_phrase.lower().replace('\'', '').replace('-', ' ')
         self.check_phrase(source_phrase)
         words_in_phrase = source_phrase.split()
         l = len(words_in_phrase)
+        for i in range(l):
+            if words_in_phrase[i] in self.__exclusions_dictionary:
+                words_in_phrase[i] = self.__exclusions_dictionary[words_in_phrase[i]]
+            words_in_phrase[i] = self.__prepare_word(words_in_phrase[i])
         long_word = words_in_phrase[0]
         for i in range(1, l):
             if words_in_phrase[i][0] in self.gen_vocals_soft:
-                if words_in_phrase[i][0] == 'и' and long_word[-1] in self.consonants | {'ъ'} - {'й', 'ь'}:
+                if words_in_phrase[i][0] == 'и' and long_word[-1] in (self.consonants - {'й', 'ь'}) | {'ъ'}:
                     words_in_phrase[i] = 'ы' + words_in_phrase[i][1:]
                 if words_in_phrase[i - 1].replace('+', '') in self.__function_words_1 | self.__function_words_2:
                     if words_in_phrase[i][0] in self.double_vocals:
@@ -156,7 +148,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 else:
                     long_word += 'ъъ'
             elif words_in_phrase[i][0] in self.gen_vocals_hard:
-                long_word += ''
+                long_word += 'ъ'
             elif words_in_phrase[i][0] in self.deaf_consonants:
                 long_word += 'ъ'
             elif words_in_phrase[i][0] in self.voiced_weak_consonants:
@@ -164,7 +156,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
             elif words_in_phrase[i][0] in self.voiced_strong_consonants:
                 long_word += ''
             else:
-                assert 0 == 1, "Incorrect word! " + words_in_phrase[i]
+                assert 0 == 1, error_message
             long_word += words_in_phrase[i]
         phrase_transcription = self.word_to_phonemes(long_word)
         return phrase_transcription
@@ -222,4 +214,3 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
-
