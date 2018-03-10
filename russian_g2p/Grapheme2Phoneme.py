@@ -148,11 +148,14 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 else:
                     long_word += 'ъъ'
             elif words_in_phrase[i][0] in self.gen_vocals_hard:
-                long_word += 'ъ'
+                if words_in_phrase[i - 1].replace('+', '') in self.__function_words_1 | self.__function_words_2:
+                    long_word += ''
+                else:
+                    long_word += 'ъ'
             elif words_in_phrase[i][0] in self.deaf_consonants:
                 long_word += 'ъ'
             elif words_in_phrase[i][0] in self.voiced_weak_consonants:
-                long_word += 'ъ'
+                long_word += 'ъъ'
             elif words_in_phrase[i][0] in self.voiced_strong_consonants:
                 long_word += ''
             else:
@@ -214,3 +217,9 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
+
+g = Grapheme2Phoneme()
+print(g.phrase_to_phonemes('дере+вьев ло+сь'))
+print(g.phrase_to_phonemes('жи+в ло+сь'))
+print(g.phrase_to_phonemes('ко+т мо+жет'))
+print(g.phrase_to_phonemes('тру+д мо+жет'))
