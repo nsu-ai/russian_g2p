@@ -12,15 +12,18 @@ with codecs.open('corpus/transcribed_voxforge_fragment_PUNCT.csv', mode='wb', en
 		prompts_line_clean = prompts_line.strip().lower()
 		id_name = prompts_line.split()[0].replace('/mfc/', '/wav/')
 		prompts_words = ' '.join(prompts_line_clean.split()[1:])
+		transcriptions = []
 		try:
-			transcription = g2p.phrase_to_phonemes(prompts_words)
-			with open('corpus/dict_voxforge_fragment_PUNCT', 'a') as f:
-				for word in prompts_words.split():
-					if word != 'sil':
-						f.writelines('{}\t{}\n'.format(word.replace('+', ''), ' '.join(g2p.word_to_phonemes(word))))
+			transcriptions = []
+			for phrase_part in prompts_words.split('sil'):
+				if phrase_part.strip() != '':
+					transcriptions.append(' '.join(g2p.phrase_to_phonemes(phrase_part.strip())))
+					with open('corpus/dict_voxforge_fragment_PUNCT', 'a') as f:
+						for word in phrase_part.split():
+							f.writelines('{}\t{}\n'.format(word.replace('+', ''), ' '.join(g2p.phrase_to_phonemes(word))))
 			wr.writerow([id_name,
 				prompts_words.replace('+', ''),
-				' '.join(transcription)])
+				'sil ' + ' sil '.join(transcriptions) + ' sil'])
 		except AssertionError:
+			print(id_name, prompts_words)
 			continue
-
