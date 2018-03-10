@@ -472,16 +472,15 @@ class TestRussianG2P(unittest.TestCase):
         self.assertFalse(self.__g2p.in_function_words_2('нибу+дь'))
 
 '''
-class TestRussianAccentor(unittest.TestCase):
+class TestRussianAccentor1(unittest.TestCase):
     def setUp(self):
-        print('HEEEEY')
         self.__accentor = Accentor()
 
     def tearDown(self):
         del self.__accentor
 
     def test_do_accents_positive01(self):
-        source_phrase = ['мама', 'мыла', 'раму']
+        source_phrase = [['мама'], ['мыла'], ['раму']]
         target_variants = [
             ['ма+ма', 'мы+ла', 'ра+му']
         ]
@@ -489,32 +488,26 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive02(self):
-        source_phrase = ['привет', 'кума']
-        morphotags = [
-            'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing',
-            'NOUN Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing'
-        ]
+        source_phrase_n_morphotags = [['привет', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
+            ['кума', 'NOUN Animacy=Anim|Case=Nom|Gender=Fem|Number=Sing']]
         target_variants = [
             ['приве+т', 'кума+']
         ]
-        real_variants = self.__accentor.do_accents(source_phrase, morphotags)
+        real_variants = self.__accentor.do_accents(source_phrase_n_morphotags)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive03(self):
-        source_phrase = ['подарок', 'для', 'кума']
-        morphotags = [
-            'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing',
-            'ADP _',
-            'NOUN Animacy=Anim|Case=Gen|Gender=Masc|Number=Sing'
-        ]
+        source_phrase_n_morphotags = [['подарок', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
+            ['для', 'ADP _'],
+            ['кума', 'NOUN Animacy=Anim|Case=Gen|Gender=Masc|Number=Sing']]
         target_variants = [
             ['пода+рок', 'для', 'ку+ма']
         ]
-        real_variants = self.__accentor.do_accents(source_phrase, morphotags)
+        real_variants = self.__accentor.do_accents(source_phrase_n_morphotags)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive04(self):
-        source_phrase = ['оружие', 'для', 'кубы']
+        source_phrase = [['оружие'], ['для'], ['кубы']]
         target_variants = [
             ['ору+жие', 'для', 'кубы']
         ]
@@ -522,34 +515,32 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive05(self):
-        source_phrase = ['фёдор', 'любит', 'кофе']
+        source_phrase = [['машинисты'], ['любят'], ['кофе']]
         target_variants = [
-            ['фё+дор', 'лю+бит', 'ко+фе']
+            ['машини+сты', 'лю+бят', 'ко+фе']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive06(self):
-        source_phrase = ['во-первых', 'кто-то', 'вот-вот', 'кое-кому']
+        source_phrase = [['во-первых'], ['кто-то'], ['вот-вот']]
         target_variants = [
-            ['во-пе+рвых', 'кто+-то', 'вот-во+т', 'кое-кому+']
+            ['во-пе+рвых', 'кто+-то', 'вот-во+т']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_negative01(self):
-        source_phrase = ['подарок', 'для', 'кума']
-        morphotags = [
-            'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing',
-            'NOUN Animacy=Anim|Case=Gen|Gender=Masc|Number=Sing'
-        ]
+        source_phrase_n_morphotags = [['подарок', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
+            ['для', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
+            ['кума']]
         target_err_msg = re.escape('`подарок для кума`: morphotags do not correspond to words!')
         with self.assertRaisesRegex(AssertionError, target_err_msg):
-            self.__accentor.do_accents(source_phrase, morphotags)
+            self.__accentor.do_accents(source_phrase_n_morphotags)
 
     def test_do_accents_negative02(self):
-        source_phrase = ['подарок', '', 'кума']
-        target_err_msg = re.escape('`[\'подарок\', \'\', \'кума\']`: this phrase is wrong!')
+        source_phrase = [['подарок'], [''], ['кума']]
+        target_err_msg = re.escape('`(\'подарок\', \'\', \'кума\')`: this phrase is wrong!')
         with self.assertRaisesRegex(AssertionError, target_err_msg):
             self.__accentor.do_accents(source_phrase)
 
@@ -626,6 +617,22 @@ class TestRussianAccentor(unittest.TestCase):
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'a|b c|d|e'), 1.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|g h|i|j'), 0.0, places=7)
         self.assertAlmostEqual(self.__accentor.calculate_morpho_similarity('a|b c|d|e', 'f|b h|d|j'), 0.25, places=7)
+
+class TestRussianAccentor2(unittest.TestCase):
+    def setUp(self):
+        self.__accentor = Accentor(mode='many')
+
+    def tearDown(self):
+        del self.__accentor
+
+    def test_do_accents_positive01(self):
+        source_phrase = [['оружие'], ['для'], ['кубы']]
+        target_variants = [
+            ['ору+жие', 'для', 'ку+бы'],
+            ['ору+жие', 'для', 'кубы+']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
 '''
 
 if __name__ == '__main__':
