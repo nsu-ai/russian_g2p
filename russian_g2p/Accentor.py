@@ -29,7 +29,7 @@ class Accentor:
         self.__homonyms = None
         self.__simple_words_dawg = None
         self.__function_words = None
-        self.__new_homonyms = set()
+        self.__new_homonyms = {}
         self.__new_simple_words = set()
         self.__bad_words = []
         self.__re_for_morphosplit = re.compile(r'[\,\s\|]+', re.U)
