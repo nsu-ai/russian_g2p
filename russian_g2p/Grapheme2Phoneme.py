@@ -127,7 +127,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
-        source_phrase = source_phrase.lower().replace('\'', '').replace('-', ' ')
+        source_phrase = source_phrase.lower().replace('-', ' ')
+        source_phrase = re.sub('[^a-zйцукенгшщзхъфывапролджэячсмитьбюё+ ]', '', source_phrase)
         self.check_phrase(source_phrase)
         words_in_phrase = source_phrase.split()
         l = len(words_in_phrase)

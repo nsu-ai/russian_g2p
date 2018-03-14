@@ -30,3 +30,12 @@ with codecs.open('/home/a117/Документы/Linguistics/russian_g2p/corpus/t
         except AssertionError:
             print(id_name, prompts_words)
             continue
+
+prompts_file = open('/home/a117/Документы/Linguistics/russian_g2p/corpus/wordlist')
+prompts_lines = prompts_file.readlines()
+with codecs.open('/home/a117/Документы/Linguistics/russian_g2p/corpus/wordlist_transcribed',
+                 mode='wb', encoding='utf-8') as f:
+    wr = csv.writer(f)
+    for prompts_line in prompts_lines:
+        transcriptions = ' '.join(g2p.phrase_to_phonemes(prompts_line))
+        f.write(prompts_line.replace('+', '').replace('\n', '') + ' ' + transcriptions + '\n')
