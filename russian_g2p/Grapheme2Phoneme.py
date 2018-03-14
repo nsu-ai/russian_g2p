@@ -74,9 +74,9 @@ class Grapheme2Phoneme(RulesForGraphemes):
         assert all([c in (self.all_russian_letters | {' ', '+', '-'} | {'s', 'i', 'l'})
                     for c in checked_phrase.lower()]), \
             '`{0}`: this phrase contains inadmissible characters!'.format(checked_phrase)
-        for cur_word in self.__re_for_phrase_split.split(checked_phrase.lower()):
-            assert (len(list(filter(lambda c: c in self.all_russian_letters, cur_word))) > 0) \
-                   or (cur_word.lower() == 'sil'), '`{0}`: this phrase is incorrect!'.format(checked_phrase)
+        #for cur_word in self.__re_for_phrase_split.split(checked_phrase.lower()):
+            #assert (len(list(filter(lambda c: c in self.all_russian_letters, cur_word))) > 0) \
+             #      or (cur_word.lower() == 'sil'), '`{0}`: this phrase is incorrect!'.format(checked_phrase)
 
     def word_to_phonemes(self, source_word: str) -> list:
         self.check_word(source_word)
@@ -218,8 +218,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
             previous_phoneme = current_phoneme
         return prepared_transcription
 
-g = Grapheme2Phoneme()
-print(g.phrase_to_phonemes('дере+вьев ло+сь'))
-print(g.phrase_to_phonemes('жи+в ло+сь'))
-print(g.phrase_to_phonemes('ко+т мо+жет'))
-print(g.phrase_to_phonemes('тру+д мо+жет'))
+#g = Grapheme2Phoneme()
+#print(g.phrase_to_phonemes('дере+вьев ло+сь'))
+#print(g.phrase_to_phonemes('жи+в ло+сь'))
+#print(g.phrase_to_phonemes('ко+т мо+жет'))
+#print(g.phrase_to_phonemes('тру+д мо+жет'))
