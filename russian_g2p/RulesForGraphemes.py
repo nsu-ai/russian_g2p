@@ -1,3 +1,6 @@
+import importlib
+
+
 class Consonant:
     def __init__(self, nh=None, dh=None, vh=None, ns=None, ds=None, vs=None):
         self.forms = dict(
@@ -69,238 +72,90 @@ class Phonetics:
         self.soft_consonants = {'й', 'ч', 'щ', 'g'}
 
 
-class Rule27:
-    def __init__(self):
-        self.mode = dict(
-            Classic=self.rule_27_classic,
-            Modern=self.rule_27_modern
-        )
+class RulesForGraphemes:
+    def __init__(self, users_mode: str='Modern'):
+        if users_mode == 'Modern':
+            from russian_g2p.modes.Modern import ModernMode as UsersMode
+        elif users_mode == 'Classic':
+            from russian_g2p.modes.Classic import ClassicMode as UsersMode
 
-    def rule_27_classic(self, letters_list: list, next_phoneme: str, cur_pos: int) -> str:
-        letters_for_rule_27 = {'н', 'т', 'с', 'д', 'з', 'л', 'м', 'п', 'б', 'в', 'ф'}
-        gen_vocals_soft = {'ь', 'я', 'ё', 'ю', 'е', 'и', 'я+', 'ё+', 'ю+', 'е+', 'и+'}
-        n = len(letters_list)
-        if cur_pos < n - 2 and letters_list[cur_pos] in {'н', 'т', 'с', 'д', 'з'} and \
-                letters_list[cur_pos + 1] in letters_for_rule_27 and \
-                letters_list[cur_pos + 2] in gen_vocals_soft:
-            case = 'n_soft'
-        elif letters_list[cur_pos] == 'н' and letters_list[cur_pos + 1] in {'ч', 'щ'}:
-            case = 'n_soft'
-        else:
-            case = ''
-        return case
+        self.mode = UsersMode()
 
-    def rule_27_modern(self, letters_list: list, next_phoneme: str, cur_pos: int) -> str:
-        n = len(letters_list)
-        case = ''
-        if letters_list[cur_pos] == 'н':
-            if next_phoneme in {'J0', 'TSH0', 'SH0', 'DZH0', 'ZH0', 'D0', 'T0', 'Z0', 'S0'}:
-                case = 'n_soft'
-        elif letters_list[cur_pos] in {'с', 'з'}:
-            if next_phoneme in {'D0', 'Z0'}:
-                case = 'v_soft'
-            elif next_phoneme in {'T0', 'S0'}:
-                case = 'd_soft'
-            elif next_phoneme in {'N0'}:
-                case = 'n_soft'
-        return case
-
-
-class TableG2P:
-    def __init__(self):
-        self.mode1 = dict(
-            Classic={
-                    'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0'),
-
-                    'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0'),
-                    'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0'),
-                    'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0'),
-                    'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0'),
-
-                    'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0'),
-                    'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0'),
-                    'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0'),
-                    'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0'),
-                    'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0'),
-                    'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0'),
-                    'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0'),
-                    'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0'),
-                    'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
-                    'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
-                    'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
-                    'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
-                    'h': Consonant('GH', 'KH', 'GH', 'GH0', 'KH0', 'GH0'),  # боh, аhа, буhалтер
-                    'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
-                    'z': Consonant('DZ', 'TS', 'DZ', 'DZ0', 'TS0', 'DZ0'),  # zета, гоzилла
-                    'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
-                    'j': Consonant('DZH', 'TSH', 'DZH', 'DZH', 'TSH', 'DZH'),  # маjонг, лоjия
-                    'ч': Consonant('TSH0', 'TSH0', 'DZH0', 'TSH0', 'TSH0', 'DZH0'),
-                    'g': Consonant('ZH0', 'SH0', 'ZH0', 'ZH0', 'SH0', 'ZH0'),  # доggи
-                    'щ': Consonant('SH0', 'SH0', 'ZH0', 'SH0', 'SH0', 'ZH0'),
-
-                    # считаем, что J0 уже добавили, где нужно
-                    'ё+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-                    'ю+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-                    'я+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-                    'е+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-
-                    'о+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-                    'у+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-                    'а+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-                    'э+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-                    'ы+': Vocal('Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0'),
-                    'и+': Vocal('I0', 'I0', 'I0', 'I0', 'Y0', 'Y0', 'I0', 'I0'),
-
-                    'ё': Vocal('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
-                    'ю': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-                    'я': Vocal('A', 'I', 'A', 'I', 'A', 'Y', 'A', 'I'),
-                    'е': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I'),
-
-                    'о': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-                    'у': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-                    'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-                    'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-                    'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-                    'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
-            },
-            Modern={
-                    'й': Consonant('J0', 'J0', 'J0', 'J0', 'J0', 'J0'),
-
-                    'л': Consonant('L', 'L', 'L', 'L0', 'L0', 'L0'),
-                    'м': Consonant('M', 'M', 'M', 'M0', 'M0', 'M0'),
-                    'н': Consonant('N', 'N', 'N', 'N0', 'N0', 'N0'),
-                    'р': Consonant('R', 'R', 'R', 'R0', 'R0', 'R0'),
-
-                    'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0'),
-                    'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0'),
-                    'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0'),
-                    'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0'),
-                    'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0'),
-                    'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0'),
-                    'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0'),
-                    'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0'),
-                    'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
-                    'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
-                    'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
-                    'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
-                    'h': Consonant('GH', 'KH', 'GH', 'GH0', 'KH0', 'GH0'),  # боh, аhа, буhалтер
-                    'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
-                    'z': Consonant('DZ', 'TS', 'DZ', 'DZ0', 'TS0', 'DZ0'),  # zета, гоzилла
-                    'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
-                    'j': Consonant('DZH', 'TSH', 'DZH', 'DZH', 'TSH', 'DZH'),  # маjонг, лоjия
-                    'ч': Consonant('TSH0', 'TSH0', 'DZH0', 'TSH0', 'TSH0', 'DZH0'),
-                    'g': Consonant('ZH0', 'SH0', 'ZH0', 'ZH0', 'SH0', 'ZH0'),  # доggи
-                    'щ': Consonant('SH0', 'SH0', 'ZH0', 'SH0', 'SH0', 'ZH0'),
-
-                    # считаем, что J0 уже добавили, где нужно
-                    'ё+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-                    'ю+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-                    'я+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-                    'е+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-
-                    'о+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),
-                    'у+': Vocal('U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0', 'U0'),
-                    'а+': Vocal('A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0', 'A0'),
-                    'э+': Vocal('E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0', 'E0'),
-                    'ы+': Vocal('Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0', 'Y0'),
-                    'и+': Vocal('I0', 'I0', 'I0', 'I0', 'Y0', 'Y0', 'I0', 'I0'),
-
-                    'ё': Vocal('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
-                    'ю': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-                    'я': Vocal('A', 'I', 'A', 'I', 'A', 'Y', 'A', 'I'),
-                    'е': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I'),
-
-                    'о': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-                    'у': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-                    'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
-                    'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-                    'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
-                    'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
-            }
-        )
-
-
-class RulesForGraphemes(Phonetics, TableG2P, Rule27):
-    def __init__(self, users_mode: str):
-        Phonetics.__init__(self)
-        TableG2P.__init__(self)
-        Rule27.__init__(self)
-        self.users_mode = users_mode
-
-    def apply_rule_for_vocals(self, letters_list: list, cur_pos: int) -> tuple:
+    def apply_rule_for_vocals(self, letters_list: list, cur_pos: int) -> list:
         new_phonemes_list = list()
         case = 0
-        if (cur_pos == 0) or (letters_list[cur_pos - 1] in self.vocals | self.hard_and_soft_signs) \
-                or (letters_list[cur_pos - 1] not in self.all_russian_letters):
-            if letters_list[cur_pos] in self.double_vocals:
+        if (cur_pos == 0) or (letters_list[cur_pos - 1] in self.mode.vocals | self.mode.hard_and_soft_signs) \
+                or (letters_list[cur_pos - 1] not in self.mode.all_russian_letters):
+            if letters_list[cur_pos] in self.mode.double_vocals:
                 new_phonemes_list.append('J0')
             if cur_pos + 1 >= len(letters_list):
                 case = 1
             else:
                 case = 2
-        elif letters_list[cur_pos - 1] in self.soft_consonants:
+        elif letters_list[cur_pos - 1] in self.mode.soft_consonants:
             if cur_pos + 1 >= len(letters_list):
                 case = 3
             else:
                 case = 4
-        elif letters_list[cur_pos - 1] in self.hard_consonants:
+        elif letters_list[cur_pos - 1] in self.mode.hard_consonants:
             if cur_pos + 1 >= len(letters_list):
                 case = 5
             else:
                 case = 6
-        elif letters_list[cur_pos - 1] in self.hardsoft_consonants:
+        elif letters_list[cur_pos - 1] in self.mode.hardsoft_consonants:
             if cur_pos + 1 >= len(letters_list):
                 case = 7
             else:
                 case = 8
         else:
             assert 0 == 1, "Incorrect word! " + ''.join(letters_list)
-        new_phonemes_list.append(self.mode1[self.users_mode][letters_list[cur_pos]].forms['case' + str(case)])
-        return new_phonemes_list, cur_pos - 1
+        new_phonemes_list.append(self.mode.TableG2P[letters_list[cur_pos]].forms['case' + str(case)])
+        return new_phonemes_list
 
-    def apply_rule_for_consonants(self, letters_list: list, next_phoneme: str, cur_pos: int) -> tuple:
+    def apply_rule_for_consonants(self, letters_list: list, next_phoneme: str, cur_pos: int) -> list:
         new_phonemes_list = list()
         n = len(letters_list)
-
         # твердость / мягкость
-        if cur_pos < n - 1 and letters_list[cur_pos + 1] in self.gen_vocals_soft:
+        if cur_pos < n - 1 and letters_list[cur_pos + 1] in self.mode.gen_vocals_soft:
             hardsoft = 'soft'
         else:
             hardsoft = 'hard'
-        if letters_list[-1] in self.hard_and_soft_signs:
+        if letters_list[-1] in self.mode.hard_and_soft_signs:
             n -= 1
-
         # конец слова
         if cur_pos == n - 1:
             if next_phoneme == 'sil':
                 voice = 'd'
-            elif next_phoneme in self.deaf_phonemes:
+            elif next_phoneme in self.mode.deaf_phonemes:
                 voice = 'd'
-            elif next_phoneme in self.voiced_weak_phonemes:
+            elif next_phoneme in self.mode.voiced_weak_phonemes:
                 voice = 'd'
-            elif next_phoneme in self.voiced_strong_phonemes:
+            elif next_phoneme in self.mode.voiced_strong_phonemes:
                 voice = 'v'
-            elif next_phoneme in self.vocals_phonemes:
+            elif next_phoneme in self.mode.vocals_phonemes:
                 voice = 'd'
             else:
+                voice = ''
                 assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
             case = voice + '_' + hardsoft
         # внутри слова
         else:
-            case = self.mode[self.users_mode](letters_list, next_phoneme, cur_pos)
+            case = self.mode.rule_27(letters_list, next_phoneme, cur_pos)
             if len(case) == 0:
                 if next_phoneme == 'sil':
+                    voice = ''
                     assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
-                elif next_phoneme in self.deaf_phonemes:
+                elif next_phoneme in self.mode.deaf_phonemes:
                     voice = 'd'
-                elif next_phoneme in self.voiced_weak_phonemes:
+                elif next_phoneme in self.mode.voiced_weak_phonemes:
                     voice = 'n'
-                elif next_phoneme in self.voiced_strong_phonemes:
+                elif next_phoneme in self.mode.voiced_strong_phonemes:
                     voice = 'v'
-                elif next_phoneme in self.vocals_phonemes:
+                elif next_phoneme in self.mode.vocals_phonemes:
                     voice = 'n'
                 else:
+                    voice = ''
                     assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
                 case = voice + '_' + hardsoft
-        new_phonemes_list.append(self.mode1[self.users_mode][letters_list[cur_pos]].forms[case])
-        return new_phonemes_list, cur_pos - 1
+        new_phonemes_list.append(self.mode.TableG2P[letters_list[cur_pos]].forms[case])
+        return new_phonemes_list
