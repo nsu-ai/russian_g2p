@@ -177,7 +177,9 @@ class Grapheme2Phoneme(RulesForGraphemes):
                          ('сч', 'щ'), ('жч', 'щ'), ('сш', 'ш'), ('зж', 'ж'),
                          ('тс', 'ц'), ('тьс', 'ц'), ('тц', 'ц'), ('дс', 'ц'), ('дц', 'ц'),
                          ('дз', 'z'), ('дж', 'j')]
-        if len(prepared_word) > 2 and prepared_word[-2:] == 'го' and prepared_word[-3] in {'о', 'е', 'о+', 'е+'}:
+        if len(prepared_word) > 2 and prepared_word[-2:] == 'го' and prepared_word[-3] in {'о', 'е'}:
+            prepared_word = prepared_word[:-2] + 'ва'
+        if len(prepared_word) > 3 and prepared_word[-2:] == 'го' and prepared_word[-3] in {'о+', 'е+'}:
             prepared_word = prepared_word[:-2] + 'ва'
         for repl_from, repl_to in replace_pairs:
             prepared_word = prepared_word.replace(repl_from, repl_to)
