@@ -31,8 +31,8 @@ class Phonetics:
                               'Kl', 'K0l', 'Pl', 'P0l', 'Sl', 'S0l', 'Tl', 'T0l', 'Fl', 'F0l', 'KHl', 'KH0l',
                               'TSl', 'TS0l', 'TSHl', 'TSH0l', 'SHl', 'SH0l'}
 
-        self.russian_phonemes_set = self.vocals_phonemes | self.voiced_weak_phonemes | \
-                                    self.voiced_strong_phonemes | self.deaf_phonemes
+        self.russian_phonemes_set = self.vocals_phonemes | self.voiced_weak_phonemes |\
+                                    self.voiced_strong_phonemes | self.deaf_phonemes | {'sil'}
 
         self.all_russian_letters = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о',
                                     'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
@@ -261,55 +261,46 @@ class RulesForGraphemes(Phonetics, TableG2P, Rule27):
     def apply_rule_for_consonants(self, letters_list: list, next_phoneme: str, cur_pos: int) -> tuple:
         new_phonemes_list = list()
         n = len(letters_list)
+
+        # твердость / мягкость
+        if cur_pos < n - 1 and letters_list[cur_pos + 1] in self.gen_vocals_soft:
+            hardsoft = 'soft'
+        else:
+            hardsoft = 'hard'
+        if letters_list[-1] in self.hard_and_soft_signs:
+            n -= 1
+
+        # конец слова
         if cur_pos == n - 1:
-            case = 'd_hard'
+            if next_phoneme == 'sil':
+                voice = 'd'
+            elif next_phoneme in self.deaf_phonemes:
+                voice = 'd'
+            elif next_phoneme in self.voiced_weak_phonemes:
+                voice = 'd'
+            elif next_phoneme in self.voiced_strong_phonemes:
+                voice = 'v'
+            elif next_phoneme in self.vocals_phonemes:
+                voice = 'd'
+            else:
+                assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
+            case = voice + '_' + hardsoft
+        # внутри слова
         else:
             case = self.mode[self.users_mode](letters_list, next_phoneme, cur_pos)
-            if len(case) > 0:
-                pass
-            elif letters_list[cur_pos + 1] == 'ь':
-                if next_phoneme == '':
-                    case = 'd_soft'
+            if len(case) == 0:
+                if next_phoneme == 'sil':
+                    assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
+                elif next_phoneme in self.deaf_phonemes:
+                    voice = 'd'
+                elif next_phoneme in self.voiced_weak_phonemes:
+                    voice = 'n'
+                elif next_phoneme in self.voiced_strong_phonemes:
+                    voice = 'v'
+                elif next_phoneme in self.vocals_phonemes:
+                    voice = 'n'
                 else:
-                    if cur_pos < n - 2 and letters_list[cur_pos + 2] == 'ъ':
-                        case = 'd_soft'
-                    elif next_phoneme in self.deaf_phonemes:
-                        case = 'd_soft'
-                    elif next_phoneme in self.vocals_phonemes:
-                        case = 'd_soft'
-                    elif next_phoneme in self.voiced_weak_phonemes:
-                        case = 'n_soft'
-                    elif next_phoneme in self.voiced_strong_phonemes:
-                        case = 'v_soft'
-                    else:
-                        assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
-            elif letters_list[cur_pos + 1] == 'ъ':
-                if next_phoneme == '':
-                    case = 'd_hard'
-                else:
-                    if cur_pos < n - 2 and letters_list[cur_pos + 2] == 'ъ':
-                        case = 'd_hard'
-                    elif next_phoneme in self.deaf_phonemes:
-                        case = 'd_hard'
-                    elif next_phoneme in self.vocals_phonemes:
-                        case = 'd_hard'
-                    elif next_phoneme in self.voiced_weak_phonemes:
-                        case = 'n_hard'
-                    elif next_phoneme in self.voiced_strong_phonemes:
-                        case = 'v_hard'
-                    else:
-                        assert 0 == 1, "Incorrect word! " + letters_list[cur_pos]
-            elif next_phoneme in self.deaf_phonemes:
-                case = 'd_hard'
-            elif next_phoneme in self.voiced_weak_phonemes:
-                case = 'n_hard'
-            elif next_phoneme in self.voiced_strong_phonemes:
-                case = 'v_hard'
-            elif letters_list[cur_pos + 1] in self.gen_vocals_soft - {'ь'}:
-                case = 'n_soft'
-            elif letters_list[cur_pos + 1] in self.gen_vocals_hard - {'ъ'}:
-                case = 'n_hard'
-            else:
-                assert 0 == 1, "Incorrect word! " + ''.join(letters_list)
+                    assert 0 == 1, "Incorrect word! " + ' '.join(letters_list)
+                case = voice + '_' + hardsoft
         new_phonemes_list.append(self.mode1[self.users_mode][letters_list[cur_pos]].forms[case])
         return new_phonemes_list, cur_pos - 1

@@ -284,7 +284,7 @@
 бабушка B A0 B U SH K A
 бабушки B A0 B U SH K0 I
 бабушку B A0 B U SH K U
-бабьих B A0 P0 I KH
+бабьих B A0 B0 I KH
 баз B A0 S
 базу B A0 Z U
 байки B A0 J0 K0 I
@@ -607,7 +607,7 @@
 бицикл B0 I TS Y0 K L
 бичами B0 I TSH0 A0 M0 I
 благ B L A0 K
-благо B L A0 V A
+благо B L A0 G A
 благовест B L A0 G A V0 I S T
 блад B L A0 T
 блада B L A0 D A
@@ -698,7 +698,7 @@
 божиих B O0 ZH Y I KH
 божий B O0 ZH Y J0
 божия B O0 ZH Y J0 A
-божьим B O0 SH I M
+божьим B O0 ZH I M
 бойкий B O0 J0 K0 I J0
 бойко B O0 J0 K A
 бойня B O0 J0 N0 A
@@ -783,7 +783,7 @@
 большинства B A L0 SH Y N S T V A0
 большинство B A L0 SH Y N S T V O0
 большинством B A L0 SH Y N S T V O0 M
-большого B A L0 SH O0 V A
+большого B A L0 SH O0 G A
 большое B A L0 SH O0 J0 I
 большой B A L0 SH O0 J0
 большою B A L0 SH O0 J0 U
@@ -1042,7 +1042,7 @@
 васильевич V A0 S0 I0 L0 J0 I V0 I TSH0
 васька V A0 S0 K A
 вася V A0 S0 A
-вася-кадет V A0 S0 I K A D0 I T
+вася-кадет V A0 S0 A K A D0 I T
 ваш V A0 SH
 ваша V A0 SH A
 ваше V A0 SH Y
@@ -1842,7 +1842,7 @@
 восьми V A S0 M0 I0
 восьмидесятом V A S0 M0 I D0 I S0 A0 T A M
 восьмисот V A S0 M0 I S O0 T
-восьмого V A S0 M O0 V A
+восьмого V A S0 M O0 G A
 восьмой V A S0 M O0 J0
 вот-вот V A T V O0 T
 вошедши V A SH E0 T SH Y
@@ -2025,7 +2025,7 @@
 второй F T O0 R A J0
 вторая F T A R A0 J0 A
 вторично F T A R0 I0 TSH0 N A
-второго F T A R O0 V A
+второго F T A R O0 G A
 второе F T A R O0 J0 I
 втором F T A R O0 M
 второму F T A R O0 M U
@@ -2428,7 +2428,7 @@
 гениальный G0 I N0 I A0 L0 N Y J0
 геннельхольм G0 I N0l I L0 KH O0 L0 M
 генриэттой G0 I N R0 I E0 Tl A J0
-генэго G0 I N E0 V A
+генэго G0 I N E0 G A
 георгия G0 I O0 R G0 I J0 A
 геометрически G0 I A M0 I T R0 I0 TSH0 I S K0 I
 геометрическими G0 I A M0 I T R0 I0 TSH0 I S K0 I M0 I
@@ -2555,7 +2555,7 @@
 говит G O0 V0 I T
 говор G O0 V A R
 гоголь G O0 G A L0
-гоголя-моголя G O0 G A L0 I M O0 G A L0 A
+гоголя-моголя G O0 G A L0 A M O0 G A L0 A
 год G O0 T
 года G O0 D A
 годы G O0 D Y
@@ -3242,7 +3242,7 @@
 деревня D0 I R0 E0 V N0 A
 деревьев D0 I R0 E0 V0 J0 I F
 деревья D0 I R0 E0 V0 J0 A
-деревья-то D0 I R0 E0 V0 J0 I T A
+деревья-то D0 I R0 E0 V0 J0 A T A
 деревьям D0 I R0 E0 V0 J0 I M
 деревьями D0 I R0 E0 V0 J0 I M0 I
 деревьях D0 I R0 E0 V0 J0 I KH
@@ -3405,7 +3405,7 @@
 долгая D O0 L G A J0 A
 долгий D O0 L G0 I J0
 долгим D O0 L G0 I M
-долго D O0 L V A
+долго D O0 L G A
 долгое D O0 L G A J0 I
 долгой D O0 L G A J0
 долгом D O0 L G A M
@@ -3524,7 +3524,7 @@
 должны D A L ZH N Y0
 долине D A L0 I0 N0 I
 долотами D A L A T A0 M0 I
-дольская-каучукова D O0 L0 S K A J0 I K A U TSH0 U0 K A V A
+дольская-каучукова D O0 L0 S K A J0 A K A U TSH0 U0 K A V A
 дома D A M A0
 домам D A M A0 M
 домами D A M A0 M0 I
@@ -3636,7 +3636,7 @@
 дрожью D R O0 ZH J0 U
 дровами D R A V A0 M0 I
 дровосеков D R A V A S0 E0 K A F
-дровяного D R A V0 I N O0 V A
+дровяного D R A V0 I N O0 G A
 дрожал D R A ZH A0 L
 дрожала D R A ZH A0 L A
 дрожали D R A ZH A0 L0 I
@@ -3662,7 +3662,7 @@
 другим D R U G0 I0 M
 другими D R U G0 I0 M0 I
 других D R U G0 I0 KH
-другого D R U G O0 V A
+другого D R U G O0 G A
 другое D R U G O0 J0 I
 другой D R U G O0 J0
 другом D R U G O0 M
@@ -3715,7 +3715,7 @@
 дурак D U R A0 K
 дурацкие D U R A0 TS K0 I J0 I
 дурака D U R A K A0
-дурного D U R N O0 V A
+дурного D U R N O0 G A
 дурное D U R N O0 J0 I
 дурной D U R N O0 J0
 дурные D U R N Y0 J0 I
@@ -3983,7 +3983,7 @@
 жестокий ZH Y S T O0 K0 I J0
 жестокостью ZH Y S T O0 K A S0 T0 J0 U
 жесточайший ZH Y S T A TSH0 A0 J0 SH Y J0
-жестяного ZH Y S0 T0 I N O0 V A
+жестяного ZH Y S0 T0 I N O0 G A
 жестяном ZH Y S0 T0 I N O0 M
 жив ZH Y0 F
 живо ZH Y0 V A
@@ -4011,7 +4011,7 @@
 жиакомо ZH Y A K O0 M A
 живая ZH Y V A0 J0 A
 живейшую ZH Y V0 E0 J0 SH U J0 U
-живого ZH Y V O0 V A
+живого ZH Y V O0 G A
 живое ZH Y V O0 J0 I
 живой ZH Y V O0 J0
 живот ZH Y V O0 T
@@ -4260,7 +4260,7 @@
 задержав Z A D0 I R ZH A0 F
 задержал Z A D0 I R ZH A0 L
 задирал Z A D0 I R A0 L
-задолго Z A D O0 L V A
+задолго Z A D O0 L G A
 задрался Z A D R A0 L S0 A
 задрожал Z A D R A ZH A0 L
 задумавшись Z A D U0 M A F SH Y S0
@@ -4767,7 +4767,7 @@
 злоба Z L O0 B A
 злобным Z L O0 B N Y M
 злобу Z L O0 B U
-злого Z L O0 V A
+злого Z L O0 G A
 злое Z L O0 J0 I
 злой Z L O0 J0
 злом Z L O0 M
@@ -4868,7 +4868,7 @@
 золотистые Z A L A T0 I0 S T Y J0 I
 золотистым Z A L A T0 I0 S T Y M
 золотит Z A L A T0 I0 T
-золотого Z A L A T O0 V A
+золотого Z A L A T O0 G A
 золотой Z A L A T O0 J0
 золотом Z A L A T O0 M
 золотую Z A L A T U0 J0 U
@@ -4901,7 +4901,7 @@
 зубам Z U B A0 M
 зубами Z U B A0 M0 I
 зубах Z U B A0 KH
-зубного Z U B N O0 V A
+зубного Z U B N O0 G A
 зубной Z U B N O0 J0
 зубов Z U B O0 F
 зубочистки Z U B A TSH0 I0 S T K0 I
@@ -5163,7 +5163,7 @@
 инженер I N ZH Y N0 E0 R
 инженера I N ZH Y N0 E0 R A
 инженером-механиком I N ZH Y N0 E0 R A M0l I KH A0 N0 I K A M
-иного I N O0 V A
+иного I N O0 G A
 иной I N O0 J0
 иногда I N A G D A0
 инородного I N A R O0 D N A V A
@@ -5444,8 +5444,8 @@
 кайонскую K A J0 O0 N S K U J0 U
 какао K A K Al
 какая K A K A0 J0 A
-какая-нибудь K A K A0 J0 I N0 I B U T0
-какая-то K A K A0 J0 I T A
+какая-нибудь K A K A0 J0 A N0 I B U T0
+какая-то K A K A0 J0 A T A
 какие K A K0 I0 J0 I
 какие-нибудь K A K0 I0 J0 I N0 I B U T0
 какие-то K A K0 I0 J0 I T A
@@ -5458,9 +5458,9 @@
 каких-либо K A K0 I0 KH L0 I B A
 каких-нибудь K A K0 I0 KH N0 I B U T0
 каких-то K A K0 I0 KH T A
-какого K A K O0 V A
-какого-нибудь K A K O0 V A N0 I B U T0
-какого-то K A K O0 V A T A
+какого K A K O0 G A
+какого-нибудь K A K O0 G A N0 I B U T0
+какого-то K A K O0 G A T A
 какое K A K O0 J0 I
 какой K A K O0 J0
 какой-нибудь K A K O0 J0 N0 I B U T0
@@ -5744,7 +5744,7 @@
 кожей K O0 ZH Y J0
 кожи K O0 ZH Y
 козий K O0 Z0 I J0
-козьим K O0 S0 I M
+козьим K O0 Z0 I M
 коих K O0 I KH
 колец K O0 L0 I TS
 колокол K O0 L A K A L
@@ -5865,7 +5865,7 @@
 колонизации K A L A N0 I Z A0 TS Y I
 колоннады K A L A Nl A0 D Y
 колпачком K A L P A TSH0 K O0 M
-колыго K A L Y0 V A
+колыго K A L Y0 G A
 колышется K A L Y0 SH Y TS A
 колышутся K A L Y0 SH U TS A
 кольцо K A L0 TS O0
@@ -6053,7 +6053,7 @@
 коснулось K A S N U0 L A S0
 коснулся K A S N U0 L S0 A
 коснуться K A S N U0 TS A
-косого K A S O0 V A
+косого K A S O0 G A
 косой K A S O0 J0
 костей K A S0 T0 E0 J0
 костлявое K A S L0 A0 V A J0 I
@@ -6526,7 +6526,7 @@
 легкомысленного L0 I Kl A M Y0 S L0 I Nl A V A
 легкомыслию L0 I Kl A M Y0 S L0 I J0 U
 легла L0 I G L A0
-ледяного L0 I D0 I N O0 V A
+ледяного L0 I D0 I N O0 G A
 ледяной L0 I D0 I N O0 J0
 ледяную L0 I D0 I N U0 J0 U
 ледяным L0 I D0 I N Y0 M
@@ -6824,7 +6824,7 @@
 любовной L0 U B O0 V N A J0
 любовь L0 U B O0 F0
 любовью L0 U B O0 V0 J0 U
-любого L0 U B O0 V A
+любого L0 U B O0 G A
 любом L0 U B O0 M
 любому L0 U B O0 M U
 любовался L0 U B A V A0 L S0 A
@@ -7394,7 +7394,7 @@
 молочно-белые M A L O0 TSH0 N A B0 E0 L Y J0 I
 молодая M A L A D A0 J0 A
 молодец M A L A D0 E0 TS
-молодого M A L A D O0 V A
+молодого M A L A D O0 G A
 молодое M A L A D O0 J0 I
 молодой M A L A D O0 J0
 молодом M A L A D O0 M
@@ -7533,7 +7533,7 @@
 мужикам M U ZH Y K A0 M
 мужики M U ZH Y K0 I0
 мужиков M U ZH Y K O0 F
-мужского M U SH S K O0 V A
+мужского M U SH S K O0 G A
 мужской M U SH S K O0 J0
 мужчин M U SH0 I0 N
 мужчина M U SH0 I0 N A
@@ -7733,7 +7733,7 @@
 надир N A D0 I0 R
 надлежит N A D L0 I ZH Y0 T
 надменно-гневная N A D M0 E0 Nl A G N0 E0 V N A J0 A
-надолго N A D O0 L V A
+надолго N A D O0 L G A
 надоело N A D A J0 E0 L A
 надоедать N A D A J0 I D A0 T0
 надоедают N A D A J0 I D A0 J0 U T
@@ -8127,7 +8127,7 @@
 небольшая N0 I B A L0 SH A0 J0 A
 небольшим N0 I B A L0 SH Y0 M
 небольших N0 I B A L0 SH Y0 KH
-небольшого N0 I B A L0 SH O0 V A
+небольшого N0 I B A L0 SH O0 G A
 небольшое N0 I B A L0 SH O0 J0 I
 небольшой N0 I B A L0 SH O0 J0
 небольшом N0 I B A L0 SH O0 M
@@ -8196,7 +8196,7 @@
 неделей N0 I D0 E0 L0 I J0
 недель N0 I D0 E0 L0
 неделю N0 I D0 E0 L0 U
-недолго N0 I D O0 L V A
+недолго N0 I D O0 L G A
 недоверчивая N0 I D A V0 E0 R TSH0 I V A J0 A
 недоверчивые N0 I D A V0 E0 R TSH0 I V Y J0 I
 недовольная N0 I D A V O0 L0 N A J0 A
@@ -8220,13 +8220,13 @@
 недуг N0 I D U0 K
 недурно N0 I D U0 R N A
 неестественно N0 I J0 I S0 T0 E0 S T V0 I Nl A
-неживого N0 I ZH Y V O0 V A
+неживого N0 I ZH Y V O0 G A
 нежилыми N0 I ZH Y L Y0 M0 I
 нежно N0 I ZH N O0
-нежно-голубого N0 I ZH N O0 G A L U B O0 V A
+нежно-голубого N0 I ZH N O0 G A L U B O0 G A
 незабытые N0 I Z A B Y0 T Y J0 I
 независимость N0 I Z A V0 I0 S0 I M A S0 T0
-незадолго N0 I Z A D O0 L V A
+незадолго N0 I Z A D O0 L G A
 незаконную N0 I Z A K O0 Nl U J0 U
 незаметна N0 I Z A M0 E0 T N A
 незаметных N0 I Z A M0 E0 T N Y KH
@@ -8285,7 +8285,7 @@
 немного N0 I M N O0 G A
 немножко N0 I M N O0 SH K A
 немногословен N0 I M N A G A S L O0 V0 I N
-немого N0 I M O0 V A
+немого N0 I M O0 G A
 немодно N0 I M O0 D N A
 немое N0 I M O0 J0 I
 немой N0 I M O0 J0
@@ -8297,7 +8297,7 @@
 немыслимый N0 I M Y0 S L0 I M Y J0
 ненавидел N0 I N A V0 I0 D0 I L
 ненавистных N0 I N A V0 I0 S N Y KH
-ненадолго N0 I N A D O0 L V A
+ненадолго N0 I N A D O0 L G A
 ненадёжная N0 I N A D0 O0 ZH N A J0 A
 ненадёжно N0 I N A D0 O0 ZH N A
 ненадёжным N0 I N A D0 O0 ZH N Y M
@@ -8498,7 +8498,7 @@
 никак N0 I K A0 K
 никакая N0 I K A K A0 J0 A
 никаких N0 I K A K0 I0 KH
-никакого N0 I K A K O0 V A
+никакого N0 I K A K O0 G A
 никакой N0 I K A K O0 J0
 никем N0 I K0 E0 M
 никитич N0 I K0 I0 T0 I TSH0
@@ -8609,7 +8609,7 @@
 ночам N A TSH0 A0 M
 ночевал N A TSH0 I V A0 L
 ночная N A TSH0 N A0 J0 A
-ночного N A TSH0 N O0 V A
+ночного N A TSH0 N O0 G A
 ночной N A TSH0 N O0 J0
 ночном N A TSH0 N O0 M
 ночные N A TSH0 N Y0 J0 I
@@ -9647,7 +9647,7 @@
 отсюда A TS U0 D A
 отсёк A TS O0 K
 оттенка A T0l E0 N K A
-оттого A Tl A G O0
+оттого A Tl A V O0
 оттолкнуть A Tl A L K N U0 T0
 оттопырив A Tl A P Y0 R0 I F
 оттуда A Tl U0 D A
@@ -9704,7 +9704,7 @@
 очевидно A TSH0 I V0 I0 D N A
 очевидной A TSH0 I V0 I0 D N A J0
 очевидцев A TSH0 I V0 I0 TS Y F
-очередного A TSH0 I R0 I D N O0 V A
+очередного A TSH0 I R0 I D N O0 G A
 очередной A TSH0 I R0 I D N O0 J0
 очеретяных A TSH0 I R0 I T0 A0 N Y KH
 очертания A TSH0 I R T A0 N0 I J0 A
@@ -10807,7 +10807,7 @@
 пожитки P A ZH Y0 T K0 I
 поживать P A ZH Y V A0 T0
 пожилая P A ZH Y L A0 J0 A
-пожилого P A ZH Y L O0 V A
+пожилого P A ZH Y L O0 G A
 пожилой P A ZH Y L O0 J0
 пожилым P A ZH Y L Y0 M
 пожимали P A ZH Y M A0 L0 I
@@ -11289,7 +11289,7 @@
 порошок P A R A SH O0 K
 портки P A R T K0 I0
 портмоне P A R T M A N0 E0
-портного P A R T N O0 V A
+портного P A R T N O0 G A
 портрет P A R T R0 E0 T
 портрете P A R T R0 E0 T0 I
 портреты P A R T R0 E0 T Y
@@ -12487,7 +12487,7 @@
 простите P R A S0 T0 I0 T0 I
 простить P R A S0 T0 I0 T0
 простирались P R A S0 T0 I R A0 L0 I S0
-простого P R A S T O0 V A
+простого P R A S T O0 G A
 простое P R A S T O0 J0 I
 простой P R A S T O0 J0
 просторами P R A S T O0 R A M0 I
@@ -12678,7 +12678,7 @@
 пустилась P U S0 T0 I0 L A S0
 пустились P U S0 T0 I0 L0 I S0
 пустился P U S0 T0 I0 L S0 A
-пустого P U S T O0 V A
+пустого P U S T O0 G A
 пустой P U S T O0 J0
 пустом P U S T O0 M
 пустые P U S T Y0 J0 I
@@ -13445,7 +13445,7 @@
 родилась R A D0 I L A0 S0
 родная R A D N A0 J0 A
 родни R A D N0 I0
-родного R A D N O0 V A
+родного R A D N O0 G A
 родной R A D N O0 J0
 родном R A D N O0 M
 родному R A D N O0 M U
@@ -13551,7 +13551,7 @@
 рукопожатием R U K A P A ZH A0 T0 I J0 I M
 рукопожатий R U K A P A ZH A0 T0 I J0
 рукотворным R U K A T V O0 R N Y M
-рулевого R U L0 I V O0 V A
+рулевого R U L0 I V O0 G A
 рулевой R U L0 I V O0 J0
 рулём R U L0 O0 M
 румяная R U M0 A0 N A J0 A
@@ -13569,7 +13569,7 @@
 рыбок R Y0 B A K
 рыбу R Y0 B U
 рыбы R Y0 B Y
-рыбьих R Y0 P0 I KH
+рыбьих R Y0 B0 I KH
 рыжая R Y0 ZH A J0 A
 рыжие R Y0 ZH Y J0 I
 рыжий R Y0 ZH Y J0
@@ -13585,7 +13585,7 @@
 рыбацкая R Y B A0 TS K A J0 A
 рыбацкой R Y B A0 TS K A J0
 рыдание R Y D A0 N0 I J0 I
-рыжевато-мучного R Y ZH Y V A0 T A M U TSH0 N O0 V A
+рыжевато-мучного R Y ZH Y V A0 T A M U TSH0 N O0 G A
 рыжеватый R Y ZH Y V A0 T Y J0
 рысак R Y S A0 K
 рычал R Y TSH0 A0 L
@@ -13687,8 +13687,8 @@
 санитары S A N0 I T A0 R Y
 сановникам S A N O0 V N0 I K A M
 сановников S A N O0 V N0 I K A F
-сантьяго S A N0 T0 J0 A0 V A
-сантьяго-де-компостелу S A N0 T0 J0 A0 V A D0 I K A M P A S0 T0 E0 L U
+сантьяго S A N0 T0 J0 A0 G A
+сантьяго-де-компостелу S A N0 T0 J0 A0 G A D0 I K A M P A S0 T0 E0 L U
 саоцера S Al TS E0 R A
 сапог S A P O0 K
 сапожные S A P O0 ZH N Y J0 I
@@ -13850,7 +13850,7 @@
 связок S V0 A0 Z A K
 связывались S V0 A0 Z Y V A L0 I S0
 связь S V0 A0 S0
-святого S V0 I T O0 V A
+святого S V0 I T O0 G A
 святой S V0 I T O0 J0
 святому S V0 I T O0 M U
 святый S V0 I T Y0 J0
@@ -13953,11 +13953,11 @@
 седину S0 I D0 I N U0
 седины S0 I D0 I N Y0
 седло S0 I D L O0
-седого S0 I D O0 V A
+седого S0 I D O0 G A
 седой S0 I D O0 J0
 седою S0 I D O0 J0 U
 седые S0 I D Y0 J0 I
-седьмого S0 I D0 M O0 V A
+седьмого S0 I D0 M O0 G A
 седьмое S0 I D0 M O0 J0 I
 седьмой S0 I D0 M O0 J0
 седьмому S0 I D0 M O0 M U
@@ -14415,7 +14415,7 @@
 служивым S L U ZH Y0 V Y M
 служил S L U ZH Y0 L
 служу S L U ZH U0
-слухового S L U KH A V O0 V A
+слухового S L U KH A V O0 G A
 случается S L U TSH0 A0 J0 I TS A
 случайно S L U TSH0 A0 J0 N A
 случайностей S L U TSH0 A0 J0 N A S0 T0 I J0
@@ -15079,7 +15079,7 @@
 становилось S T A N A V0 I0 L A S0
 становился S T A N A V0 I0 L S0 A
 становись S T A N A V0 I0 S0
-станового S T A N A V O0 V A
+станового S T A N A V O0 G A
 становой S T A N A V O0 J0
 становясь S T A N A V0 A0 S0
 станционный S T A N TS Y O0 Nl Y J0
@@ -15573,7 +15573,7 @@
 такими T A K0 I0 M0 I
 таких T A K0 I0 KH
 таков T A K O0 F
-такого T A K O0 V A
+такого T A K O0 G A
 такое T A K O0 J0 I
 такой T A K O0 J0
 таком T A K O0 M
@@ -17475,7 +17475,7 @@
 чичиков TSH0 I0 TSH0 I K A F
 чичикова TSH0 I0 TSH0 I K A V A
 чичикову TSH0 I0 TSH0 I K A V U
-чин-чинарём TSH0 I N0 TSH0 I N A R0 O0 M
+чин-чинарём TSH0 I N TSH0 I N A R0 O0 M
 чинил TSH0 I N0 I0 L
 чиновника TSH0 I N O0 V N0 I K A
 чиновники TSH0 I N O0 V N0 I K0 I
@@ -17682,7 +17682,7 @@
 шестнадцатого SH Y S N A0 TS A T A V A
 шестнадцать SH Y S N A0 TS A T0
 шестнадцатилетнего SH Y S N A TS A T0 I L0 E0 T N0 I V A
-шестого SH Y S T O0 V A
+шестого SH Y S T O0 G A
 шестой SH Y S T O0 J0
 шестым SH Y S T Y0 M
 шестьдесят SH Y Z0 D Y S0 A0 T
@@ -18030,7 +18030,7 @@
 юного J0 U0 N A V A
 юноша J0 U0 N A SH A
 юры J0 U0 R Y
-юго-западу J0 U V A Z A0 P A D U
+юго-западу J0 U G A Z A0 P A D U
 юлейлии J0 U L0 E0 J0 L0 Il
 юморком J0 U M A R K O0 M
 юриспруденция J0 U R0 I S P R U D0 E0 N TS Y J0 A
