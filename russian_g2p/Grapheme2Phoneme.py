@@ -210,30 +210,3 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
-
-
-"""
-# unittests
-g = Grapheme2Phoneme()
-print(g.phrase_to_phonemes('компо+т я+блочный'))
-print(g.phrase_to_phonemes('пло+д я+блони'))
-print(g.phrase_to_phonemes('под я+блоней'))
-
-print(g.phrase_to_phonemes('компо+т сли+вовый'))
-print(g.phrase_to_phonemes('пло+д сли+вы'))
-print(g.phrase_to_phonemes('под сли+вой'))
-
-print(g.phrase_to_phonemes('компо+т гру+шевый'))
-print(g.phrase_to_phonemes('пло+д гру+ши'))
-print(g.phrase_to_phonemes('под гру+шей'))
-"""
-
-"""
-g = Grapheme2Phoneme()
-print(g.phrase_to_phonemes('поднебе+сье'))
-print(g.phrase_to_phonemes('подтверди+ть'))
-print(g.phrase_to_phonemes('подбодри+ть'))
-print(g.phrase_to_phonemes('подо+льский'))
-print(g.phrase_to_phonemes('подержа+л'))
-print(g.phrase_to_phonemes('подъе+зд'))
-"""

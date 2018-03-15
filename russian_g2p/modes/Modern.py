@@ -1,4 +1,4 @@
-from russian_g2p.RulesForGraphemes import Consonant, Vocal, Phonetics
+from russian_g2p.modes.Phonetics import Consonant, Vocal, Phonetics
 
 
 class ModernMode(Phonetics):
