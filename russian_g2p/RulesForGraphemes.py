@@ -10,8 +10,21 @@ class RulesForGraphemes:
     def apply_rule_for_vocals(self, letters_list: list, cur_pos: int) -> list:
         new_phonemes_list = list()
         case = 0
-        if (cur_pos == 0) or (letters_list[cur_pos - 1] in self.mode.vocals | self.mode.hard_and_soft_signs) \
-                or (letters_list[cur_pos - 1] not in self.mode.all_russian_letters):
+        if cur_pos == 0:
+            if letters_list[cur_pos] in self.mode.double_vocals:
+                new_phonemes_list.append('J0')
+            if cur_pos + 1 >= len(letters_list):
+                case = 1
+            else:
+                case = 2
+        elif letters_list[cur_pos - 1] in self.mode.hard_and_soft_signs:
+            if letters_list[cur_pos] in self.mode.gen_vocals_soft:
+                new_phonemes_list.append('J0')
+            if cur_pos + 1 >= len(letters_list):
+                case = 1
+            else:
+                case = 2
+        elif letters_list[cur_pos - 1] in self.mode.vocals:
             if letters_list[cur_pos] in self.mode.double_vocals:
                 new_phonemes_list.append('J0')
             if cur_pos + 1 >= len(letters_list):

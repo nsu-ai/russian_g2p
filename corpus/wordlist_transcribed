@@ -284,7 +284,7 @@
 бабушка B A0 B U SH K A
 бабушки B A0 B U SH K0 I
 бабушку B A0 B U SH K U
-бабьих B A0 B0 I KH
+бабьих B A0 B0 J0 I KH
 баз B A0 S
 базу B A0 Z U
 байки B A0 J0 K0 I
@@ -357,7 +357,7 @@
 барана B A R A0 N A
 баранками B A R A0 N K A M0 I
 бараньей B A R A0 N0 J0 I J0
-бараньим B A R A0 N0 I M
+бараньим B A R A0 N0 J0 I M
 барабанящим B A R A B A0 N0 I SH0 I M
 барбадоса B A R B A D O0 S A
 барельеф B A R0 I L0 J0 E0 F
@@ -698,7 +698,7 @@
 божиих B O0 ZH Y I KH
 божий B O0 ZH Y J0
 божия B O0 ZH Y J0 A
-божьим B O0 ZH I M
+божьим B O0 ZH J0 I M
 бойкий B O0 J0 K0 I J0
 бойко B O0 J0 K A
 бойня B O0 J0 N0 A
@@ -5117,8 +5117,8 @@
 иллинойсе I L0l I N O0 J0 S0 I
 иллюзия I L0l U0 Z0 I J0 A
 иллюзорность I L0l U Z O0 R N A S0 T0
-ильич I L0 I0 TSH0
-ильиным I L0 I N Y0 M
+ильич I L0 J0 I0 TSH0
+ильиным I L0 J0 I N Y0 M
 илья I L0 J0 A0
 имевший I M0 E0 F SH Y J0
 имеем I M0 E0 J0 I M
@@ -5596,7 +5596,7 @@
 келарь K0 E0 L A R0
 келвин K0 E0 L V0 I N
 келлермана K0 E0 L0l I R M A N A
-кельи K0 E0 L0 I
+кельи K0 E0 L0 J0 I
 келью K0 E0 L0 J0 U
 кем K0 E0 M
 кем-нибудь K0 E0 M N0 I B U T0
@@ -5744,7 +5744,7 @@
 кожей K O0 ZH Y J0
 кожи K O0 ZH Y
 козий K O0 Z0 I J0
-козьим K O0 Z0 I M
+козьим K O0 Z0 J0 I M
 коих K O0 I KH
 колец K O0 L0 I TS
 колокол K O0 L A K A L
@@ -9169,7 +9169,7 @@
 окунул A K U N U0 L
 олег A L0 E0 K
 оленей A L0 E0 N0 I J0
-оленьи A L0 E0 N0 I
+оленьи A L0 E0 N0 J0 I
 оливы A L0 I0 V Y
 олицетворением A L0 I TS Y T V A R0 E0 N0 I J0 I M
 оловянную A L A V0 A0 Nl U J0 U
@@ -13569,7 +13569,7 @@
 рыбок R Y0 B A K
 рыбу R Y0 B U
 рыбы R Y0 B Y
-рыбьих R Y0 B0 I KH
+рыбьих R Y0 B0 J0 I KH
 рыжая R Y0 ZH A J0 A
 рыжие R Y0 ZH Y J0 I
 рыжий R Y0 ZH Y J0
@@ -14609,7 +14609,7 @@
 сотый S O0 T Y J0
 соусом S O0 U S A M
 соф S O0 F
-софьи S O0 F0 I
+софьи S O0 F0 J0 I
 сочинский S O0 TSH0 I N S K0 I J0
 сочная S O0 TSH0 N A J0 A
 сочный S O0 TSH0 N Y J0
@@ -14620,7 +14620,7 @@
 собаки S A B A0 K0 I
 собаку S A B A0 K U
 собачий S A B A0 TSH0 I J0
-собачьи S A B A0 TSH0 I
+собачьи S A B A0 TSH0 J0 I
 собачью S A B A0 TSH0 J0 U
 собакевич S A B A K0 E0 V0 I TSH0
 собакевичем S A B A K0 E0 V0 I TSH0 I M
@@ -15108,7 +15108,7 @@
 старуху S T A R U0 KH U
 старшим S T A R SH Y0 M
 статейка S T A T0 E0 J0 K A
-статьи S T A T0 I0
+статьи S T A T0 J0 I0
 стаффордширская S T A Fl A R T SH Y0 R S K A J0 A
 стаховича S T A KH O0 V0 I TSH0 A
 ствол S T V O0 L
@@ -15954,7 +15954,7 @@
 третьей T R0 E0 T0 J0 I J0
 третьем T R0 E0 T0 J0 I M
 третьему T R0 E0 T0 J0 I M U
-третьи T R0 E0 T0 I
+третьи T R0 E0 T0 J0 I
 третья T R0 E0 T0 J0 A
 тревоге T R0 I V O0 G0 I
 тревогой T R0 I V O0 G A J0
@@ -17562,7 +17562,7 @@
 чулок TSH0 U L O0 K
 чуть-чуть TSH0 U T0 TSH0 U0 T0
 чухонскую TSH0 U KH O0 N S K U J0 U
-чьи TSH0 I0
+чьи TSH0 J0 I0
 чья TSH0 J0 A0
 чё TSH0 O0
 чём TSH0 O0 M
@@ -17999,7 +17999,7 @@
 эрлихман Y R L0 I KH M A0 N
 эрлихмана Y R L0 I KH M A0 N A
 эрудит Y R U D0 I0 T
-эскадрильи Y S K A D R0 I0 L0 I
+эскадрильи Y S K A D R0 I0 L0 J0 I
 эскадрон Y S K A D R O0 N
 эскадронами Y S K A D R O0 N A M0 I
 эскадронов Y S K A D R O0 N A F

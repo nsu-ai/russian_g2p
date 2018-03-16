@@ -138,17 +138,20 @@ class Grapheme2Phoneme(RulesForGraphemes):
         # формируем псевдослова, объединяя предлоги со стоящими после них словами
         new_words = list()
         cur_word = ''
+        last_letter = ''
         for i in range(0, l):
-            to_append = (i == l - 1) or (words_in_phrase[i].replace('+', '') not in self.__function_words_1)
-            if words_in_phrase[i][0] == 'и' and len(new_words) > 0 \
-                    and new_words[-1][-1] in (self.mode.consonants - {'й', 'ь'}) | {'ъ'}:
-                words_in_phrase[i] = 'ы' + words_in_phrase[i][1:]
+            clear_word = words_in_phrase[i].replace('+', '')
+            to_append = (i == l - 1) or (clear_word not in self.__function_words_1)
+            if words_in_phrase[i][0] == 'и':
+                if last_letter not in (self.mode.vocals | {'ь', ''} | self.mode.soft_consonants):
+                    words_in_phrase[i] = 'ы' + words_in_phrase[i][1:]
             if words_in_phrase[i][0] in self.mode.double_vocals:
                 words_in_phrase[i] = 'ъ' + words_in_phrase[i]
             cur_word += words_in_phrase[i]
             if to_append:
                 new_words.append(cur_word)
                 cur_word = ''
+            last_letter = clear_word[-1]
         # разбираем фразу
         next_phoneme = 'sil'
         phrase_transcription = list()
