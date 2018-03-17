@@ -60,14 +60,15 @@ class ClassicMode(Phonetics):
         }
 
     def rule_27(self, letters_list: list, next_phoneme: str, cur_pos: int) -> str:
-        letters_for_rule_27 = {'н', 'т', 'с', 'д', 'з', 'л', 'м', 'п', 'б', 'в', 'ф'}
-        n = len(letters_list)
-        if cur_pos < n - 2 and letters_list[cur_pos] in {'н', 'т', 'с', 'д', 'з'} and \
-                letters_list[cur_pos + 1] in letters_for_rule_27 and \
-                letters_list[cur_pos + 2] in self.gen_vocals_soft:
-            case = 'n_soft'
-        elif letters_list[cur_pos] == 'н' and letters_list[cur_pos + 1] in {'ч', 'щ'}:
-            case = 'n_soft'
-        else:
-            case = ''
+        case = ''
+        if letters_list[cur_pos] == 'н':
+            if next_phoneme in {'J0', 'TSH0', 'SH0', 'DZH0', 'ZH0', 'D0', 'T0', 'Z0', 'S0', 'L0', 'M0', 'P0', 'B0', 'V0', 'F0', 'N0'}:
+                case = 'n_soft'
+        elif letters_list[cur_pos] in {'т', 'с', 'д', 'з', 'п', 'б', 'в', 'ф'}:
+            if next_phoneme in {'D0', 'Z0', 'B0'}:
+                case = 'v_soft'
+            elif next_phoneme in {'T0', 'S0', 'P0'}:
+                case = 'd_soft'
+            elif next_phoneme in {'N0', 'L0', 'M0', 'V0', 'F0'}:
+                case = 'n_soft'
         return case
