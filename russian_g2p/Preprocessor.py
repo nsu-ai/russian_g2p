@@ -20,7 +20,7 @@ class Preprocessor():
 
     def preprocessing(self, text):
         text = sub('[\.\,\?\!\(\);:]+', ' <sil>', text)
-        text = sub(' [–-] ', '<sil>', text)
+        text = sub(' [–-] ', ' <sil> ', text)
         text = sub('[\\\/@#\$%\^\&\*–_=+\'\"\|«»–-]+', '', text)
         words_and_tags = self.gettags(text.split(' '))
         return words_and_tags
