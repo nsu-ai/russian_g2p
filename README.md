@@ -36,8 +36,10 @@ Examples of using Accentor:
 
 ```
 >>> your_accentor = Accentor()
->>> your_accentor.do_accents(['конференция', 'диалог'])  # you will see the accented words in the output
->>> your_accentor.do_accents(['новосибирский', 'государственный', 'университет'])
+>>> your_accentor.do_accents([['конференция'], ['диалог']])
+[['конфере+нция', 'диало+г']]
+>>> your_accentor.do_accents([['ноги', 'NOUN Case=Gen|Gender=Fem|Number=Sing'], ['ноги', 'NOUN Case=Acc|Gender=Fem|Number=Plur']])
+[['ноги+', 'но+ги']]
 
 ```
 
@@ -45,14 +47,22 @@ Examples of using Transcriptor:
 
 ```
 >>> your_transcriptor = Grapheme2Phoneme()
->>> your_transcriptor.word_to_phonemes('конфере+нция')  # you will see the transcription in the output
 >>> your_transcriptor.word_to_phonemes('диало+г')
+['D0', 'I', 'A', 'L', 'O0', 'K']
+>>> your_transcriptor.phrase_to_phonemes('диало+г бы+л')
+['D0', 'I', 'A', 'L', 'O0', 'G', 'B', 'Y0', 'L']
 ```
 
+Examples of using the whole system:
+
 ```
->>> your_transcriptor = Grapheme2Phoneme()
->>> your_transcriptor.phrase_to_phonemes('конфере+нция диало+г')
->>> your_transcriptor.phrase_to_phonemes('новосиби+рский госуда+рственный университе+т')
+>>> your_transcriptor = Transcription()
+>>> Transcription().transcribe('диало+г')
+['D0', 'I', 'A', 'L', 'O0', 'K']
+>>> Transcription().transcribe('диало+г бы+л')
+['D0', 'I', 'A', 'L', 'O0', 'G', 'B', 'Y0', 'L']
+>>> Transcription().transcribe('Я иду, а ты - нет.')
+[['J0', 'A0', 'I', 'D', 'U0'], ['A', 'T', 'Y0'], ['N0', 'E0', 'T']]
 ```
 
 
