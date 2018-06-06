@@ -1,7 +1,7 @@
 import re
 import unittest
 
-from russian_g2p import Grapheme2Phoneme, Accentor, Preprocessor, Transcription
+from russian_g2p import Grapheme2Phoneme, Preprocessor, Transcription
 
 
 class TestRussianG2P(unittest.TestCase):
@@ -637,7 +637,7 @@ class TestRussianAccentor2(unittest.TestCase):
 
 class TestPrep(unittest.TestCase):
     def setUp(self):
-        self.__prep = Preprocessor.Preprocessor()
+        self.__prep = Preprocessor()
 
     def tearDown(self):
         del self.__prep
@@ -666,7 +666,7 @@ class TestPrep(unittest.TestCase):
 
 class TestAll(unittest.TestCase):
     def setUp(self):
-        self.__transcription = Transcription.Transcription()
+        self.__transcription = Transcription()
 
     def tearDown(self):
         del self.__transcription
