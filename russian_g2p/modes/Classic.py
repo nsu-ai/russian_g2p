@@ -51,9 +51,9 @@ class ClassicMode(Phonetics):
             'я': Vocal('A', 'I', 'A', 'I', 'A', 'Y', 'A', 'I'),
             'е': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I'),
 
-            'о': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
+            'о': Vocal('A', 'A', 'A', 'I', 'A', 'Y', 'A', 'A'),
             'у': Vocal('U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'),
-            'а': Vocal('A', 'A', 'A', 'I', 'A', 'A', 'A', 'A'),
+            'а': Vocal('A', 'A', 'A', 'I', 'A', 'Y', 'A', 'A'),
             'э': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
             'ы': Vocal('Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y', 'Y'),
             'и': Vocal('I', 'I', 'I', 'I', 'Y', 'Y', 'I', 'I')
