@@ -194,6 +194,34 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(self.__g2p.word_to_phonemes('ё+жик'), self.__g2p.word_to_phonemes('ёжик'))
         self.assertEqual(self.__g2p.word_to_phonemes('ё+жик'), self.__g2p.word_to_phonemes('Ёжик'))
 
+    def test_word_to_phonemes_negative001(self):
+        """ Генерация исключения, если аргумент - пустая строка. """
+        source_word = ''
+        target_error_message = 'Checked word is empty string!'
+        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
+            self.__g2p.word_to_phonemes(source_word)
+
+    def test_word_to_phonemes_negative002(self):
+        """ Генерация исключения, если слово содержит недопустимые символы. """
+        source_word = 'интерде+вочка!'
+        target_error_message = '`интерде+вочка!`: this word contains inadmissible characters!'
+        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
+            self.__g2p.word_to_phonemes(source_word)
+
+    def test_word_to_phonemes_negative003(self):
+        """ Генерация исключения, если слово содержит только неалфавитные символы, хоть и допустимые. """
+        source_word = '+-'
+        target_error_message = '`+-`: this word is incorrect!'
+        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
+            self.__g2p.word_to_phonemes(source_word)
+
+    def test_word_to_phonemes_negative004(self):
+        """ Генерация предупреждения, если слово указано без ударения и содержит более одной гласной. """
+        source_word = 'через'
+        target_warning_message = '`через`: the accent for this word is unknown!'
+        with self.assertWarnsRegex(UserWarning, re.escape(target_warning_message)):
+            self.__g2p.word_to_phonemes(source_word)
+
     def test_phrase_to_phonemes_positive001(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Служебное слово - обычная частица. """
@@ -365,47 +393,6 @@ class TestRussianG2P(unittest.TestCase):
         """ Генерация исключения, если аргумент - пустая строка. """
         source_phrase = ''
         target_error_message = 'Checked phrase is empty string!'
-        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
-            self.__g2p.phrase_to_phonemes(source_phrase)
-
-    #@unittest.skip
-    def test_phrase_to_phonemes_negative002(self):
-        """ Генерация исключения, если фраза содержит недопустимые символы. """
-        source_phrase = 'шофё+р ведё+т маши+ну, а маши+на не вы+держала перегру+зки'
-        target_error_message = '`шофё+р ведё+т маши+ну, а маши+на не вы+держала перегру+зки`: ' \
-                               'this phrase contains inadmissible characters!'
-        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
-            self.__g2p.phrase_to_phonemes(source_phrase)
-
-    #@unittest.skip
-    def test_phrase_to_phonemes_negative003(self):
-        """ Генерация исключения, если фраза содержит только неалфавитные символы, хоть и допустимые. """
-        source_phrase = '+- + --'
-        target_error_message = '`+- + --`: this phrase is incorrect!'
-        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
-            self.__g2p.phrase_to_phonemes(source_phrase)
-
-    #@unittest.skip
-    def test_phrase_to_phonemes_negative004(self):
-        """ Генерация исключения, если фраза заканчивается функциональным словом первого рода. """
-        source_phrase = 'новосиби+рск близ'
-        target_error_message = '`новосиби+рск близ`: this phrase is incorrect!'
-        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
-            self.__g2p.phrase_to_phonemes(source_phrase)
-
-    #@unittest.skip
-    def test_phrase_to_phonemes_negative005(self):
-        """ Генерация исключения, если фраза содержит два функциональных слова первого рода подряд. """
-        source_phrase = 'че+рез че+рез тайгу+'
-        target_error_message = '`че+рез че+рез тайгу+`: this phrase is incorrect!'
-        with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
-            self.__g2p.phrase_to_phonemes(source_phrase)
-
-    #@unittest.skip
-    def test_phrase_to_phonemes_negative006(self):
-        """ Генерация исключения, если фраза содержит функциональные слова первого и второго рода подряд. """
-        source_phrase = 'мо+ст че+рез бы новосиби+рск'
-        target_error_message = '`мо+ст че+рез бы новосиби+рск`: this phrase is incorrect!'
         with self.assertRaisesRegex(AssertionError, re.escape(target_error_message)):
             self.__g2p.phrase_to_phonemes(source_phrase)
 
