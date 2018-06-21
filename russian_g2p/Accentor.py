@@ -10,11 +10,10 @@ import lxml.html
 import itertools
 import dawg
 import logging
-import sys
 
 
 class Accentor:
-    def __init__(self, mode='one', debug='no'):
+    def __init__(self, mode='one', debug='no', exception_for_unknown=False):
         if debug == 'no':
             logging.basicConfig()
         else:
@@ -26,6 +25,7 @@ class Accentor:
                                       'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю',
                                       'я'}
         self.__russian_vowels = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е'}
+        self.exception_for_unknown = exception_for_unknown
         self.__homonyms = None
         self.__simple_words_dawg = None
         self.__function_words = None
@@ -231,8 +231,8 @@ class Accentor:
                 if mention_text.replace('́', '').find(form) != -1:
                     if mention_text.find('́') != -1:
                         rel_forms.add(mention_text_best[mention_text.replace('́', '').find(form):])
-                elif re.sub('[\(\)́]', '', mention_text) == form:
-                    rel_forms.add(re.sub('[\(\)]', '', mention_text_best))
+                elif re.sub(r'[\(\)́]', '', mention_text) == form:
+                    rel_forms.add(re.sub(r'[\(\)]', '', mention_text_best))
         for target in root.xpath('.//span[@class="Cyrl"][@lang="ru"]'):
             one_form = target.text_content()
             if one_form.replace('ё', 'е́').replace('́', '') == form:
@@ -250,10 +250,14 @@ class Accentor:
     def load_wiki_page(self, cur_form):
         query = urllib.parse.urlencode({ 'title' : cur_form })
         try:
+            http_exception_type = urllib.error.HTTPError
+        except:
+            http_exception_type = urllib.request.HTTPError
+        try:
             with urllib.request.urlopen('https://en.wiktionary.org/w/index.php?{}&#printable=yes'.format(query)) as f:
                 root_text = f.read().decode('utf-8')
                 return root_text
-        except urllib.error.HTTPError:
+        except http_exception_type:
             return
 
     def do_accents(self, source_phrase_and_morphotags: list) -> list:
@@ -402,6 +406,7 @@ class Accentor:
         warn = ''
         if '+' in cur_token:
             accented_wordforms = [cur_token]
+            accented_wordforms_many = [cur_token]
         else:
             accented_wordforms = []
             accented_wordforms_many = []
@@ -514,11 +519,14 @@ class Accentor:
         if cur_token in accented_wordforms:
             accented_wordforms = [accented_wordforms[accented_wordforms.index(cur_token)]]
             if warn != '':
-                self.__bad_words.append(cur_token)
                 if warn == 'many':
-                    warnings.warn('Word `{0}` has too many accent variants!'.format(cur_token))
-                elif warn == 'no':
-                    warnings.warn('Word `{0}` is unknown!'.format(cur_word))
+                    err_msg = 'Word `{0}` has too many accent variants!'.format(cur_token)
+                else:  # warn == 'no':
+                    err_msg = 'Word `{0}` is unknown!'.format(cur_token)
+                if self.exception_for_unknown:
+                    raise ValueError(err_msg)
+                self.__bad_words.append(cur_token)
+                warnings.warn(err_msg)
         accented_phrases = []
         if n > 1:
             if self.mode == 'one':

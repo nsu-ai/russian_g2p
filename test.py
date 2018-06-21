@@ -473,6 +473,20 @@ class TestRussianAccentor1(unittest.TestCase):
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
+    def test_do_accents_positive07(self):
+        source_phrase = [['хракозябр'], ['впулил'], ['куздру']]
+        target_variants = [
+            ['хракозябр', 'впулил', 'куздру']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_do_accents_positive08(self):
+        accentor = Accentor(exception_for_unknown=True)
+        source_phrase = [['хракозябр'], ['впулил'], ['куздру']]
+        with self.assertRaises(ValueError):
+            _ = accentor.do_accents(source_phrase)
+
     def test_do_accents_negative01(self):
         source_phrase_n_morphotags = [['подарок', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
             ['для', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
@@ -601,8 +615,12 @@ class TestPrep(unittest.TestCase):
         source_phrase = 'Кто-нибудь выучил фразео-, нео- и прочие измы? Я - нет.'
         target_variants = [['<sil>', 'SIL _'], ['кто-нибудь', 'PRON Case=Nom|Gender=Masc|Number=Sing'],
                            ['выучил', 'VERB Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act'],
-                           ['фразео-', 'ADV Degree=Pos'], ['<sil>', 'SIL _'], ['нео-', 'ADJ Degree=Pos|Gender=Masc|Number=Sing|Variant=Short'],
-                           ['и', 'PART _'], ['прочие', 'DET Case=Nom|Number=Plur'], ['измы', 'NOUN Case=Acc|Gender=Masc|Number=Plur'], ['<sil>', 'SIL _'], ['я', 'PRON Case=Nom|Number=Sing|Person=1'], ['<sil>', 'SIL _'], ['нет', 'PART _'], ['<sil>', 'SIL _']]
+                           ['фразео-', 'ADV Degree=Cmp'], ['<sil>', 'SIL _'], ['нео-', 'ADV Degree=Pos'],
+                           ['и', 'CONJ _'], ['прочие', 'DET Case=Acc|Number=Plur'],
+                           ['измы', 'NOUN Case=Acc|Gender=Masc|Number=Plur'], ['<sil>', 'SIL _'],
+                           ['я', 'PRON Case=Nom|Number=Sing|Person=1'], ['<sil>', 'SIL _'],
+                           ['нет', 'VERB Mood=Ind|Number=Sing|Person=3|Tense=Notpast|VerbForm=Fin'],
+                           ['<sil>', 'SIL _']]
 
         real_variants = self.__prep.preprocessing(source_phrase)
         self.assertEqual(target_variants, real_variants)
@@ -644,6 +662,13 @@ class TestAll(unittest.TestCase):
         target_variants = [['A', 'G', 'A0']]
         real_variants = self.__transcription.transcribe(source_phrase)
         self.assertEqual(target_variants, real_variants)
+
+    def test_accented(self):
+        source_phrase_1 = 'диалог был'
+        real_variants_1 = self.__transcription.transcribe(source_phrase_1)
+        source_phrase_2 = 'диало+г бы+л'
+        real_variants_2 = self.__transcription.transcribe(source_phrase_2)
+        self.assertEqual(real_variants_1, real_variants_2)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
