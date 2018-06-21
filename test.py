@@ -487,6 +487,22 @@ class TestRussianAccentor1(unittest.TestCase):
         with self.assertRaises(ValueError):
             _ = accentor.do_accents(source_phrase)
 
+    def test_do_accents_positive09(self):
+        source_phrase = [['серебристо-белый'], ['цвет']]
+        target_variants = [
+            ['серебри+сто-бе+лый', 'цве+т']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_do_accents_positive10(self):
+        source_phrase = [['озеро'], ['так'],['серебристо'], ['в'], ['свете'], ['луны']]
+        target_variants = [
+            ['о+зеро', 'та+к', 'серебри+сто', 'в', 'све+те', 'луны+']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
     def test_do_accents_negative01(self):
         source_phrase_n_morphotags = [['подарок', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
             ['для', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
