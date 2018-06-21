@@ -37,7 +37,7 @@ class Preprocessor():
             united_phrase_for_rnnmorph = []
             for phonetic_phrase in list_of_phonetic_phrases:
                 if len(phonetic_phrase) > 0:
-                    united_phrase_for_rnnmorph += phonetic_phrase.split(' ')
+                    united_phrase_for_rnnmorph += phonetic_phrase.split()
             if len(united_phrase_for_rnnmorph) > 0:
                 all_phrases_for_rnnmorph.append(united_phrase_for_rnnmorph)
                 all_phonetic_phrases.append(list_of_phonetic_phrases)

@@ -4,9 +4,10 @@ from russian_g2p.Grapheme2Phoneme import Grapheme2Phoneme
 
 
 class Transcription:
-    def __init__(self, exception_for_unknown: bool=False, batch_size: int=64, verbose=False):
+    def __init__(self, exception_for_unknown: bool=False, batch_size: int=64, verbose: bool=False,
+                 use_wiki: bool=False):
         self.__preprocessor = Preprocessor(batch_size=batch_size)
-        self.__accentor = Accentor(exception_for_unknown=exception_for_unknown)
+        self.__accentor = Accentor(exception_for_unknown=exception_for_unknown, use_wiki=use_wiki)
         self.__g2p = Grapheme2Phoneme()
         self.verbose = verbose
 

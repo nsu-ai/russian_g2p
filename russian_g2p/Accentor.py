@@ -13,7 +13,7 @@ import logging
 
 
 class Accentor:
-    def __init__(self, mode='one', debug='no', exception_for_unknown=False):
+    def __init__(self, mode='one', debug='no', exception_for_unknown=False, use_wiki=True):
         if debug == 'no':
             logging.basicConfig()
         else:
@@ -26,6 +26,7 @@ class Accentor:
                                       'я'}
         self.__russian_vowels = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е'}
         self.exception_for_unknown = exception_for_unknown
+        self.use_wiki = use_wiki
         self.__homonyms = None
         self.__simple_words_dawg = None
         self.__function_words = None
@@ -248,6 +249,10 @@ class Accentor:
         return list(rel_forms)
 
     def load_wiki_page(self, cur_form):
+        if not self.use_wiki:
+            if self.exception_for_unknown:
+                raise ValueError('Word `{0}` is unknown!'.format(cur_form))
+            return
         query = urllib.parse.urlencode({ 'title' : cur_form })
         try:
             http_exception_type = urllib.error.HTTPError
