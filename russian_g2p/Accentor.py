@@ -502,7 +502,7 @@ class Accentor:
                         accented_wordforms += [cur_word]
                         accented_wordforms_many.append([cur_word])
                         warn = 'no'
-                if (i == 0):
+                if i == 0:
                     if (accented_wordforms[0].find('+') != -1) or (len(separate_tokens) == 2):
                         break
                     else:

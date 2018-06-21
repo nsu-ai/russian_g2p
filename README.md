@@ -57,11 +57,9 @@ Examples of using the whole system:
 
 ```
 >>> your_transcriptor = Transcription()
->>> Transcription().transcribe('диало+г')
-['D0', 'I', 'A', 'L', 'O0', 'K']
->>> Transcription().transcribe('диало+г бы+л')
-['D0', 'I', 'A', 'L', 'O0', 'G', 'B', 'Y0', 'L']
->>> Transcription().transcribe('Я иду, а ты - нет.')
+>>> for it in your_transcriptor.transcribe(['диало+г', 'диало+г бы+л', 'Я иду, а ты - нет.']): print(it)
+[['D0', 'I', 'A', 'L', 'O0', 'K']]
+[['D0', 'I', 'A', 'L', 'O0', 'G', 'B', 'Y0', 'L']]
 [['J0', 'A0', 'I', 'D', 'U0'], ['A', 'T', 'Y0'], ['N0', 'E0', 'T']]
 ```
 
