@@ -9,7 +9,7 @@ from russian_g2p import Transcription
 def iterate_by_texts(file_name):
     batch_size = 1000
     re_for_russian_letters = re.compile(
-        r'[^АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя-]+',
+        r'[^АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя]+',
         re.U
     )
     source_lines_v1 = []
