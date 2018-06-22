@@ -60,7 +60,7 @@ def main():
     if len(dst_dir) > 0:
         assert os.path.isdir(dst_dir), 'Directory "{0}" does not exist!'.format(dst_dir)
 
-    transcriptor = Transcription(exception_for_unknown=True, verbose=False, batch_size=256, use_wiki=False)
+    transcriptor = Transcription(raise_exceptions=True, verbose=False, batch_size=256, use_wiki=False)
     silence = '<sil>'
     with codecs.open(dst_name, mode='w', encoding='utf-8', errors='ignore') as dst_fp:
         for source_lines_v1, source_lines_v2 in iterate_by_texts(src_name):

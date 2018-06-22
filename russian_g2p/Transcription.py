@@ -4,11 +4,11 @@ from russian_g2p.Grapheme2Phoneme import Grapheme2Phoneme
 
 
 class Transcription:
-    def __init__(self, exception_for_unknown: bool=False, batch_size: int=64, verbose: bool=False,
+    def __init__(self, raise_exceptions: bool=False, batch_size: int=64, verbose: bool=False,
                  use_wiki: bool=False):
         self.__preprocessor = Preprocessor(batch_size=batch_size)
-        self.__accentor = Accentor(exception_for_unknown=exception_for_unknown, use_wiki=use_wiki)
-        self.__g2p = Grapheme2Phoneme()
+        self.__accentor = Accentor(exception_for_unknown=raise_exceptions, use_wiki=use_wiki)
+        self.__g2p = Grapheme2Phoneme(exception_for_nonaccented=raise_exceptions)
         self.verbose = verbose
 
     def transcribe(self, texts: list):
@@ -32,11 +32,14 @@ class Transcription:
                 tmp = ' '.join(accented_text[0])
                 tmp = ' ' + tmp
                 phonetic_words = tmp.split(' <sil>')
-                result = []
-                for phonetic_word in phonetic_words:
-                    if len(phonetic_word) != 0:
-                        phonemes = self.__g2p.phrase_to_phonemes(phonetic_word)
-                        result.append(phonemes)
+                try:
+                    result = []
+                    for phonetic_word in phonetic_words:
+                        if len(phonetic_word) != 0:
+                            phonemes = self.__g2p.phrase_to_phonemes(phonetic_word)
+                            result.append(phonemes)
+                except:
+                    result = []
             else:
                 result = []
             total_result.append(result)

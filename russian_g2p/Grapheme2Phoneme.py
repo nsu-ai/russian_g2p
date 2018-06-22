@@ -8,8 +8,9 @@ from russian_g2p import RulesForGraphemes
 
 
 class Grapheme2Phoneme(RulesForGraphemes):
-    def __init__(self, users_mode='Modern'):
+    def __init__(self, users_mode='Modern', exception_for_nonaccented=False):
         RulesForGraphemes.__init__(self, users_mode)
+        self.exception_for_nonaccented = exception_for_nonaccented
 
         self.__re_for_phrase_split = None
 
@@ -87,6 +88,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
         if '+' not in prepared_word:
             counter = len(prepared_word) - len(re.sub(r'[аоуэыияёею]', '', prepared_word))
             if counter > 1:
+                if self.exception_for_nonaccented:
+                    raise ValueError('`{0}`: the accent for this word is unknown!'.format(source_word))
                 warnings.warn('`{0}`: the accent for this word is unknown!'.format(source_word))
         if prepared_word in self.__exclusions_dictionary:
             prepared_word = self.__exclusions_dictionary[prepared_word]

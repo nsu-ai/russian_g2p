@@ -222,6 +222,14 @@ class TestRussianG2P(unittest.TestCase):
         with self.assertWarnsRegex(UserWarning, re.escape(target_warning_message)):
             self.__g2p.word_to_phonemes(source_word)
 
+    def test_word_to_phonemes_begative005(self):
+        """ Генерация исключения, если exception_for_nonaccented, а слово - без ударения и содержит более 1 гласной. """
+        g2p = Grapheme2Phoneme(exception_for_nonaccented=True)
+        source_word = 'через'
+        target_warning_message = '`через`: the accent for this word is unknown!'
+        with self.assertRaisesRegex(ValueError, re.escape(target_warning_message)):
+            g2p.word_to_phonemes(source_word)
+
     def test_phrase_to_phonemes_positive001(self):
         """ Проверка корректной работы правил межсловного преобразования на стыке служебного и знаменательного слова.
         Служебное слово - обычная частица. """
