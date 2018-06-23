@@ -369,9 +369,9 @@ class TestRussianG2P(unittest.TestCase):
         Простое предложение. """
         self.assertEqual(['J0', 'O0', 'L', 'K', 'A', 'S', 'T', 'A', 'J0', 'A0', 'L', 'A', 'U', 'A', 'K', 'N', 'A0'],
                          self.__g2p.phrase_to_phonemes('ё+лка стоя+ла у окна+'))
-        #self.assertEqual(['SH', 'A', 'F0', 'O0', 'R', 'V0', 'I', 'D0', 'O0', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U'],
-        #                 self.__g2p.phrase_to_phonemes('шофё+р ведё+т маши+ну'))
-        self.assertEqual(['A', 'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'I', 'V', 'Y0', 'D0', 'I', 'R', 'ZH', 'Y', 'L',
+        self.assertEqual(['SH', 'A', 'F0', 'O0', 'R', 'V0', 'I', 'D0', 'O0', 'T', 'M', 'A', 'SH', 'Y0', 'N', 'U'],
+                         self.__g2p.phrase_to_phonemes('шофё+р ведё+т маши+ну'))
+        self.assertEqual(['A', 'M', 'A', 'SH', 'Y0', 'N', 'A', 'N0', 'I', 'V', 'Y0', 'D0', 'I', 'R', 'ZH', 'A', 'L',
                           'A', 'P0', 'I', 'R0', 'I', 'G', 'R', 'U0', 'S', 'K0', 'I'],
                          self.__g2p.phrase_to_phonemes('а маши+на не вы+держала перегру+зки'))
         self.assertEqual(['M', 'O0', 'S', 'T', 'TSH0', 'E0', 'R0', 'I', 'Z', 'N', 'A', 'V', 'A', 'S0', 'I', 'B0', 'I0',
