@@ -3,7 +3,7 @@ import codecs
 import os
 import re
 
-from russian_g2p import Transcription
+from russian_g2p.Transcription import Transcription
 
 
 def iterate_by_texts(file_name):

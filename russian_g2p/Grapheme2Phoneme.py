@@ -1,10 +1,9 @@
 import codecs
-import copy
 import os
 import re
 import warnings
 
-from russian_g2p import RulesForGraphemes
+from russian_g2p.RulesForGraphemes import RulesForGraphemes
 
 
 class Grapheme2Phoneme(RulesForGraphemes):

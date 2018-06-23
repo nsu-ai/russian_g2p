@@ -1,7 +1,11 @@
 import re
 import unittest
 
-from russian_g2p import Grapheme2Phoneme, Accentor, Preprocessor, Transcription
+from russian_g2p.Grapheme2Phoneme import Grapheme2Phoneme
+from russian_g2p.Accentor import Accentor
+from russian_g2p.Preprocessor import Preprocessor
+from russian_g2p.Transcription import Transcription
+
 
 class TestRussianG2P(unittest.TestCase):
     def setUp(self):
@@ -196,7 +200,7 @@ class TestRussianG2P(unittest.TestCase):
 
     def test_word_to_phonemes_positive031(self):
         """ Баг https://github.com/nsu-ai/russian_g2p/issues/8 """
-        self.assertEqual(['SH', 'A', 'F0', 'O0', 'R'], self.__g2p.word_to_phonemes('шофёр'))
+        self.assertEqual(['SH', 'A', 'F0', 'O0', 'R'], self.__g2p.word_to_phonemes('шофё+р'))
 
     def test_word_to_phonemes_negative001(self):
         """ Генерация исключения, если аргумент - пустая строка. """
