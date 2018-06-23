@@ -208,10 +208,9 @@ class TestRussianG2P(unittest.TestCase):
         """ Баг https://github.com/nsu-ai/russian_g2p/issues/8 """
         self.assertEqual(['SH', 'A', 'F0', 'O0', 'R'], self.__g2p.word_to_phonemes('шофё+р'))
 
-    @unittest.skip
     def test_word_to_phonemes_positive032(self):
         """ Баг https://github.com/nsu-ai/russian_g2p/issues/8 """
-        self.assertEqual(['J0', 'TSH0', 'N0', 'I', 'TS', 'U'], self.__g2p.word_to_phonemes('яи+чницу'))
+        self.assertEqual(['J0', 'I0', 'TSH0', 'N0', 'I', 'TS', 'U'], self.__g2p.word_to_phonemes('яи+чницу'))
 
     def test_word_to_phonemes_positive033(self):
         """ Проверка, что костыль для удаления длинных фонем работает """
