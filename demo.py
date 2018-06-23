@@ -6,14 +6,19 @@ import re
 from russian_g2p.Transcription import Transcription
 
 
+def postprocess_phoneme(src):
+    if (len(src) > 1) and (src.endswith('l')):
+        return src[:-1]
+    return src
+
+
 def prepare_transcription(source_transcription):
-    re_for_long_phonemes = re.compile(r'.+l$')
     n = len(source_transcription)
     if n == 0:
         return []
-    new_transcription = [re_for_long_phonemes.sub('', source_transcription[0])]
+    new_transcription = [postprocess_phoneme(source_transcription[0])]
     for idx in range(1, n):
-        new_phoneme = re_for_long_phonemes.sub('', source_transcription[idx])
+        new_phoneme = postprocess_phoneme(source_transcription[idx])
         if new_phoneme != new_transcription[-1]:
             new_transcription.append(new_phoneme)
     return tuple(filter(lambda it: len(it) > 0, new_transcription))
