@@ -194,6 +194,10 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(self.__g2p.word_to_phonemes('ё+жик'), self.__g2p.word_to_phonemes('ёжик'))
         self.assertEqual(self.__g2p.word_to_phonemes('ё+жик'), self.__g2p.word_to_phonemes('Ёжик'))
 
+    def test_word_to_phonemes_positive031(self):
+        """ Баг https://github.com/nsu-ai/russian_g2p/issues/8 """
+        self.assertEqual(['SH', 'A', 'F0', 'O0', 'R'], self.__g2p.word_to_phonemes('шофёр'))
+
     def test_word_to_phonemes_negative001(self):
         """ Генерация исключения, если аргумент - пустая строка. """
         source_word = ''
