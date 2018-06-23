@@ -124,7 +124,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
             transcription = new_phonemes + transcription
             next_phoneme = new_phonemes[0]
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        return self.__remove_repeats_from_transcription(transcription)
+        return self.__remove_long_phonemes(self.__remove_repeats_from_transcription(transcription))
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
@@ -161,7 +161,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
             phrase_transcription = self.word_to_phonemes(new_words[i], next_phoneme) + phrase_transcription
             next_phoneme = phrase_transcription[0]
         phrase_transcription = self.__remove_repeats_from_transcription(phrase_transcription)
-        return phrase_transcription
+        return self.__remove_long_phonemes(phrase_transcription)
 
     def in_function_words_1(self, source_word: str) -> bool:
         return self.__remove_character(source_word, '+').lower() in self.__function_words_1
@@ -215,3 +215,20 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
+
+    def __remove_long_phonemes(self, source_transcription: list) -> list:
+
+        def postprocess_phoneme(src):
+            if (len(src) > 1) and (src.endswith('l')):
+                return src[:-1]
+            return src
+
+        n = len(source_transcription)
+        if n == 0:
+            return []
+        new_transcription = [postprocess_phoneme(source_transcription[0])]
+        for idx in range(1, n):
+            new_phoneme = postprocess_phoneme(source_transcription[idx])
+            if new_phoneme != new_transcription[-1]:
+                new_transcription.append(new_phoneme)
+        return list(filter(lambda it: len(it) > 0, new_transcription))

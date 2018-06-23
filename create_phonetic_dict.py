@@ -9,24 +9,6 @@ from russian_g2p.Accentor import Accentor
 from russian_g2p.Grapheme2Phoneme import Grapheme2Phoneme
 
 
-def postprocess_phoneme(src):
-    if (len(src) > 1) and (src.endswith('l')):
-        return src[:-1]
-    return src
-
-
-def prepare_transcription(source_transcription):
-    n = len(source_transcription)
-    if n == 0:
-        return []
-    new_transcription = [postprocess_phoneme(source_transcription[0])]
-    for idx in range(1, n):
-        new_phoneme = postprocess_phoneme(source_transcription[idx])
-        if new_phoneme != new_transcription[-1]:
-            new_transcription.append(new_phoneme)
-    return tuple(filter(lambda it: len(it) > 0, new_transcription))
-
-
 def transcribe_words(source_words_list):
     n_words = len(source_words_list)
     n_parts = 100
@@ -61,7 +43,7 @@ def transcribe_words(source_words_list):
                     filter(
                         lambda it2: len(it2) > 0,
                         map(
-                            lambda it: prepare_transcription(g2p.word_to_phonemes(it)),
+                            lambda it: tuple(g2p.word_to_phonemes(it)),
                             accentuation_variants
                         )
                     )
