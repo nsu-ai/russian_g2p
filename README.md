@@ -17,24 +17,15 @@ pip3 install -r requirements.txt
 To install this project on your local machine, you should run the following commands in Terminal:
 
 ```
-cd YOUR_FOLDER
 git init
-git clone https://github.com/nsu-ai/russian_g2p.git
-```
-
-The project is now in YOUR_FOLDER.
-
-To use this project, run
-```
+git clone https://github.com/nsu-ai/russian_g2p.git\
 cd russian_g2p
-python3 __init__.py
-python3
->>> from russian_g2p import *
 ```
 
 Examples of using Accentor:
 
 ```
+>>> from russian_g2p.Accentor import Accentor
 >>> your_accentor = Accentor()
 >>> your_accentor.do_accents([['конференция'], ['диалог']])
 [['конфере+нция', 'диало+г']]
@@ -46,6 +37,7 @@ Examples of using Accentor:
 Examples of using Transcriptor:
 
 ```
+>>> from russian_g2p.Grapheme2Phoneme import Grapheme2Phoneme
 >>> your_transcriptor = Grapheme2Phoneme()
 >>> your_transcriptor.word_to_phonemes('диало+г')
 ['D0', 'I', 'A', 'L', 'O0', 'K']
@@ -56,6 +48,7 @@ Examples of using Transcriptor:
 Examples of using the whole system:
 
 ```
+>>> from russian_g2p.Transcription import Transcription
 >>> your_transcriptor = Transcription()
 >>> for it in your_transcriptor.transcribe(['диало+г', 'диало+г бы+л', 'Я иду, а ты - нет.']): print(it)
 [['D0', 'I', 'A', 'L', 'O0', 'K']]
@@ -71,6 +64,42 @@ To run the automated tests for this system (may take some time), use a command
 ```
 python3 test.py
 ```
+
+## Using for a phonetic dictionary generating
+
+Phonetic dictionary is necessary for speech recognition system based on the CMU Sphinx (see https://cmusphinx.github.io/wiki/tutorialam/#data-preparation). You can use our Python script `create_phonetic_dict.py` to generate new phonetic dictionary. For example:
+
+```
+python create_phonetic_dict.py --src source_vocabulary.txt --dst 'created_phonetic_dictionary.dic' --bad 'unknown_words.txt'
+```
+
+The `source_vocabulary.txt` is a simple text file, and it has to contain all words, for which we want to generate phonetic transcriptions (each word in a single line).
+
+All generated pairs "a word" - "its transcription" will be generated and saved into the file `created_phonetic_dictionary.dic`:
+
+- each pair will be placed in a single line;
+
+- word in this pair will be separated from transcription by the space character;
+
+- phonemes in transcription also will be separated apart each other by the space characters.
+
+Finally, "bad words", which are unknown for our system, will be written into the `unknown_words.txt`. You will have the opportunity to transcribe these words manually.
+
+
+## Generating phonetic transcriptions not only for words but also for phrases
+
+Also you can automatically create phonetical transcriptions for whole phrases. In this case the coarctication and other phenomenons at the words junction can be taken into account.
+
+For this, you have to use the `demo.py` script in the following way, for example:
+
+```
+python demo.py --src source_phrases.txt --dst transcribed_phrases.txt --order pronunciation-text
+```
+
+The `source_phrases.txt` is a simple text file contained source phrases (of course, in Russian). Our system will be transcribe these phrases and save all pairs "a phrase" - "a phonetic transcritpion" into the `transcribed_phrases.txt` file. Order in such pairs can be various: the source phrase from the beginning, and then the transcription, if you specify `--order text-pronunciation`, or the transcription from the beginning, and then the corresponding phrase, if you specify `--order pronunciation-text`.
+
+Number of lines in the `transcribed_phrases.txt` can be less then number of lines in the `source_phrases.txt`, because some phrases cannot be transcribed by our system (usually, over the incompleteness of thesaurus using for accentuation).
+
 
 ## Contributing
 

@@ -289,7 +289,24 @@ class Accentor:
             assert len(prepared_phrase) == len(morphotags_of_phrase), \
                 '`{0}`: morphotags do not correspond to words!'.format(' '.join(source_phrase))
         assert len(prepared_phrase) > 0, 'Source phrase is empty!'
-        return self.__do_accents(prepared_phrase, morphotags_of_phrase)
+        try:
+            res = self.__do_accents(prepared_phrase, morphotags_of_phrase)
+        except Exception as e:
+            err_msg = str(e)
+            ok = False
+            res = []
+            for modified_phrase in self.__generate_phrases_with_jo(prepared_phrase, []):
+                try:
+                    res = self.__do_accents(modified_phrase, morphotags_of_phrase)
+                    ok = True
+                except Exception as e:
+                    ok = False
+                    err_msg = str(e)
+                if ok:
+                    break
+            if not ok:
+                raise ValueError(err_msg)
+        return res
 
     def check_source_wordform(self, checked: str) -> bool:
         if len(checked.strip()) == 0:
@@ -400,6 +417,17 @@ class Accentor:
 
     def get_bad_words(self):
         return self.__bad_words
+
+    def __generate_phrases_with_jo(self, old_phrase, new_phrase):
+        if len(old_phrase) == 0:
+            yield new_phrase
+        else:
+            found_pos = old_phrase[0].find('е')
+            while found_pos >= 0:
+                new_word = old_phrase[0][:found_pos] + 'ё' + old_phrase[0][(found_pos + 1):]
+                yield from self.__generate_phrases_with_jo(old_phrase[1:], new_phrase + [new_word])
+                found_pos = old_phrase[0].find('е', found_pos + 1)
+            yield from self.__generate_phrases_with_jo(old_phrase[1:], new_phrase + [old_phrase[0]])
 
     def __do_accents(self, words_list: list, morphotags_list: list=None) -> list:
         n = len(words_list)

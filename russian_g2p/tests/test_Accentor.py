@@ -85,11 +85,20 @@ class TestRussianAccentor1(unittest.TestCase):
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_positive10(self):
-        source_phrase = [['озеро'], ['так'],['серебристо'], ['в'], ['свете'], ['луны']]
+        source_phrase = [['озеро'], ['так'],['серебристо'], ['в'], ['свете'], ['солнца']]
         target_variants = [
-            ['о+зеро', 'та+к', 'серебри+сто', 'в', 'све+те', 'луны+']
+            ['о+зеро', 'та+к', 'серебри+сто', 'в', 'све+те', 'со+лнца']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_do_accents_positive11(self):
+        accentor = Accentor(exception_for_unknown=True)
+        source_phrase = [['зеленого'], ['камня']]
+        target_variants = [
+            ['зелё+ного', 'ка+мня']
+        ]
+        real_variants = accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_negative01(self):
@@ -111,6 +120,13 @@ class TestRussianAccentor1(unittest.TestCase):
         target_err_msg = re.escape('Source phrase is empty!')
         with self.assertRaisesRegex(AssertionError, target_err_msg):
             self.__accentor.do_accents(source_phrase)
+
+    def test_do_accents_negative04(self):
+        source_phrase = [['а-зе']]
+        target_err_msg = re.escape('Word `а-зе` is unknown!')
+        accentor = Accentor(exception_for_unknown=True, use_wiki=False)
+        with self.assertRaisesRegex(ValueError, target_err_msg):
+            accentor.do_accents(source_phrase)
 
     def test_check_source_wordform_positive01(self):
         self.assertTrue(self.__accentor.check_source_wordform('абвг'))
