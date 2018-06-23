@@ -6,6 +6,19 @@ import re
 from russian_g2p.Transcription import Transcription
 
 
+def prepare_transcription(source_transcription):
+    re_for_long_phonemes = re.compile(r'.+l$')
+    n = len(source_transcription)
+    if n == 0:
+        return []
+    new_transcription = [re_for_long_phonemes.sub('', source_transcription[0])]
+    for idx in range(1, n):
+        new_phoneme = re_for_long_phonemes.sub('', source_transcription[idx])
+        if new_phoneme != new_transcription[-1]:
+            new_transcription.append(new_phoneme)
+    return tuple(filter(lambda it: len(it) > 0, new_transcription))
+
+
 def iterate_by_texts(file_name):
     batch_size = 1000
     re_for_russian_letters = re.compile(
@@ -84,6 +97,8 @@ def main():
                 else:
                     transcription_v2 = []
                 source_text = source_lines_v2[line_idx]
+                transcription_v1 = prepare_transcription(transcription_v1)
+                transcription_v2 = prepare_transcription(transcription_v2)
                 if (len(transcription_v1) > 0) and (len(transcription_v2) > 0):
                     if args.pair_order == 'text-pronunciation':
                         dst_fp.write('{0}\t{1}\n'.format(source_text.lower(), ' '.join(transcription_v1)))
