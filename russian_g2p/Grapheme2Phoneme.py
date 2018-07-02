@@ -78,7 +78,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
         # assert (len(list(filter(lambda c: c in self.all_russian_letters, cur_word))) > 0) \
         #      or (cur_word.lower() == 'sil'), '`{0}`: this phrase is incorrect!'.format(checked_phrase)
 
-    def word_to_phonemes(self, source_word: str, next_phoneme: str = 'sil') -> list:
+    def word_to_phonemes(self, source_word: str, next_phoneme: str = 'sil', long_phonemes: bool = False) -> list:
         self.check_word(source_word)
         error_message = '`{0}`: this word is incorrect!'.format(source_word)
         prepared_word = source_word.lower()
@@ -124,9 +124,12 @@ class Grapheme2Phoneme(RulesForGraphemes):
             transcription = new_phonemes + transcription
             next_phoneme = new_phonemes[0]
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        return self.__remove_long_phonemes(self.__remove_repeats_from_transcription(transcription))
+        transcription = self.__remove_repeats_from_transcription(transcription)
+        if long_phonemes == False:
+            transcription = self.__remove_long_phonemes(transcription)
+        return transcription
 
-    def phrase_to_phonemes(self, source_phrase: str) -> list:
+    def phrase_to_phonemes(self, source_phrase: str, long_phonemes: bool = False) -> list:
         error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
         source_phrase = source_phrase.lower().replace('-', ' ')
         source_phrase = re.sub('[^a-zйцукенгшщзхъфывапролджэячсмитьбюё+ ]', '', source_phrase)
@@ -158,10 +161,12 @@ class Grapheme2Phoneme(RulesForGraphemes):
         next_phoneme = 'sil'
         phrase_transcription = list()
         for i in range(len(new_words) - 1, -1, -1):
-            phrase_transcription = self.word_to_phonemes(new_words[i], next_phoneme) + phrase_transcription
+            phrase_transcription = self.word_to_phonemes(new_words[i], next_phoneme, long_phonemes) + phrase_transcription
             next_phoneme = phrase_transcription[0]
         phrase_transcription = self.__remove_repeats_from_transcription(phrase_transcription)
-        return self.__remove_long_phonemes(phrase_transcription)
+        if long_phonemes == False:
+            phrase_transcription = self.__remove_long_phonemes(phrase_transcription)
+        return phrase_transcription
 
     def in_function_words_1(self, source_word: str) -> bool:
         return self.__remove_character(source_word, '+').lower() in self.__function_words_1
