@@ -19,7 +19,7 @@ class TestRussianG2P(unittest.TestCase):
         здра+вствуй здра+ствуй
     """
 
-    def test_word_to_phonemes_positive028(self):
+    def test_phrase_to_phonemes_positive_tlp0_001(self):
         """ Проверка словаря фонетических исключений. """
         self.assertEqual(['A', 'F', 'T', 'A', 'B0', 'I0', 'Z', 'N', 'Y', 'S'],
                          self.__g2p.word_to_phonemes('автоби+знес'))
@@ -33,7 +33,7 @@ class TestRussianG2P(unittest.TestCase):
     Rule TLP 1. In combinations of letters «СТН», «СТЛ» and «НТГ» letter Т is removed.
     """
 
-    def test_word_to_phonemes_positive021(self):
+    def test_phrase_to_phonemes_positive_tlp1_001(self):
         """ Проверка правила ПБФ21. """
         self.assertEqual(['TSH0', 'A0', 'S', 'N', 'Y', 'J0'], self.__g2p.word_to_phonemes('ча+стный'))
         self.assertEqual(['SH0', 'I', 'S', 'L0', 'I0', 'V', 'Y', 'J0'], self.__g2p.word_to_phonemes('счастли+вый'))
@@ -43,7 +43,7 @@ class TestRussianG2P(unittest.TestCase):
     Rule TLP 2. In combinations of letters «ЗДН», «ЗДЦ», «НДЦ», «РДЦ», «НДШ» and «ГДТ» letter Д is removed.
     """
 
-    def test_word_to_phonemes_positive022(self):
+    def test_phrase_to_phonemes_positive_tlp2_001(self):
         """ Проверка правила ПБФ22. """
         self.assertEqual(['P', 'O0', 'Z', 'N', 'A'], self.__g2p.word_to_phonemes('по+здно'))
         self.assertEqual(['U', 'S', 'TS', 'Y0'], self.__g2p.word_to_phonemes('уздцы+'))
@@ -57,36 +57,27 @@ class TestRussianG2P(unittest.TestCase):
     Rule TLP 3. In combinations of letters «ЛНЦ» letter Л is removed.
     """
 
-    def test_word_to_phonemes_positive023(self):
+    def test_phrase_to_phonemes_positive_tlp3_001(self):
         """ Проверка правила ПБФ23. """
         self.assertEqual(['S', 'O0', 'N', 'TS', 'Y'], self.__g2p.word_to_phonemes('со+лнце'))
 
     """
     Rule TLP 4 (устарело). Combinations of letters  «СЧ» и «ЖЧ» go to «Щ», «ТС», «ТЬС», «ТЦ», «ДС» and «ДЦ» go to «Ц», 
     «СШ» goes to «Ш», «ЗЖ» goes to «Ж».
+    Вместо него: «ТСЯ», «ТЬСЯ» на конце слова переходят в «ЦА».
     """
 
-    def test_word_to_phonemes_positive024(self):
-        """ Проверка правила ПБФ24. """
-        self.assertEqual(['SH0', 'A0', 'S0', 'T0', 'J0', 'I'], self.__g2p.word_to_phonemes('сча+стье'))
-        self.assertEqual(['P0', 'I', 'R0', 'I', 'B0', 'E0', 'SH0', 'I', 'K'],
-                         self.__g2p.word_to_phonemes('перебе+жчик'))
-
-    def test_word_to_phonemes_positive025(self):
+    def test_phrase_to_phonemes_positive_tlp4_001(self):
         """ Проверка правила ПБФ25. """
         self.assertEqual(['P0', 'I', 'R0', 'I', 'V', 'A', 'L', 'N', 'A', 'V', 'A0', 'TS', 'A'],
                          self.__g2p.word_to_phonemes('переволнова+ться'))
         self.assertEqual(['R', 'U', 'TSH0', 'A0', 'J0', 'I', 'TS', 'A'], self.__g2p.word_to_phonemes('руча+ется'))
-        self.assertEqual(['B', 'L0', 'U0', 'TS', 'Y'], self.__g2p.word_to_phonemes('блю+дце'))
-        self.assertEqual(['A', 'TS', 'A0'], self.__g2p.word_to_phonemes('отца+'))
-        self.assertEqual(['R', 'A', 'SH', 'Y0', 'P'], self.__g2p.word_to_phonemes('расши+б'))
-        self.assertEqual(['V', 'J0', 'I', 'ZH', 'A0', 'T0'], self.__g2p.word_to_phonemes('въезжа+ть'))
 
     """
     Rule TLP 5. Affixes «ОГО», «ЕГО» or «ГО» go to «ВО», except «много», «дорого», «строго» and some other adverbs.
     """
 
-    def test_word_to_phonemes_positive026(self):
+    def test_phrase_to_phonemes_positive_tlp5_001(self):
         """ Проверка правила ПБФ26. """
         self.assertEqual(['K', 'R', 'A0', 'S', 'N', 'A', 'V', 'A'], self.__g2p.word_to_phonemes('кра+сного'))
         self.assertEqual(['S0', 'I0', 'N0', 'I', 'V', 'A'], self.__g2p.word_to_phonemes('си+него'))
@@ -110,7 +101,7 @@ class TestRussianG2P(unittest.TestCase):
     
     """
 
-    def test_word_to_phonemes_positive006(self):
+    def test_phrase_to_phonemes_positive_tlp6_001(self):
         """ Проверка правила ПБФ6. """
         self.assertEqual(['A', 'N0', 'T0', 'I0', 'KH', 'R0', 'I', 'S', 'T'], self.__g2p.word_to_phonemes('анти+христ'))
         self.assertEqual(['B', 'A', 'N0', 'D0', 'U0', 'G', 'A'], self.__g2p.word_to_phonemes('бандю+га'))
@@ -118,7 +109,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['U', 'S0', 'N0', 'I0'], self.__g2p.word_to_phonemes('усни+'))
         self.assertEqual(['P', 'U', 'S0', 'T0', 'A0', 'K'], self.__g2p.word_to_phonemes('пустя+к'))
 
-    def test_word_to_phonemes_positive027(self):
+    def test_phrase_to_phonemes_positive_tlp6_002(self):
         """ Проверка правила ПБФ27. """
         self.assertEqual(['V0', 'I', 'Z0', 'D0', 'E0'], self.__g2p.word_to_phonemes('везде+'))
         self.assertEqual(['S0', 'T0', 'E0', 'P0'], self.__g2p.word_to_phonemes('сте+пь'))
@@ -130,7 +121,7 @@ class TestRussianG2P(unittest.TestCase):
      context (previous and next letter). The transformation patterns are introduced in Table 1.
     """
 
-    def test_phrase_to_phonemes_positive001_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_001(self):
         """ Checking line 1 for vowels."""
         self.assertEqual(['TSH0', 'J0', 'A0'], self.__g2p.phrase_to_phonemes('чья+'))
         self.assertEqual(['TSH0', 'J0', 'I0'], self.__g2p.phrase_to_phonemes('чьи+'))
@@ -141,7 +132,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['B0', 'E0', 'L', 'A', 'J0', 'A'], self.__g2p.phrase_to_phonemes('бе+лая'))
         self.assertEqual(['T', 'V', 'A', 'I0'], self.__g2p.phrase_to_phonemes('твои+'))
 
-    def test_phrase_to_phonemes_positive002_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_002(self):
         """ Checking line 2 for vowels."""
         self.assertEqual(['R', 'A', 'Z', 'J0', 'O0', 'M'], self.__g2p.phrase_to_phonemes('разъё+м'))
         self.assertEqual(['P', 'A', 'D', 'J0', 'U0', 'P', 'K', 'A', 'J0'], self.__g2p.phrase_to_phonemes('под ю+бкой'))
@@ -150,7 +141,7 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['V', 'Y0', 'B', 'A', 'R'], self.__g2p.phrase_to_phonemes('вы+бор'))
         self.assertEqual(['A', 'O0', 'R', 'T', 'A'], self.__g2p.phrase_to_phonemes('ао+рта'))
 
-    def test_phrase_to_phonemes_positive003_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_003(self):
         """ Checking line 3 for vowels."""
         self.assertEqual(['TSH0', 'O0'], self.__g2p.phrase_to_phonemes('чё+'))
         self.assertEqual(['M', 'A0', 'J0', 'A'], self.__g2p.phrase_to_phonemes('ма+йя'))
@@ -160,18 +151,18 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['G', 'A', 'S', 'P', 'A0', 'TSH0', 'A'], self.__g2p.phrase_to_phonemes('гаспа+чо'))
         self.assertEqual(['U', 'D', 'A0', 'TSH0', 'A'], self.__g2p.phrase_to_phonemes('уда+ча'))
 
-    def test_phrase_to_phonemes_positive004_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_004(self):
         """ Checking line 4 for vowels."""
         self.assertEqual(['M', 'A', 'J0', 'A0', 'M0', 'I'], self.__g2p.phrase_to_phonemes('майа+ми'))
         self.assertEqual(['TSH0', 'O0', 'R', 'N', 'Y', 'J0'], self.__g2p.phrase_to_phonemes('чё+рный'))
         self.assertEqual(['TSH0', 'I', 'S', 'T', 'O0', 'T', 'Y'], self.__g2p.phrase_to_phonemes('часто+ты'))
 
-    def test_phrase_to_phonemes_positive005_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_005(self):
         """ Checking line 5 for vowels."""
         self.assertEqual(['N', 'R', 'A0', 'V0', 'I', 'TS', 'A'], self.__g2p.phrase_to_phonemes('нра+вится'))
         self.assertEqual(['S', 'T', 'R0', 'I', 'ZH', 'Y0'], self.__g2p.phrase_to_phonemes('стрижи+'))
 
-    def test_phrase_to_phonemes_positive006_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_006(self):
         """ Checking line 6 for vowels."""
         self.assertEqual(['ZH', 'U', 'R0', 'I0'], self.__g2p.phrase_to_phonemes('жюри+'))
         self.assertEqual(['TS', 'E0', 'N', 'T', 'R'], self.__g2p.phrase_to_phonemes('це+нтр'))
@@ -182,13 +173,13 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['SH', 'Y', 'P', 'T', 'A0', 'T0'], self.__g2p.phrase_to_phonemes('шепта+ть'))
         self.assertEqual(['ZH', 'Y', 'V', 'O0', 'J0'], self.__g2p.phrase_to_phonemes('живо+й'))
 
-    def test_phrase_to_phonemes_positive007_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_007(self):
         """ Checking line 7 for vowels."""
         self.assertEqual(['V', 'A0', 'S0', 'A'], self.__g2p.phrase_to_phonemes('Ва+ся'))
         self.assertEqual(['V', 'A0', 'S0', 'I'], self.__g2p.phrase_to_phonemes('Ва+се'))
         self.assertEqual(['V', 'A0', 'S0', 'I'], self.__g2p.phrase_to_phonemes('Ва+си'))
 
-    def test_phrase_to_phonemes_positive008_vowels(self):
+    def test_phrase_to_phonemes_positive_tlp7_008(self):
         """ Checking line 8 for vowels."""
         self.assertEqual(['L0', 'I', 'G', 'U0', 'SH', 'K', 'A'], self.__g2p.phrase_to_phonemes('лягу+шка'))
         self.assertEqual(['M', 'A', 'R', 'O0', 'S'], self.__g2p.phrase_to_phonemes('моро+з'))
@@ -199,98 +190,98 @@ class TestRussianG2P(unittest.TestCase):
     available at GitHub russian_g2p repository.
     """
 
-    def test_phrase_to_phonemes_positive001_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_001(self):
         """ Checking line 1 for consonants in the middle"""
         self.assertEqual(['M0', 'I0', 'T0', 'K', 'A'], self.__g2p.phrase_to_phonemes('Ми+тька'))
 
-    def test_phrase_to_phonemes_positive002_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_002(self):
         """ Checking line 2 for consonants in the middle"""
         self.assertEqual(['D0', 'J0', 'A0', 'K', 'A', 'N'], self.__g2p.phrase_to_phonemes('дья+кон'))
         self.assertEqual(['S', 'A', 'N0', 'T0', 'J0', 'A0', 'G', 'A'], self.__g2p.phrase_to_phonemes('Сантья+го'))
 
-    def test_phrase_to_phonemes_positive003_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_003(self):
         """ Checking line 3 for consonants in the middle"""
         self.assertEqual(['S', 'V', 'A0', 'D0', 'B', 'A'], self.__g2p.phrase_to_phonemes('сва+дьба'))
         self.assertEqual(['ZH', 'Y', 'N0', 'I0', 'D0', 'B', 'A'], self.__g2p.phrase_to_phonemes('жени+тьба'))
 
-    def test_phrase_to_phonemes_positive004_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_004(self):
         """ Checking line 4 for consonants in the middle"""
         self.assertEqual(['D0', 'E0', 'T'], self.__g2p.phrase_to_phonemes('де+д'))
         self.assertEqual(['T0', 'E0', 'R0', 'I', 'M'], self.__g2p.phrase_to_phonemes('те+рем'))
 
-    def test_phrase_to_phonemes_positive005_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_005(self):
         """ Checking line 5 for consonants in the middle"""
         self.assertEqual(['N', 'A', 'K', 'T0', 'O0', 'M'], self.__g2p.phrase_to_phonemes('ногтё+м'))
         self.assertEqual(['L', 'A', 'K', 'T0', 'O0', 'M'], self.__g2p.phrase_to_phonemes('локтё+м'))
 
-    def test_phrase_to_phonemes_positive006_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_006(self):
         """ Checking line 6 for consonants in the middle"""
         self.assertEqual(['G', 'R', 'U0', 'S'], self.__g2p.phrase_to_phonemes('гру+з'))
         self.assertEqual(['K', 'R', 'U0', 'K'], self.__g2p.phrase_to_phonemes('кру+г'))
 
-    def test_phrase_to_phonemes_positive007_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_007(self):
         """ Checking line 7 for consonants in the middle"""
         self.assertEqual(['G', 'D0', 'E0'], self.__g2p.phrase_to_phonemes('где+'))
         self.assertEqual(['V', 'A', 'G', 'Z', 'A0', 'L'], self.__g2p.phrase_to_phonemes('вокза+л'))
 
-    def test_phrase_to_phonemes_positive008_cons_m(self):
+    def test_phrase_to_phonemes_positive_tlp8_008(self):
         """ Checking line 8 for consonants in the middle"""
         self.assertEqual(['G', 'O0', 'L0', 'F'], self.__g2p.phrase_to_phonemes('го+льф'))
         self.assertEqual(['K', 'O0', 'M0', 'I', 'K'], self.__g2p.phrase_to_phonemes('ко+мик'))
 
-    def test_phrase_to_phonemes_positive001_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_009(self):
         """ Checking line 1 for consonants in the end"""
         self.assertEqual(['G', 'R0', 'I0', 'P'], self.__g2p.phrase_to_phonemes('гри+б'))
         self.assertEqual(['T', 'R', 'U0', 'P'], self.__g2p.phrase_to_phonemes('тру+п'))
 
-    def test_phrase_to_phonemes_positive002_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_010(self):
         """ Checking line 2 for consonants in the end"""
         self.assertEqual(['S', 'K', 'O0', 'R', 'P0', 'S', 'T', 'A0', 'R', 'A', 'J0', 'A'],
                          self.__g2p.phrase_to_phonemes('ско+рбь ста+рая'))
         self.assertEqual(['G', 'R', 'U0', 'S0', 'T0', 'P', 'R0', 'I', 'SH', 'L', 'A0'],
                          self.__g2p.phrase_to_phonemes('гру+сть пришла+'))
 
-    def test_phrase_to_phonemes_positive003_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_011(self):
         """ Checking line 3 for consonants in the end"""
         self.assertEqual(['S', 'K', 'O0', 'R', 'P0', 'V0', 'E0', 'TSH0', 'N', 'A', 'J0', 'A'],
                          self.__g2p.phrase_to_phonemes('ско+рбь ве+чная'))
         self.assertEqual(['G', 'R', 'U0', 'S0', 'T0', 'V0', 'E0', 'TSH0', 'N', 'A', 'J0', 'A'],
                          self.__g2p.phrase_to_phonemes('гру+сть ве+чная'))
 
-    def test_phrase_to_phonemes_positive004_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_012(self):
         """ Checking line 4 for consonants in the end"""
         self.assertEqual(['S', 'K', 'O0', 'R', 'B0', 'G', 'O0', 'R0', 'K', 'A', 'J0', 'A'],
                          self.__g2p.phrase_to_phonemes('ско+рбь го+рькая'))
         self.assertEqual(['G', 'R', 'U0', 'Z0', 'D0', 'G', 'O0', 'R0', 'K', 'A', 'J0', 'A'],
                          self.__g2p.phrase_to_phonemes('гру+сть го+рькая'))
 
-    def test_phrase_to_phonemes_positive005_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_013(self):
         """ Checking line 5 for consonants in the end"""
         self.assertEqual(['S', 'K', 'O0', 'R', 'P0', 'U', 'ZH', 'E0'], self.__g2p.phrase_to_phonemes('ско+рбь уже+'))
         self.assertEqual(['G', 'R', 'U0', 'S0', 'T0', 'U', 'ZH', 'E0'], self.__g2p.phrase_to_phonemes('гру+сть уже+'))
 
-    def test_phrase_to_phonemes_positive006_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_014(self):
         """ Checking line 6 for consonants in the end"""
         self.assertEqual(['G', 'R0', 'I0', 'P', 'S', 'V0', 'E0', 'ZH', 'Y', 'J0'],
                          self.__g2p.phrase_to_phonemes('гри+б све+жий'))
         self.assertEqual(['T', 'R', 'U0', 'P', 'S', 'V0', 'E0', 'ZH', 'Y', 'J0'],
                          self.__g2p.phrase_to_phonemes('тру+п све+жий'))
 
-    def test_phrase_to_phonemes_positive007_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_015(self):
         """ Checking line 7 for consonants in the end"""
         self.assertEqual(['G', 'R0', 'I0', 'P', 'V0', 'A0', 'L', 'Y', 'J0'],
                          self.__g2p.phrase_to_phonemes('гри+б вя+лый'))
         self.assertEqual(['T', 'R', 'U0', 'P', 'V0', 'A0', 'L', 'Y', 'J0'],
                          self.__g2p.phrase_to_phonemes('тру+п вя+лый'))
 
-    def test_phrase_to_phonemes_positive008_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_016(self):
         """ Checking line 8 for consonants in the end"""
         self.assertEqual(['G', 'R0', 'I0', 'B', 'G', 'A', 'R0', 'A0', 'TSH0', 'I', 'J0'],
                          self.__g2p.phrase_to_phonemes('гри+б горя+чий'))
         self.assertEqual(['T', 'R', 'U0', 'B', 'G', 'A', 'R0', 'A0', 'TSH0', 'I', 'J0'],
                          self.__g2p.phrase_to_phonemes('тру+п горя+чий'))
 
-    def test_phrase_to_phonemes_positive009_cons_e(self):
+    def test_phrase_to_phonemes_positive_tlp8_017(self):
         """ Checking line 9 for consonants in the end"""
         self.assertEqual(['G', 'R0', 'I0', 'P', 'U', 'ZH', 'E0'], self.__g2p.phrase_to_phonemes('гри+б уже+'))
         self.assertEqual(['T', 'R', 'U0', 'P', 'U', 'ZH', 'E0'], self.__g2p.phrase_to_phonemes('тру+п уже+'))
@@ -298,9 +289,10 @@ class TestRussianG2P(unittest.TestCase):
     """
     Rule TLP 9. If i and i+1 are the same phonemes, then they are substituted with a corresponding long variant 
     (e.g. [A0 A0] → [A0l]).
+    Обновлено: A A0 -> A0l, A0 A0 -> A0l
     """
 
-    def test_word_to_phonemes_positive007(self):
+    def test_phrase_to_phonemes_positive_tlp9_001(self):
         """ Проверка правила ПБФ7. """
         # self.assertEqual(['I', 'N0', 'T0', 'I', 'L0l', 'I', 'G0', 'E0', 'N', 'T'],
         #                  self.__g2p.word_to_phonemes('интеллиге+нт'))
@@ -318,8 +310,15 @@ class TestRussianG2P(unittest.TestCase):
     """
     Rule TLP 10. If i is a prefix of i+1, then they are substituted with a corresponding long variant 
     of the i+1 phoneme (e.g. [Z ZH] → [ZHl]).
+    Обновлено: такие тройки фонем нужно смотреть в специальном dict.
     """
 
+    def test_phrase_to_phonemes_positive_tlp10_001(self):
+        """ Проверка TLP 10. """
+        self.assertEqual(['B', 'L0', 'U0', 'TS', 'Y'], self.__g2p.word_to_phonemes('блю+дце'))
+        self.assertEqual(['A', 'TS', 'A0'], self.__g2p.word_to_phonemes('отца+'))
+        self.assertEqual(['R', 'A', 'SH', 'Y0', 'P'], self.__g2p.word_to_phonemes('расши+б'))
+        self.assertEqual(['V', 'J0', 'I', 'ZH', 'A0', 'T0'], self.__g2p.word_to_phonemes('въезжа+ть'))
 
     def test_word_to_phonemes_positive029(self):
         """ Проверка корректности обработки прописных букв. """
