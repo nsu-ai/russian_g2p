@@ -124,9 +124,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
             transcription = new_phonemes + transcription
             next_phoneme = new_phonemes[0]
         assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
-        transcription = self.__remove_repeats_from_transcription(transcription)
-        if long_phonemes == False:
-            transcription = self.__remove_long_phonemes(transcription)
+        transcription = self.__remove_repeats_from_transcription(transcription, long_phonemes)
         return transcription
 
     def phrase_to_phonemes(self, source_phrase: str, long_phonemes: bool = False) -> list:
@@ -163,9 +161,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
         for i in range(len(new_words) - 1, -1, -1):
             phrase_transcription = self.word_to_phonemes(new_words[i], next_phoneme, long_phonemes) + phrase_transcription
             next_phoneme = phrase_transcription[0]
-        phrase_transcription = self.__remove_repeats_from_transcription(phrase_transcription)
-        if long_phonemes == False:
-            phrase_transcription = self.__remove_long_phonemes(phrase_transcription)
+        phrase_transcription = self.__remove_repeats_from_transcription(phrase_transcription, long_phonemes)
         return phrase_transcription
 
     def in_function_words_1(self, source_word: str) -> bool:
@@ -211,30 +207,15 @@ class Grapheme2Phoneme(RulesForGraphemes):
         del vocal_letters
         return letters_list
 
-    def __remove_repeats_from_transcription(self, source_transcription: list) -> list:
+    def __remove_repeats_from_transcription(self, source_transcription: list, long_phonemes: bool = False) -> list:
         prepared_transcription = list()
         previous_phoneme = ''
         for current_phoneme in source_transcription:
             if re.sub(r'[0l]', '', current_phoneme) != re.sub(r'[0l]', '', previous_phoneme):
                 prepared_transcription.append(current_phoneme)
+            elif long_phonemes == False:
+                prepared_transcription[-1] = current_phoneme
             else:
                 prepared_transcription[-1] = current_phoneme + 'l'
             previous_phoneme = current_phoneme
         return prepared_transcription
-
-    def __remove_long_phonemes(self, source_transcription: list) -> list:
-
-        def postprocess_phoneme(src):
-            if (len(src) > 1) and (src.endswith('l')):
-                return src[:-1]
-            return src
-
-        n = len(source_transcription)
-        if n == 0:
-            return []
-        new_transcription = [postprocess_phoneme(source_transcription[0])]
-        for idx in range(1, n):
-            new_phoneme = postprocess_phoneme(source_transcription[idx])
-            if new_phoneme != new_transcription[-1]:
-                new_transcription.append(new_phoneme)
-        return list(filter(lambda it: len(it) > 0, new_transcription))
