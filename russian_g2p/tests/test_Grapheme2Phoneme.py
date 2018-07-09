@@ -213,8 +213,11 @@ class TestRussianG2P(unittest.TestCase):
         self.assertEqual(['J0', 'I0', 'TSH0', 'N0', 'I', 'TS', 'U'], self.__g2p.word_to_phonemes('яи+чницу'))
 
     def test_word_to_phonemes_positive033(self):
-        """ Проверка, что костыль для удаления длинных фонем работает """
-        self.assertEqual(['A', 'B0', 'I', 'S0', 'I0', 'N0', 'I'], self.__g2p.word_to_phonemes('абисси+нии'))
+        """ Проверка включения/выключения длинных фонем """
+        self.assertEqual(['S', 'A', 'M', 'A', 'TS', 'E0', 'N', 'K', 'A'],
+                         self.__g2p.word_to_phonemes('самооце+нка'))
+        self.assertEqual(['S', 'A', 'M', 'Al', 'TS', 'E0', 'N', 'K', 'A'],
+                         self.__g2p.word_to_phonemes('самооце+нка', long_phonemes=True))
 
     def test_word_to_phonemes_negative001(self):
         """ Генерация исключения, если аргумент - пустая строка. """
@@ -427,6 +430,13 @@ class TestRussianG2P(unittest.TestCase):
         """ Проверка стыка знаменательного и служебного слов в ситуации, когда служебное слово - частица с дефисом. """
         self.assertEqual(['D', 'A', 'V', 'A0', 'J0', 'K', 'A', 'R', 'A', 'Z', 'B0', 'I', 'R0', 'O0', 'M', 'S0', 'A'],
                          self.__g2p.phrase_to_phonemes('дава+й-ка разберё+мся'))
+
+    def test_phrase_to_phonemes_positive021(self):
+        """ Проверка включения/выключения длинных гласных """
+        self.assertEqual(['S', 'A', 'M', 'A', 'TS', 'E0', 'N', 'K', 'A'],
+                         self.__g2p.phrase_to_phonemes('самооце+нка'))
+        self.assertEqual(['S', 'A', 'M', 'Al', 'TS', 'E0', 'N', 'K', 'A'],
+                         self.__g2p.phrase_to_phonemes('самооце+нка', long_phonemes=True))
 
     def test_phrase_to_phonemes_negative001(self):
         """ Генерация исключения, если аргумент - пустая строка. """

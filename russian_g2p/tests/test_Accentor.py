@@ -101,6 +101,13 @@ class TestRussianAccentor1(unittest.TestCase):
         real_variants = accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
+    def test_do_accents_positive12(self):
+        accentor = Accentor(exception_for_unknown=True)
+        source_phrase = [['ого']]
+        target_variants = ['ого+']
+        real_variants = accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
     def test_do_accents_negative01(self):
         source_phrase_n_morphotags = [['подарок', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
             ['для', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing'],
