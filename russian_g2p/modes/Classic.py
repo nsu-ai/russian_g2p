@@ -14,24 +14,39 @@ class ClassicMode(Phonetics):
 
             'б': Consonant('B', 'P', 'B', 'B0', 'P0', 'B0'),
             'п': Consonant('P', 'P', 'B', 'P0', 'P0', 'B0'),
+
             'в': Consonant('V', 'F', 'V', 'V0', 'F0', 'V0'),
             'ф': Consonant('F', 'F', 'V', 'F0', 'F0', 'V0'),
+
             'г': Consonant('G', 'K', 'G', 'G0', 'K0', 'G0'),
             'к': Consonant('K', 'K', 'G', 'K0', 'K0', 'G0'),
-            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0'),
-            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0'),
-            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
-            'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
-            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
-            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
+
             'h': Consonant('GH', 'KH', 'GH', 'GH0', 'KH0', 'GH0'),  # боh, аhа, буhалтер
             'х': Consonant('KH', 'KH', 'GH', 'KH0', 'KH0', 'GH0'),
-            'z': Consonant('DZ', 'TS', 'DZ', 'DZ0', 'TS0', 'DZ0'),  # zета, гоzилла
+
+            'д': Consonant('D', 'T', 'D', 'D0', 'T0', 'D0'),
+            'т': Consonant('T', 'T', 'D', 'T0', 'T0', 'D0'),
+
+            'з': Consonant('Z', 'S', 'Z', 'Z0', 'S0', 'Z0'),
+            'с': Consonant('S', 'S', 'Z', 'S0', 'S0', 'Z0'),
+
+            'ж': Consonant('ZH', 'SH', 'ZH', 'ZH', 'SH', 'ZH'),
+            'ш': Consonant('SH', 'SH', 'ZH', 'SH', 'SH', 'ZH'),
+
+            'z': Consonant('DZ', 'TS', 'DZ', 'DZ', 'TS', 'DZ'),  # zета, Zагоев
             'ц': Consonant('TS', 'TS', 'DZ', 'TS', 'TS', 'DZ'),
-            'j': Consonant('DZH', 'TSH', 'DZH', 'DZH', 'TSH', 'DZH'),  # маjонг, лоjия
+
+            'j': Consonant('DZH0', 'TSH0', 'DZH0', 'DZH0', 'TSH0', 'DZH0'),
             'ч': Consonant('TSH0', 'TSH0', 'DZH0', 'TSH0', 'TSH0', 'DZH0'),
-            'g': Consonant('ZH0', 'SH0', 'ZH0', 'ZH0', 'SH0', 'ZH0'),  # доggи
+
+            'g': Consonant('ZH0', 'SH0', 'ZH0', 'ZH0', 'SH0', 'ZH0'),  # доggи, приеggать
             'щ': Consonant('SH0', 'SH0', 'ZH0', 'SH0', 'SH0', 'ZH0'),
+
+            'd': Consonant('DZ0', 'TS0', 'DZ0', 'DZ0', 'TS0', 'DZ0'),  # Dюба
+            't': Consonant('TS0', 'TS0', 'DZ0', 'TS0', 'TS0', 'DZ0'),
+
+            'x': Consonant('DZH', 'TSH', 'DZH', 'DZH', 'TSH', 'DZH'),  # маxонг, лоxия
+            's': Consonant('TSH', 'TSH', 'DZH', 'TSH', 'TSH', 'DZH'),  # поsтанники
 
             # считаем, что J0 уже добавили, где нужно
             'ё+': Vocal('O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0', 'O0'),

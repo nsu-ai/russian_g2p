@@ -15,10 +15,14 @@ class Grapheme2Phoneme(RulesForGraphemes):
 
         self.__silence_name = 'sil'
 
-        self.__function_words_1 = {'без', 'безо', 'близ', 'в', 'во', 'вне', 'для', 'до', 'за', 'из', 'изо', 'к', 'ко',
-                                   'меж', 'на', 'над', 'о', 'об', 'обо', 'от', 'ото', 'по', 'под', 'подо', 'пред',
-                                   'предо', 'при', 'про', 'с', 'со', 'у', 'чрез', 'через', 'не', 'ни', 'из-за',
-                                   'из-подо', 'из-под', 'а-ля', 'по-над', 'по-за'}
+        #self.__function_words_1 = {'без', 'безо', 'близ', 'в', 'во', 'вне', 'для', 'до', 'за', 'из', 'изо', 'к', 'ко',
+        #                           'меж', 'на', 'над', 'о', 'об', 'обо', 'от', 'ото', 'по', 'под', 'подо', 'пред',
+        #                           'предо', 'перед', 'при', 'про', 'с', 'со', 'у', 'чрез', 'через', 'не', 'ни', 'из-за',
+        #                           'из-подо', 'из-под', 'а-ля', 'по-над', 'по-за'}
+
+        self.__function_words_1 = {'без', 'близ', 'в', 'из', 'меж', 'над', 'об', 'под', 'пред', 'перед', 'чрез', 'через',
+                                   'из-под', 'по-над'}
+
         self.__function_words_2 = {'бы', 'б', 'де', 'ли', 'же', '-то', '-ка', '-либо', '-нибудь', '-таки'}
 
         self.__exclusions_dictionary = None
@@ -156,12 +160,19 @@ class Grapheme2Phoneme(RulesForGraphemes):
             last_letter = clear_word[-1]
         # разбираем фразу
         next_phoneme = 'sil'
-        phrase_transcription = list()
+        phrase_transcription = []
         for i in range(len(new_words) - 1, -1, -1):
-            phrase_transcription = self.word_to_phonemes(new_words[i], next_phoneme) + phrase_transcription
-            next_phoneme = phrase_transcription[0]
-        phrase_transcription = self.__remove_repeats_from_transcription(phrase_transcription)
-        return self.__remove_long_phonemes(phrase_transcription)
+            new_transcription = self.word_to_phonemes(new_words[i], next_phoneme)
+            new_transcription = self.__remove_repeats_from_transcription(new_transcription)
+            new_transcription = self.__remove_long_phonemes(new_transcription)
+            phrase_transcription = [new_transcription] + phrase_transcription
+            next_phoneme = new_transcription[0]
+        final_transcription = list()
+        for word_transcription in phrase_transcription:
+            final_transcription += word_transcription
+        final_transcription = self.__remove_repeats_from_transcription(final_transcription, full=False)
+        final_transcription = self.__remove_long_phonemes(final_transcription)
+        return final_transcription
 
     def in_function_words_1(self, source_word: str) -> bool:
         return self.__remove_character(source_word, '+').lower() in self.__function_words_1
@@ -176,12 +187,15 @@ class Grapheme2Phoneme(RulesForGraphemes):
         prepared_word = cur_word.lower().strip()
         replace_pairs = [('стн', 'сн'), ('стл', 'сл'), ('нтг', 'нг'), ('здн', 'зн'), ('здц', 'зц'),
                          ('ндц', 'нц'), ('рдц', 'рц'), ('ндш', 'нш'), ('гдт', 'гт'), ('лнц', 'нц'),
-                         ('сч', 'щ'), ('жч', 'щ'), ('сш', 'ш'), ('зж', 'ж'),
-                         ('тс', 'ц'), ('тьс', 'ц'), ('тц', 'ц'), ('дс', 'ц'), ('дц', 'ц'),
-                         ('дз', 'z'), ('дж', 'j')]
-        if (len(prepared_word) > 2 and prepared_word[-3:] in {'ого', 'его'}) or \
+                         ]
+        if (len(prepared_word) > 2 and prepared_word[-3:] == 'его') or \
+                (len(prepared_word) > 3 and prepared_word[-3:] == 'ого') or \
                 (len(prepared_word) > 3 and prepared_word[-4:] in {'о+го', 'е+го'}):
             prepared_word = prepared_word[:-2] + 'ва'
+        elif len(prepared_word) > 2 and prepared_word[-3:] == 'тся':
+            prepared_word = prepared_word[:-3] + 'ца'
+        elif len(prepared_word) > 3 and prepared_word[-4:] == 'ться':
+            prepared_word = prepared_word[:-4] + 'ца'
         for repl_from, repl_to in replace_pairs:
             prepared_word = prepared_word.replace(repl_from, repl_to)
         return prepared_word
@@ -205,15 +219,73 @@ class Grapheme2Phoneme(RulesForGraphemes):
         del vocal_letters
         return letters_list
 
-    def __remove_repeats_from_transcription(self, source_transcription: list) -> list:
+    def __remove_repeats_from_transcription(self, source_transcription: list, full: bool=True) -> list:
+        def equal(s_l: str, s_r: str) -> bool:
+            s_l_ = re.sub(r'[l]', '', s_l)
+            s_r_ = re.sub(r'[l]', '', s_r)
+            ans = s_l_ == s_r_
+            return ans
+
+        def equal_almost(s_l: str, s_r: str) -> bool:
+            s_l_ = re.sub(r'[l]', '', s_l)
+            s_r_ = re.sub(r'[0l]', '', s_r)
+            ans = s_l_ == s_r_
+            return ans
+
+        phomene_pairs = {('Z', 'ZH'): 'ZH',
+                         ('Z', 'ZH0'): 'ZH0', ('Z0', 'ZH0'): 'ZH0',
+
+                         ('D', 'Z'): 'DZ', ('D', 'DZ'): 'DZ',
+                         ('D', 'Z0'): 'DZ0', ('D0', 'Z0'): 'DZ0', ('D', 'DZ0'): 'DZ0', ('D0', 'DZ0'): 'DZ0',
+
+                         ('D', 'ZH'): 'DZH', ('D', 'DZH'): 'DZH',
+                         ('D', 'ZH0'): 'DZ0', ('D0', 'ZH0'): 'DZH0', ('D', 'DZH0'): 'DZH0', ('D0', 'DZH0'): 'DZH0',
+
+                         ('T', 'S'): 'TS', ('T', 'TS'): 'TS',
+                         ('T', 'S0'): 'TS0', ('T0', 'S0'): 'TS0', ('T', 'TS0'): 'TS0', ('T0', 'TS0'): 'TS0',
+
+                         ('T', 'SH'): 'TSH', ('T', 'TSH'): 'TSH',
+                         ('T', 'SH0'): 'TSH0', ('T0', 'SH0'): 'TSH0', ('T', 'TSH0'): 'TSH0', ('T0', 'TSH0'): 'TSH0',
+
+                         ('S', 'SH'): 'SH',
+                         ('S', 'TSH0'): 'SH0', ('SH', 'TSH0'): 'SH0',
+                         }
+
+        def conjugate(s_l: str, s_r: str) -> str:
+            s_l_ = re.sub(r'[l]', '', s_l)
+            s_r_ = re.sub(r'[l]', '', s_r)
+            ans = phomene_pairs[(s_l_, s_r_)] if (s_l_, s_r_) in phomene_pairs else ''
+            return ans
+
         prepared_transcription = list()
         previous_phoneme = ''
-        for current_phoneme in source_transcription:
-            if re.sub(r'[0l]', '', current_phoneme) != re.sub(r'[0l]', '', previous_phoneme):
-                prepared_transcription.append(current_phoneme)
-            else:
-                prepared_transcription[-1] = current_phoneme + 'l'
-            previous_phoneme = current_phoneme
+        if full:
+            for current_phoneme in source_transcription:
+                if equal(previous_phoneme, current_phoneme):
+                    #  1st case: S0 S0 -> S0l
+                    prepared_transcription[-1] = current_phoneme + 'l'
+                elif equal_almost(previous_phoneme, current_phoneme):
+                    #  2nd case: S S0 -> S0l
+                    prepared_transcription[-1] = current_phoneme + 'l'
+                else:
+                    conj = conjugate(previous_phoneme, current_phoneme)
+                    if len(conj) > 0:
+                        #  3rd case: S SH -> SHl
+                        prepared_transcription[-1] = conj
+                    else:
+                        prepared_transcription.append(current_phoneme)
+                previous_phoneme = prepared_transcription[-1]
+        else:
+            for current_phoneme in source_transcription:
+                if equal(previous_phoneme, current_phoneme):
+                    #  1st case: S0 S0 -> S0l
+                    prepared_transcription[-1] = current_phoneme + 'l'
+                elif equal_almost(previous_phoneme, current_phoneme):
+                    #  2nd case: S S0 -> S0l
+                    prepared_transcription[-1] = current_phoneme + 'l'
+                else:
+                    prepared_transcription.append(current_phoneme)
+                previous_phoneme = prepared_transcription[-1]
         return prepared_transcription
 
     def __remove_long_phonemes(self, source_transcription: list) -> list:
@@ -232,3 +304,4 @@ class Grapheme2Phoneme(RulesForGraphemes):
             if new_phoneme != new_transcription[-1]:
                 new_transcription.append(new_phoneme)
         return list(filter(lambda it: len(it) > 0, new_transcription))
+

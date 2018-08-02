@@ -18,7 +18,7 @@ class RulesForGraphemes:
             else:
                 case = 2
         elif letters_list[cur_pos - 1] in self.mode.hard_and_soft_signs:
-            if letters_list[cur_pos] in self.mode.gen_vocals_soft:
+            if letters_list[cur_pos] in self.mode.gen_vocals_soft | {'о', 'о+'}:
                 new_phonemes_list.append('J0')
             if cur_pos + 1 >= len(letters_list):
                 case = 1
