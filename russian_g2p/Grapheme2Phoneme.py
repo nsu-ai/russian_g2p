@@ -163,14 +163,15 @@ class Grapheme2Phoneme(RulesForGraphemes):
         phrase_transcription = []
         for i in range(len(new_words) - 1, -1, -1):
             new_transcription = self.word_to_phonemes(new_words[i], next_phoneme)
-            new_transcription = self.__remove_repeats_from_transcription(new_transcription)
+            new_transcription = self.__remove_repeats_from_transcription(new_transcription, full=True)
             new_transcription = self.__remove_long_phonemes(new_transcription)
             phrase_transcription = [new_transcription] + phrase_transcription
             next_phoneme = new_transcription[0]
+        return phrase_transcription
         final_transcription = list()
         for word_transcription in phrase_transcription:
             final_transcription += word_transcription
-        final_transcription = self.__remove_repeats_from_transcription(final_transcription, full=False)
+        final_transcription = self.__remove_repeats_from_transcription(final_transcription, full=True)
         final_transcription = self.__remove_long_phonemes(final_transcription)
         return final_transcription
 
@@ -261,10 +262,12 @@ class Grapheme2Phoneme(RulesForGraphemes):
         previous_phoneme = ''
         if full:
             for current_phoneme in source_transcription:
-                if equal(previous_phoneme, current_phoneme):
+                if equal(previous_phoneme, current_phoneme) \
+                        and current_phoneme not in self.mode.vocals_phonemes:
                     #  1st case: S0 S0 -> S0l
                     prepared_transcription[-1] = current_phoneme + 'l'
-                elif equal_almost(previous_phoneme, current_phoneme):
+                elif equal_almost(previous_phoneme, current_phoneme) \
+                        and current_phoneme not in self.mode.vocals_phonemes:
                     #  2nd case: S S0 -> S0l
                     prepared_transcription[-1] = current_phoneme + 'l'
                 else:
@@ -277,10 +280,12 @@ class Grapheme2Phoneme(RulesForGraphemes):
                 previous_phoneme = prepared_transcription[-1]
         else:
             for current_phoneme in source_transcription:
-                if equal(previous_phoneme, current_phoneme):
+                if equal(previous_phoneme, current_phoneme) \
+                        and current_phoneme not in self.mode.vocals_phonemes:
                     #  1st case: S0 S0 -> S0l
                     prepared_transcription[-1] = current_phoneme + 'l'
-                elif equal_almost(previous_phoneme, current_phoneme):
+                elif equal_almost(previous_phoneme, current_phoneme)\
+                        and current_phoneme not in self.mode.vocals_phonemes:
                     #  2nd case: S S0 -> S0l
                     prepared_transcription[-1] = current_phoneme + 'l'
                 else:
@@ -304,4 +309,3 @@ class Grapheme2Phoneme(RulesForGraphemes):
             if new_phoneme != new_transcription[-1]:
                 new_transcription.append(new_phoneme)
         return list(filter(lambda it: len(it) > 0, new_transcription))
-
