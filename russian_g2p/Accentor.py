@@ -94,7 +94,6 @@ class Accentor:
         del self.__function_words
 
     def get_correct_omograph_wiki(self, root_text, cur_word, morphotag='X'):
-
         '''
         Разбор омографии.
         Использование морфологической информации о 
@@ -134,7 +133,7 @@ class Accentor:
                     result = ''.join(result)
                 else:
                     continue
-                if result.replace('ё', 'е́').find('́') != -1:
+                if result.replace('ё', 'е́').find('') != -1:
                     shallow_vars.add(result)
                 if header.text_content()[0] == morphotag[0]:
                     #print('The tags are equal')
@@ -193,17 +192,15 @@ class Accentor:
                 results.add(result)
         #print(shallow_vars)
         if len(list(shallow_vars)) == 1:
-            if list(shallow_vars)[0].replace('ё', 'е+').replace('́', '') == cur_word:
-                return [list(shallow_vars)[0].replace('ё', 'ё+').replace('́', '+').replace('́', '+')]
+            if list(shallow_vars)[0].replace('ё', 'е+').replace('', '') == cur_word:
+                return [list(shallow_vars)[0].replace('ё', 'ё+').replace('', '+').replace('', '+')]
         #print(results)
         if len(list(results)) != 1:
             return []
-        best_results = [variant.replace('́', '+') for variant in results]
-
+        best_results = [variant.replace('', '+') for variant in results]
         return list(best_results)
 
     def get_simple_form_wiki(self, root_text, form):
-
         '''
         Непосредственное нахождение релевантной формы
         и ударение без морфологической информации.
@@ -212,33 +209,33 @@ class Accentor:
         rel_forms = set()
         for header in root.findall('.//*[@class="Cyrl headword"][@lang="ru"]'):
             header_text = header.text_content().replace('ё', 'е́')
-            header_text_best = header.text_content().replace('ё', 'ё+').replace('́', '+')
-            if header_text.replace('́', '') == form:
-                if header_text.find('́') != -1:
+            header_text_best = header.text_content().replace('ё', 'ё+').replace('', '+')
+            if header_text.replace('', '') == form:
+                if header_text.find('') != -1:
                     rel_forms.add(header_text_best)
         for mention in root.findall('.//i[@class="Cyrl mention"][@lang="ru"]'):
             mention_text = mention.text_content().replace('ё', 'е́')
-            mention_text_best = mention.text_content().replace('ё', 'ё+').replace('́', '+')
-            if mention_text.replace('́', '') == form:
-                if mention_text.replace('ё', 'е́').find('́') != -1:
+            mention_text_best = mention.text_content().replace('ё', 'ё+').replace('', '+')
+            if mention_text.replace('', '') == form:
+                if mention_text.replace('ё', 'е́').find('') != -1:
                     rel_forms.add(mention_text_best)
         for mention in root.findall('.//b[@class="Cyrl"][@lang="ru"]'):
             mention_text = mention.text_content().replace('ё', 'е́')
-            mention_text_best = mention.text_content().replace('ё', 'ё+').replace('́', '+')
-            if mention_text.replace('́', '') == form:
-                if mention_text.replace('ё', 'е́').find('́') != -1:
+            mention_text_best = mention.text_content().replace('ё', 'ё+').replace('', '+')
+            if mention_text.replace('', '') == form:
+                if mention_text.replace('ё', 'е́').find('') != -1:
                     rel_forms.add(mention_text_best)
             elif mention_text.find('(') != -1:
-                if mention_text.replace('́', '').find(form) != -1:
-                    if mention_text.find('́') != -1:
-                        rel_forms.add(mention_text_best[mention_text.replace('́', '').find(form):])
+                if mention_text.replace('', '').find(form) != -1:
+                    if mention_text.find('') != -1:
+                        rel_forms.add(mention_text_best[mention_text.replace('', '').find(form):])
                 elif re.sub(r'[\(\)́]', '', mention_text) == form:
                     rel_forms.add(re.sub(r'[\(\)]', '', mention_text_best))
         for target in root.xpath('.//span[@class="Cyrl"][@lang="ru"]'):
             one_form = target.text_content()
-            if one_form.replace('ё', 'е́').replace('́', '') == form:
-                if one_form.replace('ё', 'е́').find('́') != -1:
-                    rel_forms.add(one_form.replace('ё', 'ё́').replace('́', '+'))
+            if one_form.replace('ё', 'е́').replace('', '') == form:
+                if one_form.replace('ё', 'е́').find('') != -1:
+                    rel_forms.add(one_form.replace('ё', 'ё́').replace('', '+'))
         results = list(rel_forms)
         if len(results) == 2:
             if results[0].replace('ё', 'е') == results[1].replace('ё', 'е'):
