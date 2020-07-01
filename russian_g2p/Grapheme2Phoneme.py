@@ -28,7 +28,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
         self.__exclusions_dictionary = None
         exclusions_dictionary_name = os.path.join(os.path.dirname(__file__), 'data', 'Phonetic_Exclusions.txt')
         assert os.path.isfile(exclusions_dictionary_name), \
-            'File `{0}` does not exist!'.format(exclusions_dictionary_name)
+            f'File `{exclusions_dictionary_name}` does not exist!'
         self.__exclusions_dictionary = self.load_exclusions_dictionary(exclusions_dictionary_name)
         self.__re_for_phrase_split = re.compile(r'[\s\-]+', re.U)
 
@@ -50,8 +50,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
             cur_line = dictionary_file.readline()
             cur_line_index = 1
             while len(cur_line):
-                error_message = "File `{0}`, line {1}: description of this word and its transformation is " \
-                                "incorrect!".format(file_name, cur_line_index)
+                error_message = f"File `{file_name}`, line {cur_line_index}: description of this word and its transformation is " \
+                                "incorrect!"
                 prepared_line = cur_line.strip()
                 if len(prepared_line):
                     words_of_line = prepared_line.lower().split()
@@ -69,22 +69,22 @@ class Grapheme2Phoneme(RulesForGraphemes):
     def check_word(self, checked_word: str):
         assert len(checked_word) > 0, 'Checked word is empty string!'
         assert all([c in (self.mode.all_russian_letters | {'+', '-'}) for c in checked_word.lower()]), \
-            '`{0}`: this word contains inadmissible characters!'.format(checked_word)
+            f'`{checked_word}`: this word contains inadmissible characters!'
         assert len(list(filter(lambda c: c in self.mode.all_russian_letters, checked_word.lower()))) > 0, \
-            '`{0}`: this word is incorrect!'.format(checked_word)
+            f'`{checked_word}`: this word is incorrect!'
 
     def check_phrase(self, checked_phrase: str):
         assert len(checked_phrase) > 0, 'Checked phrase is empty string!'
         assert all([c in (self.mode.all_russian_letters | {' ', '+', '-'} | {'s', 'i', 'l'})
                     for c in checked_phrase.lower()]), \
-            '`{0}`: this phrase contains inadmissible characters!'.format(checked_phrase)
+            f'`{checked_phrase}`: this phrase contains inadmissible characters!'
         # for cur_word in self.__re_for_phrase_split.split(checked_phrase.lower()):
         # assert (len(list(filter(lambda c: c in self.all_russian_letters, cur_word))) > 0) \
-        #      or (cur_word.lower() == 'sil'), '`{0}`: this phrase is incorrect!'.format(checked_phrase)
+        #      or (cur_word.lower() == 'sil'), f'`{checked_phrase}`: this phrase is incorrect!'
 
     def word_to_phonemes(self, source_word: str, next_phoneme: str = 'sil') -> list:
         self.check_word(source_word)
-        error_message = '`{0}`: this word is incorrect!'.format(source_word)
+        error_message = f'`{source_word}`: this word is incorrect!'
         prepared_word = source_word.lower()
         if prepared_word in self.__exclusions_dictionary:
             prepared_word = self.__exclusions_dictionary[prepared_word]
@@ -92,8 +92,8 @@ class Grapheme2Phoneme(RulesForGraphemes):
             counter = len(prepared_word) - len(re.sub(r'[аоуэыияёею]', '', prepared_word))
             if counter > 1:
                 if self.exception_for_nonaccented:
-                    raise ValueError('`{0}`: the accent for this word is unknown!'.format(source_word))
-                warnings.warn('`{0}`: the accent for this word is unknown!'.format(source_word))
+                    raise ValueError(f'`{source_word}`: the accent for this word is unknown!')
+                warnings.warn(f'`{source_word}`: the accent for this word is unknown!')
         if prepared_word in self.__exclusions_dictionary:
             prepared_word = self.__exclusions_dictionary[prepared_word]
         prepared_word = prepared_word.replace('\'', '')
@@ -127,11 +127,11 @@ class Grapheme2Phoneme(RulesForGraphemes):
             ind -= 1
             transcription = new_phonemes + transcription
             next_phoneme = new_phonemes[0]
-        assert len(transcription) > 0, '`{0}`: this word cannot be transcribed!'.format(source_word)
+        assert len(transcription) > 0, f'`{source_word}`: this word cannot be transcribed!'
         return self.__remove_long_phonemes(self.__remove_repeats_from_transcription(transcription))
 
     def phrase_to_phonemes(self, source_phrase: str) -> list:
-        error_message = '`{0}`: this phrase is incorrect!'.format(source_phrase)
+        error_message = f'`{source_phrase}`: this phrase is incorrect!'
         source_phrase = source_phrase.lower().replace('-', ' ')
         source_phrase = re.sub('[^a-zйцукенгшщзхъфывапролджэячсмитьбюё+ ]', '', source_phrase)
         self.check_phrase(source_phrase)
@@ -202,7 +202,7 @@ class Grapheme2Phoneme(RulesForGraphemes):
 
     def __word_to_letters_list(self, cur_word: str) -> list:
         vocal_letters = set(filter(lambda letter: not letter.endswith('+'), self.mode.vocals))
-        error_message = "`{0}`: this word is incorrect!".format(cur_word)
+        error_message = f"`{cur_word}`: this word is incorrect!"
         letters_list = list()
         new_letter = ''
         for ind in range(len(cur_word)):

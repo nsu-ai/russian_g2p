@@ -47,7 +47,7 @@ class Transcription:
             if (part_size > 0) and self.verbose:
                 if (data_counter % part_size) == 0:
                     part_counter += 1
-                    print('{0}% of texts have been processed...'.format(part_counter))
+                    print(f'{part_counter}% of texts have been processed...')
         if (part_counter < n_data_parts) and self.verbose:
             print('100% of texts have been processed...')
         return total_result
