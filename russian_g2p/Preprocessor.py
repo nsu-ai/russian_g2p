@@ -27,7 +27,7 @@ class Preprocessor():
 
     def gettags(self, texts):
         if not isinstance(texts, list):
-            raise ValueError('Expected `{0}`, but got `{1}`.'.format(type([1, 2]), type(texts)))
+            raise ValueError(f'Expected `{type([1, 2])}`, but got `{type(texts)}`.')
         if len(texts) == 0:
             return []
         all_phonetic_phrases = []

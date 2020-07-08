@@ -6,7 +6,7 @@ import sys
 import nltk
 from rnnmorph.predictor import RNNMorphPredictor
 
-from russian_g2p import Accentor
+from russian_g2p.Accentor import Accentor
 
 
 VOWEL_LETTERS = {'а', 'о', 'у', 'э', 'ы', 'и', 'я', 'ё', 'ю', 'е'}
