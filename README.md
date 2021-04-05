@@ -100,10 +100,20 @@ The `source_phrases.txt` is a simple text file contained source phrases (of cour
 
 Number of lines in the `transcribed_phrases.txt` can be less then number of lines in the `source_phrases.txt`, because some phrases cannot be transcribed by our system (usually, over the incompleteness of thesaurus using for accentuation).
 
+## Citation
 
-## Contributing
+If you use russian_g2p in your projects, please feel free to cite the work as follows:
 
-...
+```
+@inproceedings{yakovenko2018algorithms,
+  title={Algorithms for automatic accentuation and transcription of russian texts in speech recognition systems},
+  author={Yakovenko, Olga and Bondarenko, Ivan and Borovikova, Mariya and Vodolazsky, Daniil},
+  booktitle={International Conference on Speech and Computer},
+  pages={768--777},
+  year={2018},
+  organization={Springer}
+}
+```
 
 ## Authors
 
@@ -117,9 +127,13 @@ Number of lines in the `transcribed_phrases.txt` can be less then number of line
 
 See also the list of [contributors](https://github.com/nsu-ai/russian_g2p/contributors) who participated in this project.
 
+## Contributing
+
+* **Konstantin Dorichev** [kdorichev](https://github.com/kdorichev)
+
 ## License
 
----
+MIT
 
 ## Acknowledgments
 
