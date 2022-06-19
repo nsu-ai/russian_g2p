@@ -62,10 +62,13 @@ class TestRussianAccentor1(unittest.TestCase):
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
-    def test_do_accents_positive07(self):
-        source_phrase = [['хракозябр'], ['впулил'], ['куздру']]
+    def test_do_accents_positive07(self):  # нейросеть
+        source_phrase = [['хракозябр', 'NOUN Animacy=Inan|Case=Gen|Gender=Fem|Number=Plur'],
+                         ['впулил', 'VERB Aspect=Perf|Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin'],
+                         ['куздру', 'NOUN Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing']
+                         ]
         target_variants = [
-            ['хракозябр', 'впулил', 'куздру']
+            ['хракозябр', 'впули+л', 'куздру+']
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
@@ -76,10 +79,10 @@ class TestRussianAccentor1(unittest.TestCase):
         with self.assertRaises(ValueError):
             _ = accentor.do_accents(source_phrase)
 
-    def test_do_accents_positive09(self):
-        source_phrase = [['серебристо-белый'], ['цвет']]
+    def test_do_accents_positive09(self):  # нейросеть для серебристо-белый, словарь для цвет
+        source_phrase = [['серебристо-белый', 'ADJ Case=Nom|Gender=Masc|Number=Sing'], ['цвет', 'NOUN Animacy=Inan|Case=Nom|Gender=Masc|Number=Sing']]
         target_variants = [
-            ['серебри+сто-бе+лый', 'цве+т']
+            ['серебри+сто-белый', 'цве+т']  # 'серебри+сто-бе+лый'
         ]
         real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
@@ -99,6 +102,14 @@ class TestRussianAccentor1(unittest.TestCase):
             ['зелё+ного', 'ка+мня']
         ]
         real_variants = accentor.do_accents(source_phrase)
+        self.assertEqual(target_variants, real_variants)
+
+    def test_do_accents_positive12(self):  # нейросеть
+        source_phrase = [['а-зе', 'PROPN Animacy=Inan|Case=Loc|Gender=Masc|Number=Sing']]
+        target_variants = [
+            ['а-зе+']
+        ]
+        real_variants = self.__accentor.do_accents(source_phrase)
         self.assertEqual(target_variants, real_variants)
 
     def test_do_accents_negative01(self):
@@ -121,10 +132,10 @@ class TestRussianAccentor1(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, target_err_msg):
             self.__accentor.do_accents(source_phrase)
 
-    def test_do_accents_negative04(self):
+    def test_do_accents_negative04(self):  # нейросеть
         source_phrase = [['а-зе']]
-        target_err_msg = re.escape('Word `а-зе` is unknown!')
-        accentor = Accentor(exception_for_unknown=True, use_wiki=False)
+        target_err_msg = re.escape('Word `а-зе` has no morphotags. Try again by specifying it')
+        accentor = Accentor(exception_for_unknown=True)#, use_wiki=False)
         with self.assertRaisesRegex(ValueError, target_err_msg):
             accentor.do_accents(source_phrase)
 

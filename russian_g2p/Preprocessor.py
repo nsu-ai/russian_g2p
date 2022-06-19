@@ -1,13 +1,13 @@
 from re import sub
 
-import spacy_udpipe  # from rnnmorph.predictor import RNNMorphPredictor
+from rnnmorph.predictor import RNNMorphPredictor
 
 
 class Preprocessor():
 
     def __init__(self, batch_size=1):
         self.batch_size = batch_size
-        self.predictor = spacy_udpipe.load("ru")  # RNNMorphPredictor(language="ru")
+        self.predictor = RNNMorphPredictor(language="ru")
 
     def __del__(self):
         if hasattr(self, 'predictor'):
@@ -44,8 +44,7 @@ class Preprocessor():
             else:
                 all_phonetic_phrases.append([])
         if len(all_phrases_for_rnnmorph) > 0:
-            all_phrases_for_spacy = [' '.join(phrase) for phrase in all_phrases_for_rnnmorph]
-            all_forms = [self.predictor(phrase) for phrase in all_phrases_for_spacy]  # self.predictor.predict_sentences(all_phrases_for_rnnmorph, batch_size=self.batch_size)
+            all_forms = self.predictor.predict_sentences(all_phrases_for_rnnmorph, batch_size=self.batch_size)
         else:
             all_forms = []
         all_words_and_tags = []
@@ -60,8 +59,8 @@ class Preprocessor():
                         analysis = all_forms[phrase_ind][token_ind:(token_ind + n)]
                         for word in analysis:
                             word_and_tag = []
-                            word_and_tag.append(word.text)  # word.word
-                            word_and_tag.append(str(word.pos_) + ' ' + str(word.morph))  # word.pos + ' ' + word.tag
+                            word_and_tag.append(word.word)
+                            word_and_tag.append(word.pos + ' ' + word.tag)
                             words_and_tags.append(word_and_tag)
                         words_and_tags.append(['<sil>', 'SIL _'])
                         token_ind += n

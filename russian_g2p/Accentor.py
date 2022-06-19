@@ -11,7 +11,7 @@ import itertools
 import dawg
 import logging
 
-from ner_accentuation.NerAccentor import NerAccentor
+from russian_g2p.ner_accentuation.NerAccentor import NerAccentor
 
 
 class Accentor:
@@ -320,7 +320,7 @@ class Accentor:
                             accented_wordforms_many.append([self.__homonyms[cur_word][morpho_variants[best_ind]]])
                         else:
                             #print('am I even here?')
-                            cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])#sorted(self.get_correct_omograph_wiki(root_text, cur_word, morphotags_list[0]))
+                            cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])  # sorted(self.get_correct_omograph_wiki(root_text, cur_word, morphotags_list[0]))
                             if len(cur_accented_wordforms) == 1:
                                 accented_wordforms += [cur_accented_wordforms[0]]
                                 accented_wordforms_many.append([cur_accented_wordforms[0]])
@@ -331,29 +331,34 @@ class Accentor:
                                 warn = 'many'
                             else:
                                 accented_wordforms += [cur_word]
-                                accented_wordforms_many.append(sorted([self.__homonyms[cur_word][it] for it in self.__homonyms[cur_word]]))
+                                accented_wordforms_many.append(cur_accented_wordforms)  # sorted([self.__homonyms[cur_word][it] for it in self.__homonyms[cur_word]]))
                                 warn = 'many'
 
                 else:
                     #self.logger.debug(f'The word `{cur_word}` was not found in any of the dictionaries\nTrying to parse wictionary page...')
-                    cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])#sorted(self.get_simple_form_wiki(root_text, cur_word))
-                    if len(cur_accented_wordforms) == 1:
-                        accented_wordforms += [cur_accented_wordforms[0]]
-                        accented_wordforms_many.append([cur_accented_wordforms[0]])
-                        self.__new_simple_words.add(cur_accented_wordforms[0])
-                    elif len(cur_accented_wordforms) == 0:
-                        accented_wordforms += [cur_word]
-                        accented_wordforms_many.append([cur_word])
-                        warn = 'no'
+                    if morphotags_list is None:
+                        err_msg = f'Word `{cur_word}` has no morphotags. Try again by specifying it'
+                        raise ValueError(err_msg)
                     else:
-                        cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])#sorted(self.get_correct_omograph_wiki(root_text, cur_word, morphotags_list[0]))
+                        cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])  # sorted(self.get_simple_form_wiki(root_text, cur_word))
+                        #print(cur_accented_wordforms)
                         if len(cur_accented_wordforms) == 1:
                             accented_wordforms += [cur_accented_wordforms[0]]
                             accented_wordforms_many.append([cur_accented_wordforms[0]])
-                            self.__new_homonyms[cur_word] = {morphotags_list[0] : cur_accented_wordforms[0]}
-                        else:
+                            self.__new_simple_words.add(cur_accented_wordforms[0])
+                        elif len(cur_accented_wordforms) == 0:
                             accented_wordforms += [cur_word]
-                            accented_wordforms_many.append(sorted([self.__homonyms[cur_word][it] for it in self.__homonyms[cur_word]]))
+                            accented_wordforms_many.append([cur_word])
+                            warn = 'no'
+                        else:
+                            #cur_accented_wordforms = self.__ner_acc.define_stress(cur_word, morphotags_list[0])#sorted(self.get_correct_omograph_wiki(root_text, cur_word, morphotags_list[0]))
+                            #if len(cur_accented_wordforms) == 1:
+                            #    accented_wordforms += [cur_accented_wordforms[0]]
+                            #    accented_wordforms_many.append([cur_accented_wordforms[0]])
+                            #    self.__new_homonyms[cur_word] = {morphotags_list[0] : cur_accented_wordforms[0]}
+                            #else:
+                            accented_wordforms += [cur_word]
+                            accented_wordforms_many.append(cur_accented_wordforms)  # sorted([self.__homonyms[cur_word][it] for it in self.__homonyms[cur_word]]))
                             warn = 'many'
 
                 if i == 0:

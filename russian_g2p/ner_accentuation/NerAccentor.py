@@ -1,5 +1,5 @@
 import numpy as np
-from ner_utils import load_place_stress_model, create_index_of_letters, create_morph_vector, create_index_of_con_vow
+from russian_g2p.ner_accentuation.ner_utils import load_place_stress_model, create_index_of_letters, create_morph_vector, create_index_of_con_vow
 
 
 class NerAccentor:
@@ -19,9 +19,12 @@ class NerAccentor:
 
     word_with_stress = [letter for letter in word]
     words_return = []
-    for index in stress_index:
-        word_with_stress.insert(index + 1, '+')
+    if len(stress_index) > 0:
+        for index in stress_index:
+            word_with_stress.insert(index + 1, '+')
+            words_return.append(''.join(word_with_stress))
+            word_with_stress.pop(index + 1)
+    else:
         words_return.append(''.join(word_with_stress))
-        word_with_stress.pop(index + 1)
 
     return words_return

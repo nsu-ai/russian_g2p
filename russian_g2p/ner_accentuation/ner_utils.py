@@ -101,7 +101,7 @@ def create_place_stress_model():
 
 def load_place_stress_model():
   place_stress_model = create_place_stress_model()
-  place_stress_model.load_weights(filepath='Placement_of_stress_best_model.h5')
+  place_stress_model.load_weights(filepath='russian_g2p/ner_accentuation/Placement_of_stress_best_model.h5')  # russian_g2p/
 
   return place_stress_model
 
